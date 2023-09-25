@@ -8,9 +8,7 @@ on:
       - edited
       - synchronize
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: write-all
 
 jobs:
   main:

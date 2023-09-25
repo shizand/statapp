@@ -9,6 +9,7 @@ on:
       - synchronize
 
 permissions:
+  contents: write
   pull-requests: write
 
 jobs:
@@ -18,7 +19,7 @@ jobs:
     steps:
       - uses: amannn/action-semantic-pull-request@v5
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           # Configure which types are allowed.
           # Default: https://github.com/commitizen/conventional-commit-types

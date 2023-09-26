@@ -1,3 +1,4 @@
+from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QMainWindow
 
 from statapp.ui.ui_main_window import Ui_MainWindow

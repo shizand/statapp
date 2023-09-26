@@ -35,8 +35,11 @@ jobs:
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       - name: Установка зависимостей
         run: poetry install
+      - run: |
+          echo ${{ github.workspace }}
+          ls -la ${{ github.workspace }}
       - name: Сборка
-        run: poetry run pyinstaller statapp.spec
+        run: poetry run pyinstaller ${{ github.workspace }}/statapp.spec
       - name: Загрузка артефактов
         uses: actions/upload-artifact@v3
         with:

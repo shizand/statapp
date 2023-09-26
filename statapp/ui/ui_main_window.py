@@ -39,13 +39,14 @@ class Ui_MainWindow(object):
 
         self.tableView = QTableView(self.centralwidget)
         self.tableView.setObjectName(u"tableView")
+        self.tableView.verticalHeader().setVisible(False)
 
         self.gridLayout.addWidget(self.tableView, 1, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 22))
+        self.menubar.setGeometry(QRect(0, 0, 800, 27))
         self.filemenu = QMenu(self.menubar)
         self.filemenu.setObjectName(u"filemenu")
         self.generatemenu = QMenu(self.menubar)
@@ -83,4 +84,3 @@ class Ui_MainWindow(object):
         self.modelmenu.setTitle(QCoreApplication.translate("MainWindow", u"\u041c\u043e\u0434\u0435\u043b\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))
         self.helpmenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
     # retranslateUi
-

@@ -9,11 +9,56 @@ permissions:
   pull-requests: write
 
 jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Установка python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Установка poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.6.1
+      - name: Настройка virtualenv
+        run: |
+          poetry config virtualenvs.create true --local
+          poetry config virtualenvs.in-project true --local
+      - uses: actions/cache@v3
+        with:
+          path: ./.venv
+          key: venv-${{ hashFiles('poetry.lock') }}
+      - name: Установка зависимостей
+        run: poetry install
+      - name: Сборка
+        run: poetry run pyinstaller statapp.spec
+      - name: Загрузка артефактов
+        uses: actions/upload-artifact@v3
+        with:
+            name: ${{ matrix.os }}
+            path: ./dist/statapp*
+
   release-please:
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: python
           package-name: statapp
           changelog-types: '[{"type":"feat","section":"Новые функции","hidden":false},{"type":"fix","section":"Исправления","hidden":false},{"type":"chore", "hidden":true}]'
+      - name: Скачивание артефактов
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/download-artifact@v3
+        with:
+          path: dist
+      - name: Загрузка в релиз
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          gh release upload ${{ steps.release.outputs.tag_name }} ./dist/*

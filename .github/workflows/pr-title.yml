@@ -10,7 +10,7 @@ on:
 
 permissions:
   pull-requests: write
-
+  contents: write
 
 jobs:
   main:
@@ -37,8 +37,8 @@ jobs:
           requireScope: false
           subjectPattern: ^(?![A-Z]).+$
           subjectPatternError: |
-            Тема "{subject}" найденная в pull request заголовке "{title}" 
-            не соответствует настроенному шаблону. Пожалуйста, убедитесь, 
+            Тема "{subject}" найденная в pull request заголовке "{title}"
+            не соответствует настроенному шаблону. Пожалуйста, убедитесь,
             что тема не начинается с заглавной буквы.
           wip: true
           validateSingleCommit: false

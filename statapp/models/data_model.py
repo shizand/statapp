@@ -4,10 +4,15 @@ from PySide6.QtCore import Qt
 
 
 class DataModel(QtCore.QAbstractTableModel):
-    def __init__(self, data=np.array([[1, 2, 3], [4, 5, 6]])):
+    def __init__(self, data=np.array([[1, 2, 3], [4, 5, 6]], dtype=np.float32)):
         super().__init__()
 
         self._data = data
+
+    def updateAllData(self, data):
+        self.layoutAboutToBeChanged.emit()
+        self._data = data
+        self.layoutChanged.emit()
 
     def rowCount(self, index):
         return self._data.shape[0]
@@ -32,7 +37,7 @@ class DataModel(QtCore.QAbstractTableModel):
     def setData(self, index, value, role):
         if role == Qt.EditRole:
             try:
-                value = int(value)
+                value = float(value)
             except ValueError:
                 return False
             self._data[index.row(), index.column()] = value
@@ -40,7 +45,8 @@ class DataModel(QtCore.QAbstractTableModel):
         return False
 
     def data(self, index, role):
-        if role == Qt.DisplayRole:
-            return int(self._data[index.row(), index.column()])
+        if role == Qt.DisplayRole or role == Qt.EditRole:
+            # ?
+            return float(self._data[index.row(), index.column()])
 
         return None

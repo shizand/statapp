@@ -10,8 +10,3 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-    @Slot()
-    def on_aboutmenuaction_triggered(self):
-        print("Cock")
-        return 0
-

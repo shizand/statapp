@@ -103,7 +103,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../../../../Downloads/sticker.gif</pixmap>
+         <pixmap>../images/sticker.gif</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

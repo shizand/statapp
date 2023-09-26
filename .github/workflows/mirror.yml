@@ -1,0 +1,21 @@
+name: 'Синхронизация зеркал'
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@674e65a7d483ca28dafaacba0d07351bdcc8bd75 # v1.1.1
+        with:
+          target_repo_url: "git@gitflic.ru:shizand/statapp.git"
+          ssh_private_key: ${{ secrets.GITFLIC_SSH }}

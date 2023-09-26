@@ -52,7 +52,7 @@
         [
             "@semantic-release/exec",
             {
-                "prepareCmd": "./scripts/version ${nextRelease.version}",
+                "prepareCmd": "./scripts/version ${nextRelease.version}"
             }
         ],
         [

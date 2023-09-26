@@ -2,8 +2,9 @@ import numpy as np
 from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QMainWindow
 
-from statapp.generate_window import GenerateWindow
 from statapp.models.data_model import DataModel
+from statapp.generate_window import GenerateWindow
+from statapp.about_window import AboutWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
 
 
@@ -24,3 +25,10 @@ class MainWindow(QMainWindow):
 
             # self.model._data = y
             self.model.updateAllData(y)
+
+    @Slot()
+    def on_aboutmenuaction_triggered(self):
+        global about_window
+        about_window = AboutWindow()
+        about_window.show()
+

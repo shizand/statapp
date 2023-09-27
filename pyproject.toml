@@ -8,12 +8,12 @@ authors = [
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
-pyside6 = "^6.4.0"
-pandas = "^2.1.1"
-numpy = "^1.26.0"
+# windows 7 support
+python = ">=3.8,<3.9"
 pre-commit = "^3.4.0"
-scipy = "^1.11.2"
+pyinstaller = "^6.0.0"
+pandas = "^2.0"
+pyside2 = "^5.15.2.1"
 
 
 [build-system]

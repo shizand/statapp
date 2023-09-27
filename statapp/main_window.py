@@ -1,5 +1,5 @@
-from PySide6.QtCore import Slot
-from PySide6.QtWidgets import QMainWindow
+from PySide2.QtCore import Slot
+from PySide2.QtWidgets import QMainWindow
 
 from statapp.about_window import AboutWindow
 from statapp.ui.ui_main_window import Ui_MainWindow

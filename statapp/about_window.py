@@ -1,5 +1,5 @@
-from PySide6.QtGui import QMovie
-from PySide6.QtWidgets import QMainWindow
+from PySide2.QtGui import QMovie
+from PySide2.QtWidgets import QMainWindow
 
 from statapp.ui.ui_about_window import Ui_AboutWindow
 from statapp.utils import resource_path

@@ -10,10 +10,10 @@ readme = "README.md"
 [tool.poetry.dependencies]
 # windows 7 support
 python = ">=3.8,<3.9"
-pyside6 = "^6.4.0"
 pre-commit = "^3.4.0"
 pyinstaller = "^6.0.0"
 pandas = "^2.0"
+pyside2 = "^5.15.2.1"
 
 
 [build-system]

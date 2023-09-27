@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
+        spec: [statapp-onefile, statapp]
     defaults:
       run:
         shell: bash
@@ -36,11 +37,11 @@ jobs:
       - name: Установка зависимостей
         run: poetry install
       - name: Сборка
-        run: poetry run pyinstaller statapp.spec
+        run: poetry run pyinstaller ${{ matrix.spec }}.spec
       - name: Загрузка артефактов
         uses: actions/upload-artifact@v3
         with:
-            name: ${{ matrix.os }}
+            name: ${{ matrix.os }}-${{ matrix.spec }}
             path: ./dist/statapp*
 
   release-please:

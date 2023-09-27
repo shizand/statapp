@@ -9,11 +9,58 @@ permissions:
   pull-requests: write
 
 jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        spec: [statapp-onefile, statapp]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Установка python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+      - name: Установка poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.6.1
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+      - uses: actions/cache@v3
+        with:
+          path: ./.venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Установка зависимостей
+        run: poetry install
+      - name: Сборка
+        run: poetry run pyinstaller ${{ matrix.spec }}.spec
+      - name: Загрузка артефактов
+        uses: actions/upload-artifact@v3
+        with:
+            name: ${{ matrix.os }}-${{ matrix.spec }}
+            path: ./dist/statapp*
+
   release-please:
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: python
           package-name: statapp
           changelog-types: '[{"type":"feat","section":"Новые функции","hidden":false},{"type":"fix","section":"Исправления","hidden":false},{"type":"chore", "hidden":true}]'
+      - name: Скачивание артефактов
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/download-artifact@v3
+        with:
+          path: dist
+      - name: Загрузка в релиз
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          gh release upload ${{ steps.release.outputs.tag_name }} ./dist/*

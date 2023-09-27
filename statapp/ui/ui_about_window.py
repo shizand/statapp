@@ -3,20 +3,15 @@
 ################################################################################
 ## Form generated from reading UI file 'about_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.2
+## Created by: Qt User Interface Compiler version 5.15.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
-    QMainWindow, QSizePolicy, QWidget)
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
+
 
 class Ui_AboutWindow(object):
     def setupUi(self, AboutWindow):
@@ -87,4 +82,3 @@ class Ui_AboutWindow(object):
         self.labelbasegigamen.setText(QCoreApplication.translate("AboutWindow", u"\u0422\u0435\u043e\u0440\u0435\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0439 \u0444\u0443\u043d\u0434\u0430\u043c\u0435\u043d\u0442: \u0414\u043c\u0438\u0442\u0440\u044e\u043a \u0422. \u0413.", None))
         self.labelgif.setText("")
     # retranslateUi
-

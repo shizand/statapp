@@ -48,6 +48,7 @@ class Ui_GenerateWindow(object):
 
         self.matSpinBox = QDoubleSpinBox(GenerateWindow)
         self.matSpinBox.setObjectName(u"matSpinBox")
+        self.matSpinBox.setMaximum(1000000.000000000000000)
 
         self.gridLayout.addWidget(self.matSpinBox, 1, 1, 1, 1)
 
@@ -59,11 +60,13 @@ class Ui_GenerateWindow(object):
         self.countSpinBox = QSpinBox(GenerateWindow)
         self.countSpinBox.setObjectName(u"countSpinBox")
         self.countSpinBox.setMinimum(1)
+        self.countSpinBox.setMaximum(500)
 
         self.gridLayout.addWidget(self.countSpinBox, 0, 1, 1, 1)
 
         self.deviationSpinBox = QDoubleSpinBox(GenerateWindow)
         self.deviationSpinBox.setObjectName(u"deviationSpinBox")
+        self.deviationSpinBox.setMaximum(1000000.000000000000000)
 
         self.gridLayout.addWidget(self.deviationSpinBox, 2, 1, 1, 1)
 
@@ -86,3 +89,4 @@ class Ui_GenerateWindow(object):
         self.label_3.setText(QCoreApplication.translate("GenerateWindow", u"\u0421\u0440\u0435\u0434\u043d\u0435\u043a\u0432\u0430\u0434\u0440\u0430\u0442\u0438\u0447\u043d\u043e\u0435 \u043e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435", None))
         self.label.setText(QCoreApplication.translate("GenerateWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043d\u0430\u0431\u043b\u044e\u0434\u0435\u043d\u0438\u0439", None))
     # retranslateUi
+

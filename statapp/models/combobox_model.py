@@ -1,4 +1,4 @@
-from PySide6.QtCore import QAbstractListModel, Qt
+from PySide2.QtCore import QAbstractListModel, Qt
 
 
 class ComboBoxModel(QAbstractListModel):

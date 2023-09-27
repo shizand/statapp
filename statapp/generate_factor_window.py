@@ -1,6 +1,5 @@
-from PySide6.QtCore import Slot
-from PySide6.QtGui import QIntValidator
-from PySide6.QtWidgets import QDialog
+from PySide2.QtCore import Slot
+from PySide2.QtWidgets import QDialog
 
 from statapp.ui.ui_generate_factor_window import Ui_GenerateFactorWindow
 from statapp.models.combobox_model import ComboBoxModel

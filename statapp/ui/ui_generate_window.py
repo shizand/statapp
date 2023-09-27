@@ -17,7 +17,7 @@ class Ui_GenerateWindow(object):
     def setupUi(self, GenerateWindow):
         if not GenerateWindow.objectName():
             GenerateWindow.setObjectName(u"GenerateWindow")
-        GenerateWindow.resize(503, 381)
+        GenerateWindow.resize(503, 182)
         font = QFont()
         font.setPointSize(12)
         GenerateWindow.setFont(font)
@@ -83,4 +83,3 @@ class Ui_GenerateWindow(object):
         self.label_3.setText(QCoreApplication.translate("GenerateWindow", u"\u0421\u0440\u0435\u0434\u043d\u0435\u043a\u0432\u0430\u0434\u0440\u0430\u0442\u0438\u0447\u043d\u043e\u0435 \u043e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435", None))
         self.label.setText(QCoreApplication.translate("GenerateWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043d\u0430\u0431\u043b\u044e\u0434\u0435\u043d\u0438\u0439", None))
     # retranslateUi
-

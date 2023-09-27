@@ -22,7 +22,7 @@ jobs:
       - name: Установка python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.8
       - name: Установка poetry
         uses: snok/install-poetry@v1
         with:

@@ -26,7 +26,11 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QTableView" name="tableView"/>
+     <widget class="QTableView" name="tableView">
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -36,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="filemenu">
@@ -48,6 +52,8 @@
     <property name="title">
      <string>Генерация показателей</string>
     </property>
+    <addaction name="generateYaction"/>
+    <addaction name="generateXaction"/>
    </widget>
    <widget class="QMenu" name="analyzemenu">
     <property name="title">
@@ -75,6 +81,16 @@
   <action name="aboutmenuaction">
    <property name="text">
     <string>О программе</string>
+   </property>
+  </action>
+  <action name="generateYaction">
+   <property name="text">
+    <string>Генерация отклика</string>
+   </property>
+  </action>
+  <action name="generateXaction">
+   <property name="text">
+    <string>Генерация фактора</string>
    </property>
   </action>
  </widget>

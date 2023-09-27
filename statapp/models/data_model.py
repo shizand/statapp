@@ -1,0 +1,59 @@
+import numpy as np
+from PySide2 import QtCore
+from PySide2.QtCore import Qt
+
+
+class DataModel(QtCore.QAbstractTableModel):
+    def __init__(self, data=np.array([[]], dtype=np.float32)):
+        super().__init__()
+
+        self._data = data
+
+    def updateAllData(self, data):
+        self.layoutAboutToBeChanged.emit()
+        self._data = data
+        self.layoutChanged.emit()
+
+    def rowCount(self, index):
+        return self._data.shape[0]
+
+    def columnCount(self, index):
+        return self._data.shape[1]
+
+    def headerData(self, section: int, orientation: Qt.Orientation, role: int = ...):
+        if role == Qt.DisplayRole:
+            # if orientation == Qt.Orientation.Horizontal:
+
+                if section == 0:
+                    return 'Y'
+
+                return f'X{section}'
+
+        return None
+
+    def flags(self, index):
+        return Qt.ItemIsSelectable | Qt.ItemIsEnabled | Qt.ItemIsEditable
+
+    def setData(self, index, value, role):
+        if role == Qt.EditRole:
+            try:
+                value = float(value)
+            except ValueError:
+                return False
+            self._data[index.row(), index.column()] = value
+            return True
+        return False
+
+    def getData(self):
+        return self._data
+
+    def getY(self):
+        return self._data[:, 0]
+
+
+    def data(self, index, role):
+        if role == Qt.DisplayRole or role == Qt.EditRole:
+            # ?
+            return float(self._data[index.row(), index.column()])
+
+        return None

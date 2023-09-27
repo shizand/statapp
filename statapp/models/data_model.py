@@ -4,7 +4,7 @@ from PySide2.QtCore import Qt
 
 
 class DataModel(QtCore.QAbstractTableModel):
-    def __init__(self, data=np.array([[1, 2, 3], [4, 5, 6]], dtype=np.float32)):
+    def __init__(self, data=np.array([[]], dtype=np.float32)):
         super().__init__()
 
         self._data = data
@@ -22,7 +22,7 @@ class DataModel(QtCore.QAbstractTableModel):
 
     def headerData(self, section: int, orientation: Qt.Orientation, role: int = ...):
         if role == Qt.DisplayRole:
-            if orientation == Qt.Orientation.Horizontal:
+            # if orientation == Qt.Orientation.Horizontal:
 
                 if section == 0:
                     return 'Y'
@@ -43,6 +43,13 @@ class DataModel(QtCore.QAbstractTableModel):
             self._data[index.row(), index.column()] = value
             return True
         return False
+
+    def getData(self):
+        return self._data
+
+    def getY(self):
+        return self._data[:, 0]
+
 
     def data(self, index, role):
         if role == Qt.DisplayRole or role == Qt.EditRole:

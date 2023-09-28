@@ -15,6 +15,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         spec: [statapp-onefile, statapp]
+        arch: [x86, x64]
     defaults:
       run:
         shell: bash
@@ -24,6 +25,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
+          architecture: ${{ matrix.arch }}
       - name: Установка poetry
         uses: snok/install-poetry@v1
         with:
@@ -33,7 +35,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ./.venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          key: venv-${{ runner.os }}-${{ runner.arch }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       - name: Установка зависимостей
         run: poetry install
       - name: Сборка
@@ -41,7 +43,7 @@ jobs:
       - name: Загрузка артефактов
         uses: actions/upload-artifact@v3
         with:
-            name: ${{ matrix.os }}-${{ matrix.spec }}
+            name: ${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}
             path: ./dist/statapp*
 
   release-please:

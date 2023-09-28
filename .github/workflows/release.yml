@@ -13,11 +13,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-20.04, windows-latest]
         spec: [statapp-onefile, statapp]
         arch: [x86, x64]
+        include:
+          - os: ubuntu-20.04
+            target: linux
+          - os: windows-latest
+            target: windows
         exclude:
-          - os: ubuntu-latest
+          - os: ubuntu-20.04
             arch: x86
     defaults:
       run:
@@ -48,12 +53,12 @@ jobs:
         with:
           type: 'zip'
           directory: 'dist'
-          filename: "../${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}.zip"
+          filename: "../${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.spec }}.zip"
       - name: Загрузка артефактов
         uses: actions/upload-artifact@v3
         with:
-            name: ${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}
-            path: '${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}.zip'
+            name: ${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.spec }}
+            path: '${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.spec }}.zip'
 
   release-please:
     runs-on: ubuntu-latest

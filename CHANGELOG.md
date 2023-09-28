@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/shizand/statapp/compare/v0.3.1...v0.3.2) (2023-09-28)
+
+
+### Исправления
+
+* исправлена загрузка данных из файла ([8b7fabf](https://github.com/shizand/statapp/commit/8b7fabfa46d546b1969bdf9f4800cb0e06fa186a))
+
 ## [0.3.1](https://github.com/shizand/statapp/compare/v0.3.0...v0.3.1) (2023-09-28)
 
 

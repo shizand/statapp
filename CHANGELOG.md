@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.4](https://github.com/shizand/statapp/compare/v0.3.3...v0.3.4) (2023-09-28)
+
+
+### Исправления
+
+* исправлена ошибка, при СКО = 0 для фактора ([57dec07](https://github.com/shizand/statapp/commit/57dec07000e78d694986b1b90de42b84db14c1a7))
+
 ## [0.3.3](https://github.com/shizand/statapp/compare/v0.3.2...v0.3.3) (2023-09-28)
 
 

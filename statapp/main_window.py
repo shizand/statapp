@@ -88,6 +88,8 @@ class MainWindow(QMainWindow):
                     k = 2 - 1 / k
                 if gfw.typeConnection == INDIRECT_LINK:
                     k = 1 / k
+                if gfw.deviation == 0:
+                    k = 1
 
                 x = np.random.normal(gfw.mat * (k ** 3), gfw.deviation * k, size=1)
                 x_arr = np.append(x_arr, x)

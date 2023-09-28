@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.5](https://github.com/shizand/statapp/compare/v0.3.4...v0.3.5) (2023-09-28)
+
+
+### Исправления
+
+* исправлен выбор файла для загрузки (Linux) ([c1809a0](https://github.com/shizand/statapp/commit/c1809a0bc778fde52aa392fb6656b0fd2ffeabe5))
+
 ## [0.3.4](https://github.com/shizand/statapp/compare/v0.3.3...v0.3.4) (2023-09-28)
 
 

@@ -40,13 +40,16 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="filemenu">
     <property name="title">
      <string>Файл</string>
     </property>
+    <addaction name="openfileaction"/>
+    <addaction name="savefileaction"/>
+    <addaction name="closefileaction"/>
    </widget>
    <widget class="QMenu" name="generatemenu">
     <property name="title">
@@ -91,6 +94,21 @@
   <action name="generateXaction">
    <property name="text">
     <string>Генерация фактора</string>
+   </property>
+  </action>
+  <action name="openfileaction">
+   <property name="text">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="savefileaction">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="closefileaction">
+   <property name="text">
+    <string>Закрыть</string>
    </property>
   </action>
  </widget>

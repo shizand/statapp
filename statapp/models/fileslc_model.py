@@ -16,7 +16,7 @@ class FileSLCModel:
         return False
 
     def loadFile(self):
-        self.file_name, _ = QFileDialog.getOpenFileName(None, "Загрузить файл", "", "Files (*.txt;*.csv)")
+        self.file_name, _ = QFileDialog.getOpenFileName(None, "Загрузить файл", "", "Files (*.txt *.csv)")
         if self.file_name:
             try:
                 content = np.genfromtxt(self.file_name, delimiter=',', invalid_raise=True)

@@ -65,6 +65,8 @@ jobs:
           release-type: python
           package-name: statapp
           changelog-types: '[{"type":"feat","section":"Новые функции","hidden":false},{"type":"fix","section":"Исправления","hidden":false},{"type":"chore", "hidden":true}]'
+      - uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
       - name: Скачивание артефактов
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/download-artifact@v3

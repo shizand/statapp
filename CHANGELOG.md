@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/shizand/statapp/compare/v0.2.0...v0.2.1) (2023-09-28)
+
+
+### Исправления
+
+* обновлено окно "О программе" ([#21](https://github.com/shizand/statapp/issues/21)) ([37ea556](https://github.com/shizand/statapp/commit/37ea556ad20c7b2d3b346e0eafd583c60121d594))
+
 ## [0.2.0](https://github.com/shizand/statapp/compare/v0.1.0...v0.2.0) (2023-09-28)
 
 

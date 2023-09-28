@@ -1,11 +1,14 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import copy_metadata
 
+datas = [('statapp/images/sticker.gif', 'images')]
+datas += copy_metadata('statapp')
 
 a = Analysis(
     ['statapp/__main__.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=datas,
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

@@ -47,8 +47,8 @@ jobs:
         uses: thedoctor0/zip-release@0.7.1
         with:
           type: 'zip'
-          filename: '${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}.zip'
-          path: 'dist'
+          directory: 'dist'
+          filename: "../${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}.zip"
       - name: Загрузка артефактов
         uses: actions/upload-artifact@v3
         with:

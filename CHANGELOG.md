@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/shizand/statapp/compare/v0.2.1...v0.3.0) (2023-09-28)
+
+
+### Новые функции
+
+* добавлено чтение и запись исходных данных в файлы .txt, .csv ([#24](https://github.com/shizand/statapp/issues/24)) ([b73a3f5](https://github.com/shizand/statapp/commit/b73a3f5d3ba5707f0bdb816452ad7f59c0da8290))
+
 ## [0.2.1](https://github.com/shizand/statapp/compare/v0.2.0...v0.2.1) (2023-09-28)
 
 

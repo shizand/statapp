@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/shizand/statapp/compare/v0.3.0...v0.3.1) (2023-09-28)
+
+
+### Исправления
+
+* исправлена локализация стандартных кнопок ([2b061be](https://github.com/shizand/statapp/commit/2b061bed2f6343fc2feb87472afc4c9a051b30a9))
+
 ## [0.3.0](https://github.com/shizand/statapp/compare/v0.2.1...v0.3.0) (2023-09-28)
 
 

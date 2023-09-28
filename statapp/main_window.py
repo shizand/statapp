@@ -1,5 +1,5 @@
 import numpy as np
-from PySide2.QtCore import Slot
+from PySide2.QtCore import Slot, QLocale
 from PySide2.QtWidgets import QMainWindow, QMessageBox, QApplication
 
 from statapp.generate_factor_window import GenerateFactorWindow, INDIRECT_LINK
@@ -13,6 +13,7 @@ from statapp.ui.ui_main_window import Ui_MainWindow
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -23,9 +24,34 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def on_openfileaction_triggered(self):
-        data = self.fileModel.loadFile()
-        self.model.updateAllData(data)
-        self.isDataChanged = True
+        current_data = self.model.getData()
+        if current_data.size > 1:
+            file = ''
+            if self.fileModel.file_name:
+                file = '\nФайл сохранения:' + self.fileModel.file_name
+
+            msgBox = self.createMessageBox \
+                ('Сохранение данных',
+                 "Сохранить данные?" + file,
+                 QMessageBox.Question,
+                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
+                 QMessageBox.Cancel)
+
+            reply = msgBox.exec_()
+            if reply == QMessageBox.StandardButton.Yes:
+                self.fileModel.saveFile(self.model.getData())
+            elif reply == QMessageBox.StandardButton.Cancel:
+                return
+            else:
+                data = self.fileModel.loadFile()
+                if data is not None:
+                    self.model.updateAllData(data)
+                    self.isDataChanged = True
+        else:
+            data = self.fileModel.loadFile()
+            if data is not None:
+                self.model.updateAllData(data)
+                self.isDataChanged = True
 
     @Slot()
     def on_savefileaction_triggered(self):
@@ -85,33 +111,42 @@ class MainWindow(QMainWindow):
         about_window = AboutWindow()
         about_window.show()
 
+    def createMessageBox(self, title, text, icon, buttons, defaultButton):
+        msgBox = QMessageBox()
+
+        msgBox.setIcon(icon)
+        msgBox.setWindowTitle(title)
+        msgBox.setText(text)
+        msgBox.setStandardButtons(buttons)
+        msgBox.setDefaultButton(defaultButton)
+
+        if msgBox.button(QMessageBox.Yes) is not None:
+            msgBox.button(QMessageBox.Yes).setText("Да")
+
+        if msgBox.button(QMessageBox.No) is not None:
+            msgBox.button(QMessageBox.No).setText("Нет")
+
+        if msgBox.button(QMessageBox.Ok) is not None:
+            msgBox.button(QMessageBox.Ok).setText("Ок")
+
+        if msgBox.button(QMessageBox.Cancel) is not None:
+            msgBox.button(QMessageBox.Cancel).setText("Отмена")
+
+        return msgBox
+
     def closeEvent(self, event):
         if self.isDataChanged:
-            msgBox = QMessageBox()
-
-            msgBox.setIcon(QMessageBox.Question)
-
-            msgBox.setWindowTitle('Завершение работы')
-
             file = ''
             if self.fileModel.file_name:
                 file = '\nФайл сохранения:' + self.fileModel.file_name
 
-            msgBox.setText("Сохранить данные?" + file)
+            msgBox = self.createMessageBox \
+                ('Завершение работы',
+                 "Сохранить данные?" + file,
+                 QMessageBox.Question,
+                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
+                 QMessageBox.Cancel)
 
-            msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
-            msgBox.setDefaultButton(QMessageBox.Cancel)
-
-            yesButton = msgBox.button(QMessageBox.Yes)
-            yesButton.setText("Да")
-
-            noButton = msgBox.button(QMessageBox.No)
-            noButton.setText("Нет")
-
-            cancelButton = msgBox.button(QMessageBox.Cancel)
-            cancelButton.setText("Отмена")
-
-            QApplication.beep()
             reply = msgBox.exec_()
             if reply == QMessageBox.StandardButton.Yes:
                 self.fileModel.saveFile(self.model.getData())

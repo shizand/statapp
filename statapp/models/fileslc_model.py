@@ -1,16 +1,14 @@
 import numpy as np
-from PySide2.QtWidgets import QFileDialog
-from PySide2 import QtCore
+from PySide2.QtWidgets import QFileDialog, QMessageBox
 
-class FileSLCModel(QtCore.QAbstractTableModel):
+
+class FileSLCModel:
     def __init__(self):
         super().__init__()
         self.file_name = None
 
     def saveFile(self, data):
         if self.file_name is None:
-            options = QFileDialog.Options()
-            options |= QFileDialog.DontUseNativeDialog
             self.file_name, _ = QFileDialog.getSaveFileName(None, "Сохранить файл", "", "Text Files (*.txt);;CSV Files (*.csv)")
         if self.file_name:
             np.savetxt(self.file_name, data, delimiter=",")
@@ -18,11 +16,16 @@ class FileSLCModel(QtCore.QAbstractTableModel):
         return False
 
     def loadFile(self):
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
         self.file_name, _ = QFileDialog.getOpenFileName(None, "Загрузить файл", "", "Files (*.txt;*.csv)")
         if self.file_name:
-            content = np.genfromtxt(self.file_name, delimiter=',')
+            try:
+                content = np.genfromtxt(self.file_name, delimiter=',', invalid_raise=True)
+            except ValueError as e:
+                QMessageBox.warning \
+                    (None,
+                    'Ошибка',
+                    "Ошибка чтения файла!\nФайл нельзя открыть или файл неверного формата")
+                return None
             return content
 
     def closeFile(self):

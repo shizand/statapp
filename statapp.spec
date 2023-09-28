@@ -1,4 +1,15 @@
 # -*- mode: python ; coding: utf-8 -*-
+import sys
+import typing
+from pprint import pprint
+
+if typing.TYPE_CHECKING:
+    from PyInstaller.building.api import COLLECT, EXE, MERGE, PYZ  # noqa: F401
+    from PyInstaller.building.build_main import Analysis  # noqa: F401
+    from PyInstaller.building.datastruct import TOC, Target, Tree  # noqa: F401
+    from PyInstaller.building.osx import BUNDLE  # noqa: F401
+    from PyInstaller.building.splash import Splash  # noqa: F401
+
 from PyInstaller.utils.hooks import copy_metadata
 
 datas = [('statapp/images/sticker.gif', 'images')]
@@ -17,6 +28,13 @@ a = Analysis(
     excludes=[],
     noarchive=False,
 )
+
+prev_binaries = set(a.binaries)
+if sys.platform in ('linux', 'darwin'):
+    a.exclude_system_libraries(list_of_exceptions=[])  # glob expression
+print('\n\nSTRIPPED SYSTEM LIBS')
+pprint(sorted(set(prev_binaries) - set(a.binaries)))
+
 pyz = PYZ(a.pure)
 
 exe = EXE(

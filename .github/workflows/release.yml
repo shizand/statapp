@@ -42,12 +42,18 @@ jobs:
       - name: Установка зависимостей
         run: poetry install
       - name: Сборка
-        run: poetry run pyinstaller ${{ matrix.spec }}.spec
+        run: poetry run pyinstaller ${{ matrix.spec }}.spec\
+      - name: Архивация
+        uses: thedoctor0/zip-release@0.7.1
+        with:
+          type: 'zip'
+          filename: '${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}.zip'
+          path: 'dist'
       - name: Загрузка артефактов
         uses: actions/upload-artifact@v3
         with:
             name: ${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}
-            path: ./dist/statapp*
+            path: '${{ matrix.os }}-${{ matrix.arch }}-${{ matrix.spec }}.zip'
 
   release-please:
     runs-on: ubuntu-latest

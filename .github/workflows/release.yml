@@ -15,9 +15,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         spec: [statapp-onefile, statapp]
-        arch: [x64]
-        include:
-          - os: windows-latest
+        arch: [x86, x64]
+        exclude:
+          - os: ubuntu-latest
             arch: x86
     defaults:
       run:

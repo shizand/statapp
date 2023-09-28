@@ -18,7 +18,7 @@ jobs:
         arch: [x64]
         include:
           - os: windows-latest
-            arch: [x86, x64]
+            arch: x86
     defaults:
       run:
         shell: bash

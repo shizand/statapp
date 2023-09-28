@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/shizand/statapp/compare/v0.3.2...v0.3.3) (2023-09-28)
+
+
+### Исправления
+
+* удалена упаковка системных библиотек вместе с программой (Linux) ([b6e10c4](https://github.com/shizand/statapp/commit/b6e10c420958cf554c1953f30c4cfd9dcadebd1a))
+
 ## [0.3.2](https://github.com/shizand/statapp/compare/v0.3.1...v0.3.2) (2023-09-28)
 
 

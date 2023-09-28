@@ -8,7 +8,7 @@ class FileSLCModel:
         self.file_name = None
 
     def saveFile(self, data):
-        if self.file_name is None:
+        if not self.file_name:
             self.file_name, _ = QFileDialog.getSaveFileName(None, "Сохранить файл", "", "Text Files (*.txt);;CSV Files (*.csv)")
         if self.file_name:
             np.savetxt(self.file_name, data, delimiter=",")
@@ -17,7 +17,7 @@ class FileSLCModel:
 
     def loadFile(self):
         self.file_name, _ = QFileDialog.getOpenFileName(None, "Загрузить файл", "", "Files (*.txt;*.csv)")
-        if self.file_name:
+        if not self.file_name:
             try:
                 content = np.genfromtxt(self.file_name, delimiter=',', invalid_raise=True)
             except ValueError as e:

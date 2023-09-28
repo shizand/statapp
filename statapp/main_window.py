@@ -120,18 +120,6 @@ class MainWindow(QMainWindow):
         msgBox.setStandardButtons(buttons)
         msgBox.setDefaultButton(defaultButton)
 
-        if msgBox.button(QMessageBox.Yes) is not None:
-            msgBox.button(QMessageBox.Yes).setText("Да")
-
-        if msgBox.button(QMessageBox.No) is not None:
-            msgBox.button(QMessageBox.No).setText("Нет")
-
-        if msgBox.button(QMessageBox.Ok) is not None:
-            msgBox.button(QMessageBox.Ok).setText("Ок")
-
-        if msgBox.button(QMessageBox.Cancel) is not None:
-            msgBox.button(QMessageBox.Cancel).setText("Отмена")
-
         return msgBox
 
     def closeEvent(self, event):

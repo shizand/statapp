@@ -19,7 +19,7 @@ class AboutWindow(QMainWindow):
         self.ui = Ui_AboutWindow()
         self.ui.setupUi(self)
 
-        image_path = resource_path('images/sticker.gif')
+        image_path = resource_path('ui/images/sticker.gif')
         movie = QMovie(image_path)
         self.ui.labelgif.setMovie(movie)
         movie.start()

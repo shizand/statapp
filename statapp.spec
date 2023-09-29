@@ -12,7 +12,7 @@ if typing.TYPE_CHECKING:
 
 from PyInstaller.utils.hooks import copy_metadata
 
-datas = [('statapp/ui/images/sticker.gif', 'images')]
+datas = [('statapp/ui/images/*', 'ui/images')]
 datas += copy_metadata('statapp')
 
 

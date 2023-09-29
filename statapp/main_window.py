@@ -1,5 +1,6 @@
 import numpy as np
-from PySide2.QtCore import Slot, QLocale
+from PySide2.QtCore import Slot, QLocale, QSize
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QMainWindow, QMessageBox, QApplication
 
 from statapp.generate_factor_window import GenerateFactorWindow, INDIRECT_LINK
@@ -8,6 +9,7 @@ from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
 from statapp.ui.ui_main_window import Ui_MainWindow
+from statapp.utils import resource_path
 
 
 class MainWindow(QMainWindow):
@@ -16,6 +18,10 @@ class MainWindow(QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        icon = QIcon()
+        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
 
         self.isDataChanged = False
         self.model = DataModel()

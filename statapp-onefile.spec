@@ -12,7 +12,7 @@ if typing.TYPE_CHECKING:
 
 from PyInstaller.utils.hooks import copy_metadata
 
-datas = [('statapp/images/sticker.gif', 'images')]
+datas = [('statapp/ui/images/*', 'ui/images')]
 datas += copy_metadata('statapp')
 
 a = Analysis(
@@ -55,4 +55,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='statapp/ui/images/logo.ico',
 )

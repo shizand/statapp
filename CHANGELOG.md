@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.6](https://github.com/shizand/statapp/compare/v0.3.5...v0.3.6) (2023-09-29)
+
+
+### Исправления
+
+* добавляет иконку приложения ([#39](https://github.com/shizand/statapp/issues/39)) ([d3cd358](https://github.com/shizand/statapp/commit/d3cd3589a781df47e6d0e9d669a376aefd9090fe))
+
 ## [0.3.5](https://github.com/shizand/statapp/compare/v0.3.4...v0.3.5) (2023-09-28)
 
 

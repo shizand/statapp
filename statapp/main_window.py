@@ -9,7 +9,8 @@ from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
 from statapp.ui.ui_main_window import Ui_MainWindow
-from statapp.utils import resource_path
+from statapp.utils import resource_path, buildMessageBox
+from statapp.variance_analysis import VarianceAnalysisWindow
 
 
 class MainWindow(QMainWindow):
@@ -36,7 +37,7 @@ class MainWindow(QMainWindow):
             if self.fileModel.file_name:
                 file = '\nФайл сохранения:' + self.fileModel.file_name
 
-            msgBox = self.createMessageBox \
+            msgBox = buildMessageBox \
                 ('Сохранение данных',
                  "Сохранить данные?" + file,
                  QMessageBox.Question,
@@ -119,16 +120,10 @@ class MainWindow(QMainWindow):
         about_window = AboutWindow()
         about_window.show()
 
-    def createMessageBox(self, title, text, icon, buttons, defaultButton):
-        msgBox = QMessageBox()
-
-        msgBox.setIcon(icon)
-        msgBox.setWindowTitle(title)
-        msgBox.setText(text)
-        msgBox.setStandardButtons(buttons)
-        msgBox.setDefaultButton(defaultButton)
-
-        return msgBox
+    @Slot()
+    def on_varianceAnalysisAction_triggered(self):
+        dw = VarianceAnalysisWindow(self.model.getData())
+        dw.exec()
 
     def closeEvent(self, event):
         if self.isDataChanged:
@@ -136,7 +131,7 @@ class MainWindow(QMainWindow):
             if self.fileModel.file_name:
                 file = '\nФайл сохранения:' + self.fileModel.file_name
 
-            msgBox = self.createMessageBox \
+            msgBox = buildMessageBox \
                 ('Завершение работы',
                  "Сохранить данные?" + file,
                  QMessageBox.Question,

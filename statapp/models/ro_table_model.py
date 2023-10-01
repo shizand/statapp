@@ -43,10 +43,6 @@ class ROTableModel(QtCore.QAbstractTableModel):
     def getData(self):
         return self._data
 
-    def getY(self):
-        return self._data[:, 0]
-
-
     def data(self, index, role):
         if role == Qt.DisplayRole:
             return float(self._data[index.row(), index.column()])

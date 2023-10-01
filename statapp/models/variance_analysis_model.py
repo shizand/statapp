@@ -1,6 +1,7 @@
 from PySide2.QtCore import QModelIndex
 
 from statapp.models.ro_table_model import ROTableModel
+from statapp.models.utils import yx_header
 
 
 class VarianceAnalysisModel(ROTableModel):
@@ -11,4 +12,4 @@ class VarianceAnalysisModel(ROTableModel):
         return ['Мат. ожидание', 'Среднекв. отклонение', 'Минимум', 'Максимум']
 
     def getVerticalHeader(self):
-        return ['Y'] + [f'X{i}' for i in range(1, self.rowCount(QModelIndex()))]
+        return yx_header(self.rowCount(QModelIndex()))

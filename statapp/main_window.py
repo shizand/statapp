@@ -4,7 +4,7 @@ from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QMainWindow, QMessageBox, QApplication
 
 from statapp.generate_factor_window import GenerateFactorWindow, INDIRECT_LINK
-from statapp.models.data_model import DataModel
+from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(icon)
 
         self.isDataChanged = False
-        self.model = DataModel()
+        self.model = InputValuesModel()
         self.fileModel = FileSLCModel()
         self.ui.tableView.setModel(self.model)
 

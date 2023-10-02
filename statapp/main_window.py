@@ -3,8 +3,9 @@ from PySide2.QtCore import Slot, QLocale, QSize
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QMainWindow, QMessageBox, QApplication
 
+from statapp.calculations import generate_x_values
 from statapp.generate_factor_window import GenerateFactorWindow, INDIRECT_LINK
-from statapp.models.data_model import DataModel
+from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
@@ -25,7 +26,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(icon)
 
         self.isDataChanged = False
-        self.model = DataModel()
+        self.model = InputValuesModel()
         self.fileModel = FileSLCModel()
         self.ui.tableView.setModel(self.model)
 
@@ -81,36 +82,13 @@ class MainWindow(QMainWindow):
     def on_generateXaction_triggered(self):
         gfw = GenerateFactorWindow()
 
-        # dd = np.array([])
-
         if gfw.exec():
-            y = self.model.getY()
-            yMat = np.mean(y)
-
-            x_arr = np.array([])
-
-            for cur_y in y:
-                k = np.abs(cur_y / yMat)
-                if k > 1:
-                    k = 2 - 1 / k
-                if gfw.typeConnection == INDIRECT_LINK:
-                    k = 1 / k
-                if gfw.deviation == 0:
-                    k = 1
-
-                x = np.random.normal(gfw.mat * (k ** 3), gfw.deviation * k, size=1)
-                x_arr = np.append(x_arr, x)
-                # if (x > gfw.mat and cur_y > yMat) or (x < gfw.mat and cur_y < yMat):
-                #     dd = np.append(dd, 1)
-                # else:
-                #     dd = np.append(dd, 0)
-
             data = self.model.getData()
-
+            y = self.model.getY()
+            x_arr = generate_x_values(gfw.mat, gfw.deviation, gfw.typeConnection, y)
             x_arr = x_arr.reshape(len(x_arr), 1).round(2)
             # dd = dd.reshape(len(dd), 1)
             data = np.concatenate((data, x_arr), axis=1)
-            # data = np.concatenate((data, dd), axis=1)
             self.model.updateAllData(data)
             self.isDataChanged = True
 

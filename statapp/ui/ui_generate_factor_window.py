@@ -79,7 +79,7 @@ class Ui_GenerateFactorWindow(object):
     # setupUi
 
     def retranslateUi(self, GenerateFactorWindow):
-        GenerateFactorWindow.setWindowTitle(QCoreApplication.translate("GenerateFactorWindow", u"Dialog", None))
+        GenerateFactorWindow.setWindowTitle(QCoreApplication.translate("GenerateFactorWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u0444\u0430\u043a\u0442\u043e\u0440\u043e\u0432", None))
         self.label.setText(QCoreApplication.translate("GenerateFactorWindow", u"\u0422\u0438\u043f \u0441\u0432\u044f\u0437\u0438", None))
         self.label_3.setText(QCoreApplication.translate("GenerateFactorWindow", u"\u0421\u0440\u0435\u0434\u043d\u0435\u043a\u0432\u0430\u0434\u0440\u0430\u0442\u0438\u0447\u043d\u043e\u0435 \u043e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435", None))
         self.generatePushButton.setText(QCoreApplication.translate("GenerateFactorWindow", u"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))

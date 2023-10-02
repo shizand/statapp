@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         gw = GenerateWindow()
         if gw.exec():
             y = np.random.normal(gw.mat, gw.deviation, size=(gw.count, 1))
-            self.model.updateAllData(y)
+            self.model.updateAllData(y.round(2))
             self.isDataChanged = True
 
     @Slot()
@@ -86,7 +86,8 @@ class MainWindow(QMainWindow):
             data = self.model.getData()
             y = self.model.getY()
             x_arr = generate_x_values(gfw.mat, gfw.deviation, gfw.typeConnection, y)
-            x_arr = x_arr.reshape(len(x_arr), 1)
+            x_arr = x_arr.reshape(len(x_arr), 1).round(2)
+            # dd = dd.reshape(len(dd), 1)
             data = np.concatenate((data, x_arr), axis=1)
             self.model.updateAllData(data)
             self.isDataChanged = True

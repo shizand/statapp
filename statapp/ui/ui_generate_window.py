@@ -77,7 +77,7 @@ class Ui_GenerateWindow(object):
     # setupUi
 
     def retranslateUi(self, GenerateWindow):
-        GenerateWindow.setWindowTitle(QCoreApplication.translate("GenerateWindow", u"Dialog", None))
+        GenerateWindow.setWindowTitle(QCoreApplication.translate("GenerateWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u043e\u0442\u043a\u043b\u0438\u043a\u043e\u0432", None))
         self.generatePushButton.setText(QCoreApplication.translate("GenerateWindow", u"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
         self.label_2.setText(QCoreApplication.translate("GenerateWindow", u"\u041c\u0430\u0442\u0435\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0435 \u043e\u0436\u0438\u0434\u0430\u043d\u0438\u0435", None))
         self.label_3.setText(QCoreApplication.translate("GenerateWindow", u"\u0421\u0440\u0435\u0434\u043d\u0435\u043a\u0432\u0430\u0434\u0440\u0430\u0442\u0438\u0447\u043d\u043e\u0435 \u043e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435", None))

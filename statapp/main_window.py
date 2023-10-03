@@ -1,10 +1,10 @@
 import numpy as np
-from PySide2.QtCore import Slot, QLocale, QSize
+from PySide2.QtCore import Slot, QSize
 from PySide2.QtGui import QIcon
-from PySide2.QtWidgets import QMainWindow, QMessageBox, QApplication
+from PySide2.QtWidgets import QMainWindow, QMessageBox
 
 from statapp.calculations import generate_x_values
-from statapp.generate_factor_window import GenerateFactorWindow, INDIRECT_LINK
+from statapp.generate_factor_window import GenerateFactorWindow
 from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
@@ -12,6 +12,7 @@ from statapp.models.fileslc_model import FileSLCModel
 from statapp.ui.ui_main_window import Ui_MainWindow
 from statapp.utils import resource_path, buildMessageBox
 from statapp.variance_analysis import VarianceAnalysisWindow
+from statapp.correlation_analysis import СorrelationAnalysisWindow
 
 
 class MainWindow(QMainWindow):
@@ -36,7 +37,7 @@ class MainWindow(QMainWindow):
         if current_data.size > 1:
             file = ''
             if self.fileModel.file_name:
-                file = '\nФайл сохранения:' + self.fileModel.file_name
+                file = '\nФайл сохранения: ' + self.fileModel.file_name
 
             msgBox = buildMessageBox \
                 ('Сохранение данных',
@@ -54,12 +55,12 @@ class MainWindow(QMainWindow):
                 data = self.fileModel.loadFile()
                 if data is not None:
                     self.model.updateAllData(data)
-                    self.isDataChanged = True
+                    self.isDataChanged = False
         else:
             data = self.fileModel.loadFile()
             if data is not None:
                 self.model.updateAllData(data)
-                self.isDataChanged = True
+                self.isDataChanged = False
 
     @Slot()
     def on_savefileaction_triggered(self):
@@ -103,11 +104,16 @@ class MainWindow(QMainWindow):
         dw = VarianceAnalysisWindow(self.model.getData())
         dw.exec()
 
+    @Slot()
+    def on_correlationAnalisisAction_triggered(self):
+        dw = СorrelationAnalysisWindow(self.model.getData())
+        dw.exec()
+
     def closeEvent(self, event):
         if self.isDataChanged:
             file = ''
             if self.fileModel.file_name:
-                file = '\nФайл сохранения:' + self.fileModel.file_name
+                file = '\nФайл сохранения: ' + self.fileModel.file_name
 
             msgBox = buildMessageBox \
                 ('Завершение работы',

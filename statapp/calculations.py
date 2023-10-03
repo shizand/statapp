@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 DIRECT_LINK = 0
 INDIRECT_LINK = 1
@@ -25,3 +26,7 @@ def variance_analysis(data):
     return np.array([
         [np.mean(col), np.std(col), np.min(col), np.max(col)] for col in data.T
     ])
+
+
+def correlation_analysis(data):
+    return pd.DataFrame(data).corr().round(len(data[-1])).to_numpy()

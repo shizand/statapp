@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/shizand/statapp/compare/v0.4.1...v0.4.2) (2023-10-03)
+
+
+### Исправления
+
+* добавлены иконки во все окна ([#67](https://github.com/shizand/statapp/issues/67)) ([9310a5e](https://github.com/shizand/statapp/commit/9310a5e6226bfaff4a7fe4fb9395d5cd1553fee9))
+
 ## [0.4.1](https://github.com/shizand/statapp/compare/v0.4.0...v0.4.1) (2023-10-03)
 
 

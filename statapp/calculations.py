@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.#
 import numpy as np
+import pandas as pd
 
 DIRECT_LINK = 0
 INDIRECT_LINK = 1
@@ -43,3 +44,7 @@ def variance_analysis(data):
     return np.array([
         [np.mean(col), np.std(col), np.min(col), np.max(col)] for col in data.T
     ])
+
+
+def correlation_analysis(data):
+    return pd.DataFrame(data).corr().to_numpy()

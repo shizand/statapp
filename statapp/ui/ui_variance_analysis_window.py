@@ -36,7 +36,7 @@ class Ui_VarianceAnalysisWindow(object):
     def setupUi(self, VarianceAnalysisWindow):
         if not VarianceAnalysisWindow.objectName():
             VarianceAnalysisWindow.setObjectName(u"VarianceAnalysisWindow")
-        VarianceAnalysisWindow.resize(942, 606)
+        VarianceAnalysisWindow.resize(630, 400)
         self.gridLayout_2 = QGridLayout(VarianceAnalysisWindow)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout = QGridLayout()
@@ -58,3 +58,4 @@ class Ui_VarianceAnalysisWindow(object):
     def retranslateUi(self, VarianceAnalysisWindow):
         VarianceAnalysisWindow.setWindowTitle(QCoreApplication.translate("VarianceAnalysisWindow", u"\u0414\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u043e\u043d\u043d\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437", None))
     # retranslateUi
+

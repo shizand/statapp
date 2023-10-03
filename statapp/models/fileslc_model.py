@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2023 Maxim Slipenko, Euegene Lazurenko.
+# Copyright (c) 2023 Maxim Slipenko, Eugene Lazurenko.
 #
 # This file is part of Statapp
 # (see https://github.com/shizand/statapp).

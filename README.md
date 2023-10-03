@@ -9,11 +9,12 @@
 
 ## Поддерживаемые ОС и архитектуры
 
-В теории, должно работать на любой архитектуре и ОС где запускается Python 3.8 и есть Qt.
+В теории, должно работать на любой архитектуре и ОС где запускается Python 3.8 и есть Qt 5.
 
 Работоспособность проверена на x64:
- - на Windows 7, 10;
- - на ALT Linux 10.2;
+
+* на Windows 7, 10;
+* на ALT Linux 10.2.
 
 ## Установка
 
@@ -38,7 +39,15 @@ poetry run pyinstaller statapp.spec # или poetry run pyinstaller stat-onefile
 
 ## Чем я могу помочь проекту?
 
- - [Сообщить об ошибке](https://github.com/shizand/statapp/issues/new?labels=%D0%B1%D0%B0%D0%B3)
+* [Сообщить об ошибке](https://github.com/shizand/statapp/issues/new?labels=%D0%B1%D0%B0%D0%B3)
+
+## Исходный код
+
+Исходный код доступен на [GitHub](https://github.com/shizand/statapp).
+Также есть зеркала:
+
+* [GitFic](https://gitflic.ru/project/shizand/statapp);
+* [Gitea сервер](https://git.slipenko.com/shizand/statapp).
 
 ## Лицензия
 

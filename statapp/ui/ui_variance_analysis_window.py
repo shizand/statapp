@@ -16,7 +16,8 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.#
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
 
 
 ################################################################################
@@ -58,4 +59,3 @@ class Ui_VarianceAnalysisWindow(object):
     def retranslateUi(self, VarianceAnalysisWindow):
         VarianceAnalysisWindow.setWindowTitle(QCoreApplication.translate("VarianceAnalysisWindow", u"\u0414\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u043e\u043d\u043d\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437", None))
     # retranslateUi
-

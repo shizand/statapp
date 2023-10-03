@@ -97,6 +97,11 @@ class MainWindow(QMainWindow):
     def on_aboutmenuaction_triggered(self):
         global about_window
         about_window = AboutWindow()
+
+        icon = QIcon()
+        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        about_window.setWindowIcon(icon)
+
         about_window.show()
 
     @Slot()

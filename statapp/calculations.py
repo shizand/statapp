@@ -29,4 +29,4 @@ def variance_analysis(data):
 
 
 def correlation_analysis(data):
-    return pd.DataFrame(data).corr().round(len(data[-1])).to_numpy()
+    return pd.DataFrame(data).corr().to_numpy()

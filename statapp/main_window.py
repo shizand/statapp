@@ -24,15 +24,10 @@ class MainWindow(QMainWindow):
 
         icon = QIcon()
         icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        self.setWindowIcon(icon)
 
-        self.generateXaction_action = self.findChild(QAction, 'generateXaction')
-        self.varianceAnalysisAction_action = self.findChild(QAction, 'varianceAnalysisAction')
-        self.correlationAnalisisAction_action = self.findChild(QAction, 'correlationAnalisisAction')
-
-        self.generateXaction_action.setEnabled(False)
-        self.varianceAnalysisAction_action.setEnabled(False)
-        self.correlationAnalisisAction_action.setEnabled(False)
+        self.ui.generateXaction.setEnabled(False)
+        self.ui.varianceAnalysisAction.setEnabled(False)
+        self.ui.correlationAnalisisAction.setEnabled(False)
 
         self.isDataChanged = False
         self.model = InputValuesModel()
@@ -72,17 +67,17 @@ class MainWindow(QMainWindow):
                 self.isDataChanged = False
 
         if data.shape[1] == 1:
-            self.generateXaction_action.setEnabled(True)
-            self.varianceAnalysisAction_action.setEnabled(False)
-            self.correlationAnalisisAction_action.setEnabled(False)
+            self.ui.generateXaction.setEnabled(True)
+            self.ui.varianceAnalysisAction.setEnabled(False)
+            self.ui.correlationAnalisisAction.setEnabled(False)
         elif data.shape[1] > 1:
-            self.generateXaction_action.setEnabled(True)
-            self.varianceAnalysisAction_action.setEnabled(True)
-            self.correlationAnalisisAction_action.setEnabled(True)
+            self.ui.generateXaction.setEnabled(True)
+            self.ui.varianceAnalysisAction.setEnabled(True)
+            self.ui.correlationAnalisisAction.setEnabled(True)
         else:
-            self.generateXaction_action.setEnabled(False)
-            self.varianceAnalysisAction_action.setEnabled(False)
-            self.correlationAnalisisAction_action.setEnabled(False)
+            self.ui.generateXaction.setEnabled(False)
+            self.ui.varianceAnalysisAction.setEnabled(False)
+            self.ui.correlationAnalisisAction.setEnabled(False)
 
     @Slot()
     def on_savefileaction_triggered(self):

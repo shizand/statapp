@@ -11,6 +11,6 @@ repos:
 -   repo: https://github.com/johann-petrak/licenseheaders.git
     rev: v0.8.8
     hooks:
-        - id: licenseheaders
-          args: ["-t", ".copyright.tmpl", "-cy", "-f", "-d statapp"]
-          pass_filenames: false
+    -   id: licenseheaders
+        args: ["-t", ".copyright.tmpl", "-cy", "-f", "-d", "statapp"]
+        pass_filenames: false

@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.4.0](https://github.com/shizand/statapp/compare/v0.3.6...v0.4.0) (2023-10-03)
+
+
+### Новые функции
+
+* добавлен дисперсионный анализ ([#46](https://github.com/shizand/statapp/issues/46)) ([c77ed6a](https://github.com/shizand/statapp/commit/c77ed6a82fefbbf8879ba87d62bd895ebfd1e6fa)), closes [#30](https://github.com/shizand/statapp/issues/30)
+* добавлен Корреляционный анализ ([#54](https://github.com/shizand/statapp/issues/54)) ([3a65517](https://github.com/shizand/statapp/commit/3a655178d4e262c7df42b9c1567dcaf997c58071)), closes [#31](https://github.com/shizand/statapp/issues/31)
+
+
+### Исправления
+
+* добавлена иконка для окна "О программе" ([#55](https://github.com/shizand/statapp/issues/55)) ([023a4a5](https://github.com/shizand/statapp/commit/023a4a514221ab22bb29f87aeccd20b5595d1b2e))
+* добавлены заголовки диалоговых окон ([#49](https://github.com/shizand/statapp/issues/49)) ([a3f7c1a](https://github.com/shizand/statapp/commit/a3f7c1ac0b1bd16a2954dce83996c2e3677a7164)), closes [#44](https://github.com/shizand/statapp/issues/44)
+* исправлен баг "index 0 is out of bounds" ([#59](https://github.com/shizand/statapp/issues/59)) ([15825c2](https://github.com/shizand/statapp/commit/15825c22007baeceebee98d19515ff038c1c2ae4)), closes [#43](https://github.com/shizand/statapp/issues/43)
+* исправлена генерация значений фактора ([#53](https://github.com/shizand/statapp/issues/53)) ([4854a14](https://github.com/shizand/statapp/commit/4854a14e709272fe92463ac43d29f9a73a5f9875)), closes [#50](https://github.com/shizand/statapp/issues/50)
+* исправлены баги с отображением и считыванием исходных данных ([#58](https://github.com/shizand/statapp/issues/58)) ([fbf359e](https://github.com/shizand/statapp/commit/fbf359e515f962dd5e079d7a13b5b7dc39339764))
+* ограничена генерация чисел до сотых ([#48](https://github.com/shizand/statapp/issues/48)) ([0779941](https://github.com/shizand/statapp/commit/0779941dc9d9e83c35aff9f07a563da31e5c62c4)), closes [#32](https://github.com/shizand/statapp/issues/32)
+
 ## [0.3.6](https://github.com/shizand/statapp/compare/v0.3.5...v0.3.6) (2023-09-29)
 
 

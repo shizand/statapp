@@ -1,7 +1,7 @@
 import numpy as np
 from PySide2.QtCore import Slot, QSize
 from PySide2.QtGui import QIcon
-from PySide2.QtWidgets import QMainWindow, QMessageBox
+from PySide2.QtWidgets import QMainWindow, QMessageBox, QAction
 
 from statapp.calculations import generate_x_values
 from statapp.generate_factor_window import GenerateFactorWindow
@@ -26,6 +26,14 @@ class MainWindow(QMainWindow):
         icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
 
+        self.generateXaction_action = self.findChild(QAction, 'generateXaction')
+        self.varianceAnalysisAction_action = self.findChild(QAction, 'varianceAnalysisAction')
+        self.correlationAnalisisAction_action = self.findChild(QAction, 'correlationAnalisisAction')
+
+        self.generateXaction_action.setEnabled(False)
+        self.varianceAnalysisAction_action.setEnabled(False)
+        self.correlationAnalisisAction_action.setEnabled(False)
+
         self.isDataChanged = False
         self.model = InputValuesModel()
         self.fileModel = FileSLCModel()
@@ -34,6 +42,7 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_openfileaction_triggered(self):
         current_data = self.model.getData()
+        data = np.array([])
         if current_data.size > 1:
             file = ''
             if self.fileModel.file_name:
@@ -53,14 +62,27 @@ class MainWindow(QMainWindow):
                 return
             else:
                 data = self.fileModel.loadFile()
-                if data is not None:
+                if data is not None and data.shape[0] > 0:
                     self.model.updateAllData(data)
                     self.isDataChanged = False
         else:
             data = self.fileModel.loadFile()
-            if data is not None:
+            if data is not None and data.shape[0] > 0:
                 self.model.updateAllData(data)
                 self.isDataChanged = False
+
+        if data.shape[1] == 1:
+            self.generateXaction_action.setEnabled(True)
+            self.varianceAnalysisAction_action.setEnabled(False)
+            self.correlationAnalisisAction_action.setEnabled(False)
+        elif data.shape[1] > 1:
+            self.generateXaction_action.setEnabled(True)
+            self.varianceAnalysisAction_action.setEnabled(True)
+            self.correlationAnalisisAction_action.setEnabled(True)
+        else:
+            self.generateXaction_action.setEnabled(False)
+            self.varianceAnalysisAction_action.setEnabled(False)
+            self.correlationAnalisisAction_action.setEnabled(False)
 
     @Slot()
     def on_savefileaction_triggered(self):
@@ -78,6 +100,7 @@ class MainWindow(QMainWindow):
             y = np.random.normal(gw.mat, gw.deviation, size=(gw.count, 1))
             self.model.updateAllData(y.round(2))
             self.isDataChanged = True
+            self.generateXaction_action.setEnabled(True)
 
     @Slot()
     def on_generateXaction_triggered(self):
@@ -91,6 +114,8 @@ class MainWindow(QMainWindow):
             # dd = dd.reshape(len(dd), 1)
             data = np.concatenate((data, x_arr), axis=1)
             self.model.updateAllData(data)
+            self.varianceAnalysisAction_action.setEnabled(True)
+            self.correlationAnalisisAction_action.setEnabled(True)
             self.isDataChanged = True
 
     @Slot()

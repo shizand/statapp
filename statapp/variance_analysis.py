@@ -17,11 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import variance_analysis
 from statapp.models.variance_analysis_model import VarianceAnalysisModel
 from statapp.ui.ui_variance_analysis_window import Ui_VarianceAnalysisWindow
+from statapp.utils import resource_path
 
 
 class VarianceAnalysisWindow(QDialog):
@@ -35,3 +38,7 @@ class VarianceAnalysisWindow(QDialog):
         self.ui.tableView.setModel(self.model)
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+        icon = QIcon()
+        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)

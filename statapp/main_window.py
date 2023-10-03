@@ -112,10 +112,6 @@ class MainWindow(QMainWindow):
     def on_generateYaction_triggered(self):
         gw = GenerateWindow()
 
-        icon = QIcon()
-        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        gw.setWindowIcon(icon)
-
         if gw.exec():
             y = np.random.normal(gw.mat, gw.deviation, size=(gw.count, 1))
             self.model.updateAllData(y.round(2))
@@ -125,10 +121,6 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_generateXaction_triggered(self):
         gfw = GenerateFactorWindow()
-
-        icon = QIcon()
-        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        gfw.setWindowIcon(icon)
 
         if gfw.exec():
             data = self.model.getData()
@@ -146,31 +138,16 @@ class MainWindow(QMainWindow):
     def on_aboutmenuaction_triggered(self):
         global about_window
         about_window = AboutWindow()
-
-        icon = QIcon()
-        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        about_window.setWindowIcon(icon)
-
         about_window.show()
 
     @Slot()
     def on_varianceAnalysisAction_triggered(self):
         dw = VarianceAnalysisWindow(self.model.getData())
-
-        icon = QIcon()
-        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        dw.setWindowIcon(icon)
-
         dw.exec()
 
     @Slot()
     def on_correlationAnalisisAction_triggered(self):
         dw = СorrelationAnalysisWindow(self.model.getData())
-
-        icon = QIcon()
-        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        dw.setWindowIcon(icon)
-
         dw.exec()
 
     def closeEvent(self, event):

@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
 
         icon = QIcon()
         icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
 
         self.ui.generateXaction.setEnabled(False)
         self.ui.varianceAnalysisAction.setEnabled(False)

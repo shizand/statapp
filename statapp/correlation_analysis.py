@@ -17,11 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import correlation_analysis
 from statapp.models.correlation_analysis_model import CorrelationAnalysisModel
 from statapp.ui.ui_correlation_analysis_window import Ui_CorrelationAnalysisWindow
+from statapp.utils import resource_path
 
 
 class СorrelationAnalysisWindow(QDialog):
@@ -35,3 +38,7 @@ class СorrelationAnalysisWindow(QDialog):
         self.ui.tableView.setModel(self.model)
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+        icon = QIcon()
+        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)

@@ -17,10 +17,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-from PySide2.QtCore import Slot
+from PySide2.QtCore import Slot, QSize
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog
 
 from statapp.ui.ui_generate_window import Ui_GenerateWindow
+from statapp.utils import resource_path
 
 
 class GenerateWindow(QDialog):
@@ -31,6 +33,11 @@ class GenerateWindow(QDialog):
         self.count = None
         self.ui = Ui_GenerateWindow()
         self.ui.setupUi(self)
+
+        icon = QIcon()
+        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
+
 
     @Slot()
     def on_generatePushButton_clicked(self):

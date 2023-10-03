@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
 
         icon = QIcon()
         icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
 
         self.ui.generateXaction.setEnabled(False)
         self.ui.varianceAnalysisAction.setEnabled(False)
@@ -110,6 +111,7 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_generateYaction_triggered(self):
         gw = GenerateWindow()
+
         if gw.exec():
             y = np.random.normal(gw.mat, gw.deviation, size=(gw.count, 1))
             self.model.updateAllData(y.round(2))
@@ -136,11 +138,6 @@ class MainWindow(QMainWindow):
     def on_aboutmenuaction_triggered(self):
         global about_window
         about_window = AboutWindow()
-
-        icon = QIcon()
-        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        about_window.setWindowIcon(icon)
-
         about_window.show()
 
     @Slot()

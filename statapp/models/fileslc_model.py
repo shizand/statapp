@@ -19,12 +19,13 @@ class FileSLCModel:
         self.file_name, _ = QFileDialog.getOpenFileName(None, "Загрузить файл", "", "Files (*.txt *.csv)")
         if self.file_name:
             try:
-                content = np.genfromtxt(self.file_name, delimiter=',', invalid_raise=True)
+                content = np.genfromtxt(self.file_name, delimiter=',', invalid_raise=True, ndmin=2)
             except ValueError as e:
                 QMessageBox.warning \
                     (None,
                     'Ошибка',
                     "Ошибка чтения файла!\nФайл нельзя открыть или файл неверного формата")
+                self.file_name = None
                 return None
             return content
 

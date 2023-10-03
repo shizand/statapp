@@ -114,7 +114,7 @@ class MainWindow(QMainWindow):
             y = np.random.normal(gw.mat, gw.deviation, size=(gw.count, 1))
             self.model.updateAllData(y.round(2))
             self.isDataChanged = True
-            self.generateXaction_action.setEnabled(True)
+            self.ui.generateXaction.setEnabled(True)
 
     @Slot()
     def on_generateXaction_triggered(self):
@@ -128,8 +128,8 @@ class MainWindow(QMainWindow):
             # dd = dd.reshape(len(dd), 1)
             data = np.concatenate((data, x_arr), axis=1)
             self.model.updateAllData(data)
-            self.varianceAnalysisAction_action.setEnabled(True)
-            self.correlationAnalisisAction_action.setEnabled(True)
+            self.ui.varianceAnalysisAction.setEnabled(True)
+            self.ui.correlationAnalisisAction.setEnabled(True)
             self.isDataChanged = True
 
     @Slot()

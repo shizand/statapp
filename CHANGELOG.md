@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/shizand/statapp/compare/v0.4.0...v0.4.1) (2023-10-03)
+
+
+### Исправления
+
+* исправлена ошибка "Все кнопки заблокированы" ([#63](https://github.com/shizand/statapp/issues/63)) ([60f479e](https://github.com/shizand/statapp/commit/60f479ea7ddd87f2a8b9d0e62442ba9faf45e9d7)), closes [#62](https://github.com/shizand/statapp/issues/62)
+
 ## [0.4.0](https://github.com/shizand/statapp/compare/v0.3.6...v0.4.0) (2023-10-03)
 
 

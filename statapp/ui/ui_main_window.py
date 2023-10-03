@@ -51,6 +51,8 @@ class Ui_MainWindow(object):
         self.closefileaction.setObjectName(u"closefileaction")
         self.varianceAnalysisAction = QAction(MainWindow)
         self.varianceAnalysisAction.setObjectName(u"varianceAnalysisAction")
+        self.correlationAnalisisAction = QAction(MainWindow)
+        self.correlationAnalisisAction.setObjectName(u"correlationAnalisisAction")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
@@ -70,7 +72,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 27))
+        self.menubar.setGeometry(QRect(0, 0, 800, 21))
         self.filemenu = QMenu(self.menubar)
         self.filemenu.setObjectName(u"filemenu")
         self.generatemenu = QMenu(self.menubar)
@@ -97,6 +99,7 @@ class Ui_MainWindow(object):
         self.generatemenu.addAction(self.generateYaction)
         self.generatemenu.addAction(self.generateXaction)
         self.analyzemenu.addAction(self.varianceAnalysisAction)
+        self.analyzemenu.addAction(self.correlationAnalisisAction)
         self.helpmenu.addAction(self.aboutmenuaction)
 
         self.retranslateUi(MainWindow)
@@ -113,6 +116,7 @@ class Ui_MainWindow(object):
         self.savefileaction.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
         self.closefileaction.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u043a\u0440\u044b\u0442\u044c", None))
         self.varianceAnalysisAction.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u043e\u043d\u043d\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437", None))
+        self.correlationAnalisisAction.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u0440\u0440\u0435\u043b\u044f\u0446\u0438\u043e\u043d\u043d\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0422\u0410\u0422\u0418\u0421\u0422\u0418\u0427\u0415\u0421\u041a\u0418\u0415 \u0414\u0410\u041d\u041d\u042b\u0415", None))
         self.filemenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b", None))
         self.generatemenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0435\u0439", None))
@@ -120,3 +124,4 @@ class Ui_MainWindow(object):
         self.modelmenu.setTitle(QCoreApplication.translate("MainWindow", u"\u041c\u043e\u0434\u0435\u043b\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))
         self.helpmenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
     # retranslateUi
+

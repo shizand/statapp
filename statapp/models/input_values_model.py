@@ -28,7 +28,7 @@ class InputValuesModel(EditableTableModel):
         super().__init__(data)
 
     def getHorizontalHeader(self):
-        return yx_header(self.rowCount(QModelIndex()))
+        return yx_header(self.columnCount(QModelIndex()))
 
     def getY(self):
         return self._data[:, 0]

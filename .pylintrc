@@ -20,4 +20,5 @@ disable=
     fixme,
     missing-docstring,
     too-many-public-methods,
+    too-few-public-methods,
     too-many-arguments

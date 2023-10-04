@@ -20,21 +20,28 @@
 import os
 import sys
 
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QMessageBox
 
 
-def resource_path(relative):
+def resourcePath(relative):
     if getattr(sys, 'frozen', False):
-        bundle_dir = sys._MEIPASS
+        # pylint: disable=protected-access
+        bundleDir = sys._MEIPASS
     else:
         # we are running in a normal Python environment
-        bundle_dir = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(bundle_dir, relative)
+        bundleDir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(bundleDir, relative)
 
+def addIcon(windowOrDialog):
+    icon = QIcon()
+    icon.addFile(resourcePath("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+    windowOrDialog.setWindowIcon(icon)
 
-def safe_list_get(l, idx, default):
+def safeListGet(lst, idx, default):
     try:
-        return l[idx]
+        return lst[idx]
     except IndexError:
         return default
 

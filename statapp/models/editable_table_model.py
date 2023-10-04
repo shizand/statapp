@@ -43,7 +43,7 @@ class EditableTableModel(ROTableModel):
         return False
 
     def data(self, index, role):
-        if role == Qt.DisplayRole or role == Qt.EditRole:
-            return float(self._data[index.row(), index.column()])
+        if role in (Qt.DisplayRole, Qt.EditRole):
+            return super().data(index, Qt.DisplayRole)
 
         return None

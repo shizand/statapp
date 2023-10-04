@@ -24,30 +24,35 @@ from PySide2.QtWidgets import QFileDialog, QMessageBox
 class FileSLCModel:
     def __init__(self):
         super().__init__()
-        self.file_name = None
+        self.fileName = None
 
     def saveFile(self, data):
-        if not self.file_name:
-            self.file_name, _ = QFileDialog.getSaveFileName(None, "Сохранить файл", "", "Text Files (*.txt);;CSV Files (*.csv)")
-        if self.file_name:
-            np.savetxt(self.file_name, data, delimiter=",")
+        if not self.fileName:
+            self.fileName, _ = QFileDialog.getSaveFileName(
+                None, "Сохранить файл", "", "Text Files (*.txt);;CSV Files (*.csv)"
+            )
+        if self.fileName:
+            np.savetxt(self.fileName, data, delimiter=",")
             return True
         return False
 
     def loadFile(self):
-        self.file_name, _ = QFileDialog.getOpenFileName(None, "Загрузить файл", "", "Files (*.txt *.csv)")
-        if self.file_name:
+        self.fileName, _ = QFileDialog.getOpenFileName(
+            None, "Загрузить файл", "", "Files (*.txt *.csv)"
+        )
+        if self.fileName:
             try:
-                content = np.genfromtxt(self.file_name, delimiter=',', invalid_raise=True, ndmin=2)
-            except ValueError as e:
+                content = np.genfromtxt(self.fileName, delimiter=',', invalid_raise=True, ndmin=2)
+            except ValueError:
                 QMessageBox.warning \
                     (None,
                     'Ошибка',
                     "Ошибка чтения файла!\nФайл нельзя открыть или файл неверного формата")
-                self.file_name = None
+                self.fileName = None
                 return None
             return content
 
+        return None
+
     def closeFile(self):
-        self.file_name = None
-        pass
+        self.fileName = None

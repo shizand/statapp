@@ -21,24 +21,24 @@ from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QHeaderView
 
-from statapp.calculations import correlation_analysis
+from statapp.calculations import correlationAnalysis
 from statapp.models.correlation_analysis_model import CorrelationAnalysisModel
 from statapp.ui.ui_correlation_analysis_window import Ui_CorrelationAnalysisWindow
-from statapp.utils import resource_path
+from statapp.utils import resourcePath
 
 
-class СorrelationAnalysisWindow(QDialog):
+class CorrelationAnalysisWindow(QDialog):
     def __init__(self, data):
         super().__init__()
         self.ui = Ui_CorrelationAnalysisWindow()
         self.ui.setupUi(self)
 
-        res = correlation_analysis(data)
+        res = correlationAnalysis(data)
         self.model = CorrelationAnalysisModel(res.round(2))
         self.ui.tableView.setModel(self.model)
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
         icon = QIcon()
-        icon.addFile(resource_path("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(resourcePath("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)

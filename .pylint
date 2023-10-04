@@ -1,0 +1,23 @@
+[MAIN]
+ignored-modules = ["PySide2"]
+extension-pkg-whitelist = ["PySide2"]
+
+[tool.pylint.MASTER]
+init-hook = "import sys; sys.path.append('./statapp')"
+ignore-patterns = 'ui_.+\.py'
+
+[BASIC]
+attr-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$|^_?[a-z0-9]+(_[a-z0-9]+)*$"             # camelCase, lowercase, snake_case
+class-attribute-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$|^_?[a-z0-9]+(_[a-z0-9]+)*$"  # camelCase, lowercase
+variable-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$"                                    # camelCase, lowercase
+argument-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$"                                    # camelCase, lowercase
+function-rgx = "^_?[a-z][a-zA-Z0-9]+$"                                                  # camelCase
+method-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?on_[a-z][a-zA-Z]+_[a-z][a-zA-Z]+|^__init__$"     # camelCase, on_camelCaseWidget_camelCaseSignal and __init__
+
+[MESSAGES CONTROL]
+disable =
+    unused-argument,
+    fixme,
+    missing-docstring,
+    too-many-public-methods,
+    too-many-arguments

@@ -14,8 +14,34 @@ pre-commit = "^3.4.0"
 pyinstaller = "^6.0.0"
 pandas = "^2.0"
 pyside2 = "^5.15.2.1"
+pylint = "^3.0.0"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pylint.main]
+ignored-modules = ["PySide2"]
+extension-pkg-whitelist = ["PySide2"]
+
+[tool.pylint.MASTER]
+init-hook = "import sys; sys.path.append('./statapp')"
+ignore-patterns = 'ui_.+\.py'
+
+[tool.pylint.basic]
+attr-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$|^_?[a-z0-9]+(_[a-z0-9]+)*$"             # camelCase, lowercase, snake_case
+class-attribute-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$|^_?[a-z0-9]+(_[a-z0-9]+)*$"  # camelCase, lowercase
+variable-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$"                                    # camelCase, lowercase
+argument-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$"                                    # camelCase, lowercase
+function-rgx = "^_?[a-z][a-zA-Z0-9]+$"                                                  # camelCase
+method-rgx = "^_?[a-z][a-zA-Z0-9]+$|^_?on_[a-z][a-zA-Z]+_[a-z][a-zA-Z]+|^__init__$"     # camelCase, on_camelCaseWidget_camelCaseSignal and __init__
+
+[tool.pylint.messages_control]
+disable = [
+    "unused-argument",
+    "fixme",
+    "missing-docstring",
+    "too-many-public-methods",
+    "too-many-arguments"
+]

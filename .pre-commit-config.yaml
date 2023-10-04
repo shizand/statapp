@@ -19,7 +19,7 @@ repos:
         args: ["-t", ".copyright.tmpl", "-cy", "-f", "-d", "statapp"]
         pass_filenames: false
 -   repo: https://github.com/pylint-dev/pylint.git
-    rev: v3.0.0
+    rev: v2.17.5
     hooks:
     -   id: pylint
         args:

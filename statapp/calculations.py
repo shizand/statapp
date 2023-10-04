@@ -24,16 +24,16 @@ DIRECT_LINK = 0
 INDIRECT_LINK = 1
 
 
-def generate_x_values(mean, std, typeConnection, y):
-    yMean = np.mean(y)
+def generateXValues(mean, std, typeConnection, yColumn):
+    yMean = np.mean(yColumn)
     values = []
-    for cur_y in y:
+    for y in yColumn:
         raz = np.abs(mean - np.random.normal(mean, std))
         if typeConnection == INDIRECT_LINK:
             raz *= -1
-        if cur_y > yMean:
+        if y > yMean:
             x = mean + raz
-        elif cur_y < yMean:
+        elif y < yMean:
             x = mean - raz
         else:
             x = mean
@@ -41,11 +41,11 @@ def generate_x_values(mean, std, typeConnection, y):
     return np.array(values)
 
 
-def variance_analysis(data):
+def varianceAnalysis(data):
     return np.array([
         [np.mean(col), np.std(col), np.min(col), np.max(col)] for col in data.T
     ])
 
 
-def correlation_analysis(data):
+def correlationAnalysis(data):
     return pd.DataFrame(data).corr().to_numpy()

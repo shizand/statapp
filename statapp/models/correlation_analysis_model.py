@@ -20,7 +20,7 @@
 from PySide2.QtCore import QModelIndex, Qt
 
 from statapp.models.ro_table_model import ROTableModel
-from statapp.models.utils import yx_header
+from statapp.models.utils import yxHeader
 
 
 class CorrelationAnalysisModel(ROTableModel):
@@ -28,15 +28,12 @@ class CorrelationAnalysisModel(ROTableModel):
         super().__init__(data)
 
     def getHorizontalHeader(self):
-        return yx_header(self.columnCount(QModelIndex()))
+        return yxHeader(self.columnCount(QModelIndex()))
 
     def getVerticalHeader(self):
-        return yx_header(self.rowCount(QModelIndex()))
+        return yxHeader(self.rowCount(QModelIndex()))
 
     def data(self, index, role):
-        if role == Qt.DisplayRole:
-            if (index.column() <= index.row()):
-                return float(self._data[index.row(), index.column()])
-            else:
-                None
+        if role == Qt.DisplayRole and index.column() <= index.row():
+            return super().data(index, role)
         return None

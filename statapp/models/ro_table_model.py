@@ -17,12 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-import PySide2
 import numpy as np
 from PySide2 import QtCore
 from PySide2.QtCore import Qt
 
-from statapp.utils import safe_list_get
+from statapp.utils import safeListGet
 
 
 class ROTableModel(QtCore.QAbstractTableModel):
@@ -55,7 +54,7 @@ class ROTableModel(QtCore.QAbstractTableModel):
 
     def headerData(self, section: int, orientation: Qt.Orientation, role: int = ...):
         if role == Qt.DisplayRole:
-            return safe_list_get(self._headers[orientation](), section, None)
+            return safeListGet(self._headers[orientation](), section, None)
 
         return None
 

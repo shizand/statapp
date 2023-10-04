@@ -18,10 +18,10 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 import numpy as np
-from PySide2.QtCore import Qt, QModelIndex
+from PySide2.QtCore import QModelIndex
 
 from statapp.models.editable_table_model import EditableTableModel
-from statapp.models.utils import yx_header
+from statapp.models.utils import yxHeader
 
 
 class InputValuesModel(EditableTableModel):
@@ -29,7 +29,7 @@ class InputValuesModel(EditableTableModel):
         super().__init__(data)
 
     def getHorizontalHeader(self):
-        return yx_header(self.columnCount(QModelIndex()))
+        return yxHeader(self.columnCount(QModelIndex()))
 
     def getY(self):
         return self._data[:, 0]

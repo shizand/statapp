@@ -32,6 +32,7 @@ def main():
     locale = QtCore.QLocale.system().name()
     path = QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)
     translator.load(f'qt_{locale}', path)
+    translator.load(f'qtbase_{locale}', path)
     app.installTranslator(translator)
 
     window = MainWindow()

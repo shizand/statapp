@@ -32,7 +32,7 @@
 
 ```bash
 poetry install
-poetry run pyinstaller statapp.spec # или poetry run pyinstaller stat-onefile.spec
+pyinstaller statapp.spec # или pyinstaller statapp.spec -- --one-file
 ```
 
 ## Использование

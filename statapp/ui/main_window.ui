@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="filemenu">
@@ -69,6 +69,7 @@
     <property name="title">
      <string>Моделирование</string>
     </property>
+    <addaction name="linearPolynomAction"/>
    </widget>
    <widget class="QMenu" name="helpmenu">
     <property name="title">
@@ -121,6 +122,11 @@
   <action name="correlationAnalisisAction">
    <property name="text">
     <string>Корреляционный анализ</string>
+   </property>
+  </action>
+  <action name="linearPolynomAction">
+   <property name="text">
+    <string>Линейный полином</string>
    </property>
   </action>
  </widget>

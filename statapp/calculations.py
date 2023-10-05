@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+from dataclasses import dataclass
+
 import numpy as np
 import pandas as pd
 
@@ -56,14 +58,37 @@ def varianceAnalysis(data):
 def correlationAnalysis(data):
     return pd.DataFrame(data).corr().to_numpy()
 
+@dataclass()
+class LinearPolynomResult:
+    paramsAndImportance: np.ndarray
+    residualVariance: np.float64
 
-def linearPolynom(data):
-    x = data[:, 1:]
-    y = data[:, [0]]
 
-    df = pd.DataFrame(x)
-    df.insert(0, 'const', 1)
+def linearPolynom(inputData) -> LinearPolynomResult:
+    x = inputData[:, 1:]
+    y = inputData[:, 0]
+    data = pd.DataFrame(x)
+    data.insert(0, 'const', 1)
+    # ---
+    result = np.linalg.lstsq(data, y, rcond=None)
+    # Коэффициенты регрессии
+    params = result[0]
+    # Остатки
+    residues = result[1]
 
-    x = df.to_numpy()
+    # Степень свободы
+    dof = len(data) - len(params)
+    mse = residues / dof
+    cov = mse * np.diagonal(np.linalg.inv(data.T @ data))
+    se = np.sqrt(cov)
+    tStatistics = params / se
 
-    return np.linalg.lstsq(x, y, rcond=None)
+    # возможно стоит сделать через np.reshape + np.concatenate
+    out = pd.DataFrame()
+    out[0] = params
+    out[1] = tStatistics
+
+    return LinearPolynomResult(
+        out.to_numpy(),
+        np.float64(mse[0])
+    )

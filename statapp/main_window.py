@@ -21,7 +21,7 @@ import numpy as np
 from PySide2.QtCore import Slot
 from PySide2.QtWidgets import QMainWindow, QMessageBox
 
-from statapp.calculations import generateXValues
+from statapp.calculations import generateXValues, generateYValues
 from statapp.generate_factor_window import GenerateFactorWindow
 from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
@@ -112,7 +112,7 @@ class MainWindow(QMainWindow):
         gw = GenerateWindow()
 
         if gw.exec():
-            y = np.random.normal(gw.mat, gw.deviation, size=(gw.count, 1))
+            y = generateYValues(gw.mat, gw.deviation, gw.count)
             self.model.updateAllData(y.round(2))
             self.isDataChanged = True
             self.ui.generateXaction.setEnabled(True)
@@ -125,8 +125,7 @@ class MainWindow(QMainWindow):
             data = self.model.getData()
             y = self.model.getY()
             xValues = generateXValues(gfw.mat, gfw.deviation, gfw.typeConnection, y)
-            xValues = xValues.reshape(len(xValues), 1).round(2)
-            data = np.concatenate((data, xValues), axis=1)
+            data = np.concatenate((data, xValues.round(2)), axis=1)
             self.model.updateAllData(data)
             self.ui.varianceAnalysisAction.setEnabled(True)
             self.ui.correlationAnalisisAction.setEnabled(True)

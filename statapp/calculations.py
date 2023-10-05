@@ -24,6 +24,10 @@ DIRECT_LINK = 0
 INDIRECT_LINK = 1
 
 
+def generateYValues(mean, std, count):
+    return np.random.normal(mean, std, size=(count, 1))
+
+
 def generateXValues(mean, std, typeConnection, yColumn):
     yMean = np.mean(yColumn)
     values = []
@@ -38,7 +42,9 @@ def generateXValues(mean, std, typeConnection, yColumn):
         else:
             x = mean
         values.append(x)
-    return np.array(values)
+
+    res = np.array(values)
+    return res.reshape(len(res), 1)
 
 
 def varianceAnalysis(data):
@@ -49,3 +55,15 @@ def varianceAnalysis(data):
 
 def correlationAnalysis(data):
     return pd.DataFrame(data).corr().to_numpy()
+
+
+def linearPolynom(data):
+    x = data[:, 1:]
+    y = data[:, [0]]
+
+    df = pd.DataFrame(x)
+    df.insert(0, 'const', 1)
+
+    x = df.to_numpy()
+
+    return np.linalg.lstsq(x, y, rcond=None)

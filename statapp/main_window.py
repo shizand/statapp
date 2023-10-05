@@ -21,8 +21,9 @@ import numpy as np
 from PySide2.QtCore import Slot
 from PySide2.QtWidgets import QMainWindow, QMessageBox
 
-from statapp.calculations import generateXValues
+from statapp.calculations import generateXValues, generateYValues
 from statapp.generate_factor_window import GenerateFactorWindow
+from statapp.linear_polynom_window import LinearPolynomWindow
 from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
@@ -46,12 +47,48 @@ class MainWindow(QMainWindow):
         self.ui.varianceAnalysisAction.setEnabled(False)
         self.ui.correlationAnalisisAction.setEnabled(False)
 
+        self.mainActions = [
+            self.ui.varianceAnalysisAction,
+            self.ui.correlationAnalisisAction,
+            self.ui.linearPolynomAction,
+        ]
+
         self.aboutWindow = None
 
         self.isDataChanged = False
         self.model = InputValuesModel()
         self.fileModel = FileSLCModel()
         self.ui.tableView.setModel(self.model)
+        self.model.layoutChanged.connect(self.updateActionsEnabled)
+        self.updateActionsEnabled()
+        #
+        # Для быстрой отладки
+        # n = 10
+        # y = generateYValues(100, 5, n)
+        # x1 = generateXValues(20, 2, 0, y)
+        # x2 = generateXValues(10, 1, 0, y)
+        # self.model.updateAllData(np.concatenate([y, x1, x2], axis=1))
+
+
+    def updateActionsEnabled(self):
+        data = self.model.getData()
+
+        # есть только отклик
+        if data.shape[1] == 1:
+            self.ui.generateXaction.setEnabled(True)
+            self.setEnabledMainActions(False)
+        # есть отклик и фактор(ы)
+        elif data.shape[1] > 1:
+            self.ui.generateXaction.setEnabled(True)
+            self.setEnabledMainActions(True)
+        else:
+            self.ui.generateXaction.setEnabled(False)
+            self.setEnabledMainActions(False)
+
+
+    def setEnabledMainActions(self, enabled):
+        for action in self.mainActions:
+            action.setEnabled(enabled)
 
     @Slot()
     def on_openfileaction_triggered(self):
@@ -85,18 +122,6 @@ class MainWindow(QMainWindow):
                 self.model.updateAllData(data)
                 self.isDataChanged = False
 
-        if data.shape[1] == 1:
-            self.ui.generateXaction.setEnabled(True)
-            self.ui.varianceAnalysisAction.setEnabled(False)
-            self.ui.correlationAnalisisAction.setEnabled(False)
-        elif data.shape[1] > 1:
-            self.ui.generateXaction.setEnabled(True)
-            self.ui.varianceAnalysisAction.setEnabled(True)
-            self.ui.correlationAnalisisAction.setEnabled(True)
-        else:
-            self.ui.generateXaction.setEnabled(False)
-            self.ui.varianceAnalysisAction.setEnabled(False)
-            self.ui.correlationAnalisisAction.setEnabled(False)
 
     @Slot()
     def on_savefileaction_triggered(self):
@@ -112,10 +137,9 @@ class MainWindow(QMainWindow):
         gw = GenerateWindow()
 
         if gw.exec():
-            y = np.random.normal(gw.mat, gw.deviation, size=(gw.count, 1))
+            y = generateYValues(gw.mat, gw.deviation, gw.count)
             self.model.updateAllData(y.round(2))
             self.isDataChanged = True
-            self.ui.generateXaction.setEnabled(True)
 
     @Slot()
     def on_generateXaction_triggered(self):
@@ -125,11 +149,8 @@ class MainWindow(QMainWindow):
             data = self.model.getData()
             y = self.model.getY()
             xValues = generateXValues(gfw.mat, gfw.deviation, gfw.typeConnection, y)
-            xValues = xValues.reshape(len(xValues), 1).round(2)
-            data = np.concatenate((data, xValues), axis=1)
+            data = np.concatenate((data, xValues.round(2)), axis=1)
             self.model.updateAllData(data)
-            self.ui.varianceAnalysisAction.setEnabled(True)
-            self.ui.correlationAnalisisAction.setEnabled(True)
             self.isDataChanged = True
 
     @Slot()
@@ -145,6 +166,11 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_correlationAnalisisAction_triggered(self):
         dw = CorrelationAnalysisWindow(self.model.getData())
+        dw.exec()
+
+    @Slot()
+    def on_linearPolynomAction_triggered(self):
+        dw = LinearPolynomWindow(self.model.getData())
         dw.exec()
 
     def closeEvent(self, event):

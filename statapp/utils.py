@@ -34,10 +34,12 @@ def resourcePath(relative):
         bundleDir = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(bundleDir, relative)
 
+
 def addIcon(windowOrDialog):
     icon = QIcon()
     icon.addFile(resourcePath("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
     windowOrDialog.setWindowIcon(icon)
+
 
 def safeListGet(lst, idx, default):
     try:

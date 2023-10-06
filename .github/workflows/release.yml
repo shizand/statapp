@@ -47,8 +47,9 @@ jobs:
       - name: Установка зависимостей
         run: poetry install
       - name: Сборка
-        if:
-        run: pyinstaller statapp.spec -- ${{ matrix.spec == 'statapp-onefile' && '--one-file' || '' }}
+        run: |
+          poetry shell
+          pyinstaller statapp.spec -- ${{ matrix.spec == 'statapp-onefile' && '--one-file' || '' }}
       - name: Архивация
         uses: thedoctor0/zip-release@0.7.1
         with:

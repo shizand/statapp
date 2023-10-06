@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0](https://github.com/shizand/statapp/compare/v0.4.2...v0.5.0) (2023-10-06)
+
+
+### Новые функции
+
+* добавлен "Линейный полином" ([#74](https://github.com/shizand/statapp/issues/74)) ([232de9f](https://github.com/shizand/statapp/commit/232de9f145862a1a1e493478ba5fe8a6e4866e5a))
+
+
+### Исправления
+
+* добавлены переводы для QMessageBox ([#73](https://github.com/shizand/statapp/issues/73)) ([e653c3d](https://github.com/shizand/statapp/commit/e653c3df29355e84f5845d428d2265b902f5abeb))
+
 ## [0.4.2](https://github.com/shizand/statapp/compare/v0.4.1...v0.4.2) (2023-10-03)
 
 

@@ -20,6 +20,8 @@
 import numpy as np
 from PySide2.QtWidgets import QFileDialog, QMessageBox
 
+from statapp.utils import buildMessageBox
+
 
 class FileSLCModel:
     def __init__(self):
@@ -27,19 +29,43 @@ class FileSLCModel:
         self.fileName = None
 
     def saveFile(self, data):
-        if not self.fileName:
+        # pylint: disable=duplicate-code
+
+        if self.fileName:
+            file = '\nФайл сохранения: ' + self.fileName
+
+            msgBox = buildMessageBox \
+                ('Сохранение данных',
+                 "Сохранить данные в текущий файл?" + file,
+                 QMessageBox.Question,
+                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
+                 QMessageBox.Cancel)
+
+            reply = msgBox.exec_()
+            if reply == QMessageBox.StandardButton.Yes:
+                np.savetxt(self.fileName, data, delimiter=",", fmt='%10.5f')
+                return True
+            if reply == QMessageBox.StandardButton.No:
+                self.fileName, _ = QFileDialog.getSaveFileName(
+                    None, "Сохранить файл", "", "Text Files (*.txt);;CSV Files (*.csv)"
+                )
+                if self.fileName:
+                    np.savetxt(self.fileName, data, delimiter=",", fmt='%10.5f')
+                    return True
+        else:
             self.fileName, _ = QFileDialog.getSaveFileName(
                 None, "Сохранить файл", "", "Text Files (*.txt);;CSV Files (*.csv)"
             )
-        if self.fileName:
-            np.savetxt(self.fileName, data, delimiter=",")
-            return True
+            if self.fileName:
+                np.savetxt(self.fileName, data, delimiter=",", fmt='%10.5f')
+                return True
         return False
 
     def loadFile(self):
         self.fileName, _ = QFileDialog.getOpenFileName(
             None, "Загрузить файл", "", "Files (*.txt *.csv)"
         )
+
         if self.fileName:
             try:
                 content = np.genfromtxt(self.fileName, delimiter=',', invalid_raise=True, ndmin=2)

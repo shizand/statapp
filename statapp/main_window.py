@@ -109,6 +109,11 @@ class MainWindow(QMainWindow):
             reply = msgBox.exec_()
             if reply == QMessageBox.StandardButton.Yes:
                 self.fileModel.saveFile(self.model.getData())
+
+                data = self.fileModel.loadFile()
+                if data is not None and data.shape[0] > 0:
+                    self.model.updateAllData(data)
+                    self.isDataChanged = False
             elif reply == QMessageBox.StandardButton.Cancel:
                 return
             else:

@@ -21,6 +21,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+from statapp._vendor.multipolyfit import multipolyfit, mk_sympy_function
 
 DIRECT_LINK = 0
 INDIRECT_LINK = 1
@@ -92,3 +93,14 @@ def linearPolynom(inputData) -> LinearPolynomResult:
         out.to_numpy(),
         np.float64(mse[0])
     )
+
+def squaredPolynom(inputData) -> LinearPolynomResult:
+    x = inputData[:, 1:]
+    y = inputData[:, 0]
+    data = pd.DataFrame(x)
+    betas, powers = multipolyfit(x, y, 2, powers_out=True)
+    res = mk_sympy_function(betas, powers)
+    print(data)
+    print(res)
+
+    return powers

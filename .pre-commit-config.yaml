@@ -16,7 +16,7 @@ repos:
     rev: v0.8.8
     hooks:
     -   id: licenseheaders
-        args: ["-t", ".copyright.tmpl", "-cy", "-f", "-d", "statapp"]
+        args: ["-t", ".copyright.tmpl", "-cy", "-f", "-d", "statapp", "-x", "statapp/_vendor/*.py"]
         pass_filenames: false
 -   repo: local
     hooks:

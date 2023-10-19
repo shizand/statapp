@@ -70,6 +70,7 @@
      <string>Моделирование</string>
     </property>
     <addaction name="linearPolynomAction"/>
+    <addaction name="squaredPolynomAction"/>
    </widget>
    <widget class="QMenu" name="helpmenu">
     <property name="title">
@@ -127,6 +128,11 @@
   <action name="linearPolynomAction">
    <property name="text">
     <string>Линейный полином</string>
+   </property>
+  </action>
+  <action name="squaredPolynomAction">
+   <property name="text">
+    <string>Квадратичный полином</string>
    </property>
   </action>
  </widget>

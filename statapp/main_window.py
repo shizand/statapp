@@ -28,6 +28,7 @@ from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
+from statapp.squared_polynom_window import SquaredPolynomWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
 from statapp.utils import buildMessageBox, addIcon
 from statapp.variance_analysis import VarianceAnalysisWindow
@@ -171,6 +172,11 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_linearPolynomAction_triggered(self):
         dw = LinearPolynomWindow(self.model.getData())
+        dw.exec()
+
+    @Slot()
+    def on_squaredPolynomAction_triggered(self):
+        dw = SquaredPolynomWindow(self.model.getData())
         dw.exec()
 
     def closeEvent(self, event):

@@ -60,12 +60,17 @@ def correlationAnalysis(data):
     return pd.DataFrame(data).corr().to_numpy()
 
 @dataclass()
-class LinearPolynomResult:
+class RegressionResult:
+    """
+    Attributes:
+        paramsAndImportance (np.ndarray): Параметры модели
+        residualVariance (np.float64): Остаточная дисперсия
+    """
     paramsAndImportance: np.ndarray
     residualVariance: np.float64
 
 
-def linearPolynom(inputData) -> LinearPolynomResult:
+def linearPolynom(inputData) -> RegressionResult:
     x = inputData[:, 1:]
     y = inputData[:, 0]
     data = pd.DataFrame(x)
@@ -76,8 +81,6 @@ def linearPolynom(inputData) -> LinearPolynomResult:
     params = result[0]
     # Остатки
     residues = result[1]
-
-    # Степень свободы
     dof = len(data) - len(params)
     mse = residues / dof
     cov = mse * np.diagonal(np.linalg.inv(data.T @ data))
@@ -89,18 +92,40 @@ def linearPolynom(inputData) -> LinearPolynomResult:
     out[0] = params
     out[1] = tStatistics
 
-    return LinearPolynomResult(
+    return RegressionResult(
         out.to_numpy(),
         np.float64(mse[0])
     )
 
-def squaredPolynom(inputData) -> LinearPolynomResult:
+@dataclass()
+class ExtendedRegressionResult:
+    """
+    Attributes:
+        paramsAndImportance (np.ndarray): Параметры модели
+        residualVariance (np.float64): Остаточная дисперсия
+    """
+    paramsAndImportance: np.ndarray
+    residualVariance: np.float64
+    powers: list
+
+
+def squaredPolynom(inputData):
     x = inputData[:, 1:]
     y = inputData[:, 0]
     data = pd.DataFrame(x)
-    betas, powers = multipolyfit(x, y, 2, powers_out=True)
+    result, powers, tStatistics, mse = multipolyfit(x, y, 2, full=True)
+    betas = result[0]
     res = mk_sympy_function(betas, powers)
     print(data)
     print(res)
 
-    return powers
+    out = pd.DataFrame()
+    out[0] = betas
+    out[1] = tStatistics
+
+
+    return ExtendedRegressionResult(
+        out.to_numpy(),
+        np.float64(mse[0]),
+        powers
+    )

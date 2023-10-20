@@ -44,6 +44,9 @@ class Ui_LinearPolynomWindow(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.tableView = QTableView(LinearPolynomWindow)
         self.tableView.setObjectName(u"tableView")
+        self.tableView.horizontalHeader().setMinimumSectionSize(40)
+        self.tableView.verticalHeader().setMinimumSectionSize(40)
+        self.tableView.verticalHeader().setDefaultSectionSize(40)
 
         self.gridLayout.addWidget(self.tableView, 0, 0, 1, 1)
 

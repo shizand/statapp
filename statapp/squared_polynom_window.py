@@ -21,9 +21,10 @@ from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import squaredPolynom
 from statapp.mathtex_header_view import MathTexHeaderView
-from statapp.models.squared_polynom_model import SquaredPolynomModel
+from statapp.models.regression_result_model import RegressionResultModel
 from statapp.ui.ui_squared_polynom_window import Ui_SquaredPolynomWindow
 from statapp.utils import addIcon
+
 
 class SquaredPolynomWindow(QDialog):
     def __init__(self, data):
@@ -34,15 +35,9 @@ class SquaredPolynomWindow(QDialog):
 
         result = squaredPolynom(data)
 
-        # Не округляем, т.к. может получиться коэффициент = 0 и значимый (t-критерий)
-        self.model = SquaredPolynomModel(result.paramsAndImportance)
-        self.model.powers = result.powers
-        # self.ui.tableView.setItemDelegate(TermItemDelegate())
+        self.model = RegressionResultModel(result)
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setVerticalHeader(MathTexHeaderView(self.ui.tableView))
-
-        # x = h.indexWidget(h.model().index(0, 0))
-
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 

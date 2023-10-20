@@ -72,6 +72,12 @@ class CacheQPixMap(dict):
 class MathTexHeaderView(QHeaderView):
     def __init__(self, view, orientation=QtCore.Qt.Vertical):
         super().__init__(orientation, view)
+
+        if orientation == QtCore.Qt.Vertical:
+            self.setStyleSheet(
+                "QHeaderView::section { padding-left: 15px; padding-right: 15px }"
+            )
+
         self.converter = CacheQPixMap()
 
     def paintSection(self, painter, rect, logicalIndex):

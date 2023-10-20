@@ -21,7 +21,7 @@ from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import linearPolynom
 from statapp.mathtex_header_view import MathTexHeaderView
-from statapp.models.linear_polynom_model import LinearPolynomModel
+from statapp.models.regression_result_model import RegressionResultModel
 from statapp.ui.ui_linear_polynom_window import Ui_LinearPolynomWindow
 from statapp.utils import addIcon
 
@@ -35,11 +35,9 @@ class LinearPolynomWindow(QDialog):
 
         result = linearPolynom(data)
 
-        self.model = LinearPolynomModel(result.paramsAndImportance.round(2))
+        self.model = RegressionResultModel(result)
         self.ui.tableView.setModel(self.model)
-        self.ui.tableView.setVerticalHeader(
-            MathTexHeaderView(self.ui.tableView)
-        )
+        self.ui.tableView.setVerticalHeader(MathTexHeaderView(self.ui.tableView))
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 

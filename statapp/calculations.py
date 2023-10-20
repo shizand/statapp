@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
-from statapp._vendor.multipolyfit import multipolyfit
+from statapp._vendor.multipolyfit import multipolyfit, getTerms
 
 DIRECT_LINK = 0
 INDIRECT_LINK = 1
@@ -59,15 +59,18 @@ def varianceAnalysis(data):
 def correlationAnalysis(data):
     return pd.DataFrame(data).corr().to_numpy()
 
+
 @dataclass()
 class RegressionResult:
     """
     Attributes:
-        paramsAndImportance (np.ndarray): Параметры модели
+        paramsAndImportance (np.ndarray): Параметры модели. Первая колонка -
         residualVariance (np.float64): Остаточная дисперсия
+        monomials (list): Список одночленов в строковом виде без коэффициентов. Свободный член - c
     """
     paramsAndImportance: np.ndarray
     residualVariance: np.float64
+    monomials: list
 
 
 def linearPolynom(inputData) -> RegressionResult:
@@ -94,19 +97,9 @@ def linearPolynom(inputData) -> RegressionResult:
 
     return RegressionResult(
         out.to_numpy(),
-        np.float64(mse[0])
+        np.float64(mse[0]),
+        ['c'] + [f'x{i}' for i in range(1, len(params))]
     )
-
-@dataclass()
-class ExtendedRegressionResult:
-    """
-    Attributes:
-        paramsAndImportance (np.ndarray): Параметры модели
-        residualVariance (np.float64): Остаточная дисперсия
-    """
-    paramsAndImportance: np.ndarray
-    residualVariance: np.float64
-    powers: list
 
 
 def squaredPolynom(inputData):
@@ -119,8 +112,8 @@ def squaredPolynom(inputData):
     out[0] = betas
     out[1] = tStatistics
 
-    return ExtendedRegressionResult(
+    return RegressionResult(
         out.to_numpy(),
         np.float64(mse[0]),
-        powers
+        ['c' if str(x) == '1' else str(x) for x in getTerms(powers)]
     )

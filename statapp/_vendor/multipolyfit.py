@@ -1,6 +1,5 @@
 # Copyright (c) 2023 Matthew Rocklin
 # All rights reserved.
-import numpy as np
 # This source code is distributed under the terms of the BSD license,
 # which allows you to use, modify, and distribute it
 # as long as you comply with the license terms.
@@ -9,11 +8,10 @@ import numpy as np
 # is now also licensed under the GPL-3.0.
 # See the GPL-3.0 license for details.
 
-# TODO: remove
-# pylint: skip-file
-
-from numpy import linalg, zeros, ones, hstack, asarray, diagonal
 import itertools
+import numpy as np
+from numpy import linalg, zeros, ones, hstack, asarray, diagonal
+from sympy import symbols, Mul, Add, S
 
 
 def basisVector(n, i):
@@ -29,11 +27,14 @@ def basisVector(n, i):
     x[i] = 1
     return x
 
+
 def asTall(x):
     """ Turns a row vector into a column vector """
     return x.reshape(x.shape + (1,))
 
-def multipolyfit(xs, y, deg, full=False, model_out=False, powers_out=False):
+
+def multipolyfit(xs, y, deg, full=False, modelOut=False, powersOut=False):
+    # pylint: disable-msg=too-many-locals
     """
     Least squares multivariate polynomial fit
 
@@ -49,10 +50,10 @@ def multipolyfit(xs, y, deg, full=False, model_out=False, powers_out=False):
          y-coordinates of the sample points.
     deg : int
          Degree o fthe fitting polynomial
-    model_out : bool (defaults to True)
+    modelOut : bool (defaults to True)
          If True return a callable function
          If False return an array of coefficients
-    powers_out : bool (defaults to False)
+    powersOut : bool (defaults to False)
          Returns the meaning of each of the coefficients in the form of an
          iterator that gives the powers over the inputs and 1
          For example if xs corresponds to the covariates a,b,c then the array
@@ -63,8 +64,9 @@ def multipolyfit(xs, y, deg, full=False, model_out=False, powers_out=False):
         numpy.polyfit
 
     """
+    # pylin
     y = asarray(y).squeeze()
-    rows = y.shape[0]
+    # rows = y.shape[0]
     xs = asarray(xs)
     numCovariates = xs.shape[1]
     xs = hstack((ones((xs.shape[0], 1), dtype=xs.dtype) , xs))
@@ -81,10 +83,10 @@ def multipolyfit(xs, y, deg, full=False, model_out=False, powers_out=False):
     result = linalg.lstsq(a, y, rcond=None)
     beta = result[0]
 
-    if model_out:
-        return mk_model(beta, powers)
+    if modelOut:
+        return mkModel(beta, powers)
 
-    if powers_out:
+    if powersOut:
         return beta, powers
 
     if full:
@@ -100,7 +102,8 @@ def multipolyfit(xs, y, deg, full=False, model_out=False, powers_out=False):
 
     return beta
 
-def mk_model(beta, powers):
+
+def mkModel(beta, powers):
     """ Create a callable python function out of beta/powers from multipolyfit
 
     This function is callable from within multipolyfit using the model_out flag
@@ -108,23 +111,23 @@ def mk_model(beta, powers):
     # Create a function that takes in many x values
     # and returns an approximate y value
     def model(*args):
-        num_covariates = len(powers[0]) - 1
-        if len(args)!=(num_covariates):
-            raise ValueError("Expected %d inputs"%num_covariates)
+        numCovariates = len(powers[0]) - 1
+        if len(args) != numCovariates:
+            raise ValueError(f"Expected {numCovariates} inputs")
         xs = asarray((1,) + args)
-        return sum([coeff * (xs**p).prod()
-                             for p, coeff in zip(powers, beta)])
+        return sum(coeff * (xs**p).prod()
+                             for p, coeff in zip(powers, beta))
     return model
 
-def mk_sympy_function(beta, powers):
-    from sympy import symbols, Add, Mul, S
-    terms = get_terms(powers)
+
+def mkSympyFunction(beta, powers):
+    terms = getTerms(powers)
     return Add(*[coeff * term for term, coeff in zip(terms, beta)])
 
-def get_terms(powers):
-    from sympy import symbols, Add, Mul, S
-    num_covariates = len(powers[0])
-    xs = (S.One,) + symbols('x1:%d' % num_covariates)
+
+def getTerms(powers):
+    numCovariates = len(powers[0])
+    xs = (S.One,) + symbols(f'x1:{numCovariates}')
 
     terms = [Mul(*[x ** deg for x, deg in zip(xs, power)]) for power in powers]
     return terms

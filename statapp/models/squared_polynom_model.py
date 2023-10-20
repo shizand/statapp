@@ -18,7 +18,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-from statapp._vendor.multipolyfit import get_terms
+from statapp._vendor.multipolyfit import getTerms
 from statapp.models.linear_polynom_model import LinearPolynomModel
 
 
@@ -26,4 +26,4 @@ class SquaredPolynomModel(LinearPolynomModel):
     powers: list
 
     def getVerticalHeader(self):
-        return ['c' if str(x) == '1' else str(x) for x in get_terms(self.powers)]
+        return ['c' if str(x) == '1' else str(x) for x in getTerms(self.powers)]

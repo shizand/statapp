@@ -19,12 +19,9 @@
 #
 import sys
 
-import numpy as np
 from PySide2 import QtCore
 from PySide2.QtWidgets import QApplication
 
-from statapp import calculations
-from statapp.calculations import generateXValues, generateYValues
 from statapp.main_window import MainWindow
 
 
@@ -43,18 +40,4 @@ def main():
     return app.exec_()
 
 if __name__ == "__main__":
-    # Для быстрой отладки
-    N = 10
-    y = generateYValues(100, 5, N)
-    x1 = generateXValues(20, 2, 0, y)
-    x2 = generateXValues(10, 1, 0, y)
-
-    data = np.concatenate([y, x1, x2], axis=1)
-
-    out = calculations.squaredPolynom(data)
-
-    coef = []
-
-    print()
-
     sys.exit(main())

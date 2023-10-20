@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
-from statapp._vendor.multipolyfit import multipolyfit, mk_sympy_function
+from statapp._vendor.multipolyfit import multipolyfit
 
 DIRECT_LINK = 0
 INDIRECT_LINK = 1
@@ -112,17 +112,12 @@ class ExtendedRegressionResult:
 def squaredPolynom(inputData):
     x = inputData[:, 1:]
     y = inputData[:, 0]
-    data = pd.DataFrame(x)
     result, powers, tStatistics, mse = multipolyfit(x, y, 2, full=True)
     betas = result[0]
-    res = mk_sympy_function(betas, powers)
-    print(data)
-    print(res)
 
     out = pd.DataFrame()
     out[0] = betas
     out[1] = tStatistics
-
 
     return ExtendedRegressionResult(
         out.to_numpy(),

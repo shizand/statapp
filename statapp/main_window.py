@@ -70,11 +70,11 @@ class MainWindow(QMainWindow):
         self.updateActionsEnabled()
         #
         # Для быстрой отладки
-        n = 10
-        y = generateYValues(100, 5, n)
-        x1 = generateXValues(20, 2, 0, y)
-        x2 = generateXValues(10, 1, 0, y)
-        self.model.updateAllData(np.concatenate([y, x1, x2], axis=1))
+        # n = 10
+        # y = generateYValues(100, 5, n)
+        # x1 = generateXValues(20, 2, 0, y)
+        # x2 = generateXValues(10, 1, 0, y)
+        # self.model.updateAllData(np.concatenate([y, x1, x2], axis=1))
 
 
     def updateActionsEnabled(self):

@@ -26,4 +26,4 @@ class SquaredPolynomModel(LinearPolynomModel):
     powers: list
 
     def getVerticalHeader(self):
-        return [str(x) for x in get_terms(self.powers)]
+        return ['c' if str(x) == '1' else str(x) for x in get_terms(self.powers)]

@@ -17,11 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+from PySide2 import QtCore
 from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import correlationAnalysis
+from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.correlation_analysis_model import CorrelationAnalysisModel
 from statapp.ui.ui_correlation_analysis_window import Ui_CorrelationAnalysisWindow
 from statapp.utils import resourcePath
@@ -36,6 +38,12 @@ class CorrelationAnalysisWindow(QDialog):
         res = correlationAnalysis(data)
         self.model = CorrelationAnalysisModel(res.round(2))
         self.ui.tableView.setModel(self.model)
+        self.ui.tableView.setVerticalHeader(
+            MathTexHeaderView(self.ui.tableView)
+        )
+        self.ui.tableView.setHorizontalHeader(
+            MathTexHeaderView(self.ui.tableView,orientation=QtCore.Qt.Horizontal)
+        )
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 

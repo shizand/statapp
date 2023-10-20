@@ -28,4 +28,4 @@ class LinearPolynomModel(ROTableModel):
 
     def getVerticalHeader(self):
         count = (self.rowCount(QModelIndex()))
-        return ['Свободный член'] + [f'X{i}' for i in range(1, count)]
+        return ['c'] + [f'x{i}' for i in range(1, count)]

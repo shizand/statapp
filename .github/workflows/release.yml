@@ -21,9 +21,9 @@ jobs:
             target: linux
           - os: windows-latest
             target: windows
-        exclude:
-          - os: ubuntu-20.04
-            arch: x86
+#        exclude:
+#          - os: ubuntu-20.04
+#            arch: x86
     defaults:
       run:
         shell: bash

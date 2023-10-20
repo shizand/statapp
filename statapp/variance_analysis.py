@@ -20,6 +20,7 @@
 from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import varianceAnalysis
+from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.variance_analysis_model import VarianceAnalysisModel
 from statapp.ui.ui_variance_analysis_window import Ui_VarianceAnalysisWindow
 from statapp.utils import addIcon
@@ -34,6 +35,9 @@ class VarianceAnalysisWindow(QDialog):
         res = varianceAnalysis(data)
         self.model = VarianceAnalysisModel(res.round(2))
         self.ui.tableView.setModel(self.model)
+        self.ui.tableView.setVerticalHeader(
+            MathTexHeaderView(self.ui.tableView)
+        )
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 

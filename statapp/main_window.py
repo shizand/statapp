@@ -18,16 +18,19 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 import numpy as np
+from PySide2 import QtCore
 from PySide2.QtCore import Slot
 from PySide2.QtWidgets import QMainWindow, QMessageBox
 
 from statapp.calculations import generateXValues, generateYValues
 from statapp.generate_factor_window import GenerateFactorWindow
 from statapp.linear_polynom_window import LinearPolynomWindow
+from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
+from statapp.squared_polynom_window import SquaredPolynomWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
 from statapp.utils import buildMessageBox, addIcon
 from statapp.variance_analysis import VarianceAnalysisWindow
@@ -51,6 +54,7 @@ class MainWindow(QMainWindow):
             self.ui.varianceAnalysisAction,
             self.ui.correlationAnalisisAction,
             self.ui.linearPolynomAction,
+            self.ui.squaredPolynomAction,
         ]
 
         self.aboutWindow = None
@@ -59,15 +63,18 @@ class MainWindow(QMainWindow):
         self.model = InputValuesModel()
         self.fileModel = FileSLCModel()
         self.ui.tableView.setModel(self.model)
+        self.ui.tableView.setHorizontalHeader(
+            MathTexHeaderView(self.ui.tableView, orientation=QtCore.Qt.Horizontal)
+        )
         self.model.layoutChanged.connect(self.updateActionsEnabled)
         self.updateActionsEnabled()
         #
         # Для быстрой отладки
-        # n = 10
-        # y = generateYValues(100, 5, n)
-        # x1 = generateXValues(20, 2, 0, y)
-        # x2 = generateXValues(10, 1, 0, y)
-        # self.model.updateAllData(np.concatenate([y, x1, x2], axis=1))
+        n = 10
+        y = generateYValues(100, 5, n)
+        x1 = generateXValues(20, 2, 0, y)
+        x2 = generateXValues(10, 1, 0, y)
+        self.model.updateAllData(np.concatenate([y, x1, x2], axis=1))
 
 
     def updateActionsEnabled(self):
@@ -176,6 +183,11 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_linearPolynomAction_triggered(self):
         dw = LinearPolynomWindow(self.model.getData())
+        dw.exec()
+
+    @Slot()
+    def on_squaredPolynomAction_triggered(self):
+        dw = SquaredPolynomWindow(self.model.getData())
         dw.exec()
 
     def closeEvent(self, event):

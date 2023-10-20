@@ -21,6 +21,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+from statapp._vendor.multipolyfit import multipolyfit, getTerms
 
 DIRECT_LINK = 0
 INDIRECT_LINK = 1
@@ -58,13 +59,21 @@ def varianceAnalysis(data):
 def correlationAnalysis(data):
     return pd.DataFrame(data).corr().to_numpy()
 
+
 @dataclass()
-class LinearPolynomResult:
+class RegressionResult:
+    """
+    Attributes:
+        paramsAndImportance (np.ndarray): Параметры модели. Первая колонка -
+        residualVariance (np.float64): Остаточная дисперсия
+        monomials (list): Список одночленов в строковом виде без коэффициентов. Свободный член - c
+    """
     paramsAndImportance: np.ndarray
     residualVariance: np.float64
+    monomials: list
 
 
-def linearPolynom(inputData) -> LinearPolynomResult:
+def linearPolynom(inputData) -> RegressionResult:
     x = inputData[:, 1:]
     y = inputData[:, 0]
     data = pd.DataFrame(x)
@@ -75,8 +84,6 @@ def linearPolynom(inputData) -> LinearPolynomResult:
     params = result[0]
     # Остатки
     residues = result[1]
-
-    # Степень свободы
     dof = len(data) - len(params)
     mse = residues / dof
     cov = mse * np.diagonal(np.linalg.inv(data.T @ data))
@@ -88,7 +95,25 @@ def linearPolynom(inputData) -> LinearPolynomResult:
     out[0] = params
     out[1] = tStatistics
 
-    return LinearPolynomResult(
+    return RegressionResult(
         out.to_numpy(),
-        np.float64(mse[0])
+        np.float64(mse[0]),
+        ['c'] + [f'x{i}' for i in range(1, len(params))]
+    )
+
+
+def squaredPolynom(inputData):
+    x = inputData[:, 1:]
+    y = inputData[:, 0]
+    result, powers, tStatistics, mse = multipolyfit(x, y, 2, full=True)
+    betas = result[0]
+
+    out = pd.DataFrame()
+    out[0] = betas
+    out[1] = tStatistics
+
+    return RegressionResult(
+        out.to_numpy(),
+        np.float64(mse[0]),
+        ['c' if str(x) == '1' else str(x) for x in getTerms(powers)]
     )

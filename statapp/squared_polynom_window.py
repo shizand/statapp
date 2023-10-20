@@ -17,36 +17,28 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-from PySide2 import QtCore
-from PySide2.QtCore import QSize
-from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QHeaderView
 
-from statapp.calculations import correlationAnalysis
+from statapp.calculations import squaredPolynom
 from statapp.mathtex_header_view import MathTexHeaderView
-from statapp.models.correlation_analysis_model import CorrelationAnalysisModel
-from statapp.ui.ui_correlation_analysis_window import Ui_CorrelationAnalysisWindow
-from statapp.utils import resourcePath
+from statapp.models.regression_result_model import RegressionResultModel
+from statapp.ui.ui_squared_polynom_window import Ui_SquaredPolynomWindow
+from statapp.utils import addIcon
 
 
-class CorrelationAnalysisWindow(QDialog):
+class SquaredPolynomWindow(QDialog):
     def __init__(self, data):
         super().__init__()
-        self.ui = Ui_CorrelationAnalysisWindow()
+        self.ui = Ui_SquaredPolynomWindow()
         self.ui.setupUi(self)
+        addIcon(self)
 
-        res = correlationAnalysis(data)
-        self.model = CorrelationAnalysisModel(res.round(2))
+        result = squaredPolynom(data)
+
+        self.model = RegressionResultModel(result)
         self.ui.tableView.setModel(self.model)
-        self.ui.tableView.setVerticalHeader(
-            MathTexHeaderView(self.ui.tableView)
-        )
-        self.ui.tableView.setHorizontalHeader(
-            MathTexHeaderView(self.ui.tableView,orientation=QtCore.Qt.Horizontal)
-        )
+        self.ui.tableView.setVerticalHeader(MathTexHeaderView(self.ui.tableView))
         header = self.ui.tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
-        icon = QIcon()
-        icon.addFile(resourcePath("ui/images/logo.ico"), QSize(), QIcon.Normal, QIcon.Off)
-        self.setWindowIcon(icon)
+        self.ui.residualVarianceValueLabel.setText(str(result.residualVariance))

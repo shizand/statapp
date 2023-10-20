@@ -17,6 +17,8 @@ pandas = { version = "^2", markers = "python_version < '3.9'" }
 pylint = { version = "^2", markers = "python_version < '3.9'" }
 # scipy = { version = "^1", markers = "python_version < '3.9'" }
 # openpyxl = "^3.1.2"
+sympy = "^1.12"
+matplotlib = "^3.7.0"
 
 
 [build-system]

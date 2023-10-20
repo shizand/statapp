@@ -17,15 +17,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-from PySide2.QtCore import QModelIndex
-
+from statapp.calculations import RegressionResult
 from statapp.models.ro_table_model import ROTableModel
 
 
-class LinearPolynomModel(ROTableModel):
+class RegressionResultModel(ROTableModel):
+    def __init__(self, result: RegressionResult):
+        data = result.paramsAndImportance
+        super().__init__(data)
+        self._monomials = result.monomials
+
     def getHorizontalHeader(self):
         return ['Коэффициент регрессии', 'Коэффициент значимости']
 
     def getVerticalHeader(self):
-        count = (self.rowCount(QModelIndex()))
-        return ['Свободный член'] + [f'X{i}' for i in range(1, count)]
+        return self._monomials

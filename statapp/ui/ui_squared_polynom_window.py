@@ -21,7 +21,7 @@
 
 
 ################################################################################
-## Form generated from reading UI file 'linear_polynom_window.ui'
+## Form generated from reading UI file 'squared_polynom_window.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -33,32 +33,29 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 
-class Ui_LinearPolynomWindow(object):
-    def setupUi(self, LinearPolynomWindow):
-        if not LinearPolynomWindow.objectName():
-            LinearPolynomWindow.setObjectName(u"LinearPolynomWindow")
-        LinearPolynomWindow.resize(630, 400)
-        self.gridLayout_2 = QGridLayout(LinearPolynomWindow)
+class Ui_SquaredPolynomWindow(object):
+    def setupUi(self, SquaredPolynomWindow):
+        if not SquaredPolynomWindow.objectName():
+            SquaredPolynomWindow.setObjectName(u"SquaredPolynomWindow")
+        SquaredPolynomWindow.resize(630, 400)
+        self.gridLayout_2 = QGridLayout(SquaredPolynomWindow)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.tableView = QTableView(LinearPolynomWindow)
+        self.tableView = QTableView(SquaredPolynomWindow)
         self.tableView.setObjectName(u"tableView")
-        self.tableView.horizontalHeader().setMinimumSectionSize(40)
-        self.tableView.verticalHeader().setMinimumSectionSize(40)
-        self.tableView.verticalHeader().setDefaultSectionSize(40)
 
         self.gridLayout.addWidget(self.tableView, 0, 0, 1, 1)
 
         self.gridLayout_3 = QGridLayout()
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(-1, 10, -1, -1)
-        self.residualVarianceLabel = QLabel(LinearPolynomWindow)
+        self.residualVarianceLabel = QLabel(SquaredPolynomWindow)
         self.residualVarianceLabel.setObjectName(u"residualVarianceLabel")
 
         self.gridLayout_3.addWidget(self.residualVarianceLabel, 0, 0, 1, 1)
 
-        self.residualVarianceValueLabel = QLabel(LinearPolynomWindow)
+        self.residualVarianceValueLabel = QLabel(SquaredPolynomWindow)
         self.residualVarianceValueLabel.setObjectName(u"residualVarianceValueLabel")
 
         self.gridLayout_3.addWidget(self.residualVarianceValueLabel, 0, 1, 1, 1)
@@ -70,13 +67,13 @@ class Ui_LinearPolynomWindow(object):
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
 
 
-        self.retranslateUi(LinearPolynomWindow)
+        self.retranslateUi(SquaredPolynomWindow)
 
-        QMetaObject.connectSlotsByName(LinearPolynomWindow)
+        QMetaObject.connectSlotsByName(SquaredPolynomWindow)
     # setupUi
 
-    def retranslateUi(self, LinearPolynomWindow):
-        LinearPolynomWindow.setWindowTitle(QCoreApplication.translate("LinearPolynomWindow", u"\u041b\u0438\u043d\u0435\u0439\u043d\u044b\u0439 \u043f\u043e\u043b\u0438\u043d\u043e\u043c", None))
-        self.residualVarianceLabel.setText(QCoreApplication.translate("LinearPolynomWindow", u"\u041e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u0430\u044f \u0434\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u044f:", None))
-        self.residualVarianceValueLabel.setText(QCoreApplication.translate("LinearPolynomWindow", u"undefined", None))
+    def retranslateUi(self, SquaredPolynomWindow):
+        SquaredPolynomWindow.setWindowTitle(QCoreApplication.translate("SquaredPolynomWindow", u"\u041a\u0432\u0430\u0434\u0440\u0430\u0442\u0438\u0447\u043d\u044b\u0439 \u043f\u043e\u043b\u0438\u043d\u043e\u043c", None))
+        self.residualVarianceLabel.setText(QCoreApplication.translate("SquaredPolynomWindow", u"\u041e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u0430\u044f \u0434\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u044f:", None))
+        self.residualVarianceValueLabel.setText(QCoreApplication.translate("SquaredPolynomWindow", u"undefined", None))
     # retranslateUi

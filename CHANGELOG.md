@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/shizand/statapp/compare/v0.5.0...v0.6.0) (2023-10-20)
+
+
+### Новые функции
+
+* добавлен "Квадратичный полином" ([#81](https://github.com/shizand/statapp/issues/81)) ([9033770](https://github.com/shizand/statapp/commit/9033770406a6163bee794be80da9d5eebf0fcb87))
+
+
+### Исправления
+
+* исправлен формат сохранения файлов ([#79](https://github.com/shizand/statapp/issues/79)) ([044d2b6](https://github.com/shizand/statapp/commit/044d2b61cf068065a0fa0f33c8b0be94753eb84b))
+
 ## [0.5.0](https://github.com/shizand/statapp/compare/v0.4.2...v0.5.0) (2023-10-06)
 
 

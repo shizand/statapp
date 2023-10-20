@@ -14,6 +14,9 @@ argument-rgx=^_?[a-z][a-zA-Z0-9]+$|^_?[a-z0-9]+$                                
 function-rgx=^_?[a-z][a-zA-Z0-9]+$                                                  # camelCase
 method-rgx=^_?[a-z][a-zA-Z0-9]+$|^_?on_[a-z][a-zA-Z]+_[a-z][a-zA-Z]+|^__init__$     # camelCase, on_camelCaseWidget_camelCaseSignal and __init__
 
+[SIMILARITIES]
+min-similarity-lines=8
+
 [MESSAGES CONTROL]
 disable=
     unused-argument,

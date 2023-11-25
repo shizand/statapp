@@ -23,7 +23,7 @@ from statapp.calculations import linearPolynom
 from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.regression_result_model import RegressionResultModel
 from statapp.ui.ui_linear_polynom_window import Ui_LinearPolynomWindow
-from statapp.utils import addIcon
+from statapp.utils import addIcon, FloatDelegate
 
 
 class LinearPolynomWindow(QDialog):
@@ -36,6 +36,7 @@ class LinearPolynomWindow(QDialog):
         result = linearPolynom(data)
 
         self.model = RegressionResultModel(result)
+        self.ui.tableView.setItemDelegate(FloatDelegate())
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setVerticalHeader(MathTexHeaderView(self.ui.tableView))
         header = self.ui.tableView.horizontalHeader()

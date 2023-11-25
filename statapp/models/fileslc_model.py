@@ -20,6 +20,7 @@
 import numpy as np
 from PySide2.QtWidgets import QFileDialog, QMessageBox
 
+from statapp.constants import NUMBERS_PRECISION
 from statapp.utils import buildMessageBox
 
 
@@ -57,7 +58,7 @@ class FileSLCModel:
                 None, "Сохранить файл", "", "Text Files (*.txt);;CSV Files (*.csv)"
             )
             if self.fileName:
-                np.savetxt(self.fileName, data, delimiter=",", fmt='%10.5f')
+                np.savetxt(self.fileName, data, delimiter=",", fmt=f"%.{NUMBERS_PRECISION}f")
                 return True
         return False
 

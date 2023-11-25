@@ -62,6 +62,7 @@ class Ui_GenerateWindow(object):
 
         self.matSpinBox = QDoubleSpinBox(GenerateWindow)
         self.matSpinBox.setObjectName(u"matSpinBox")
+        self.matSpinBox.setDecimals(5)
         self.matSpinBox.setMaximum(1000000.000000000000000)
 
         self.gridLayout.addWidget(self.matSpinBox, 1, 1, 1, 1)
@@ -80,6 +81,7 @@ class Ui_GenerateWindow(object):
 
         self.deviationSpinBox = QDoubleSpinBox(GenerateWindow)
         self.deviationSpinBox.setObjectName(u"deviationSpinBox")
+        self.deviationSpinBox.setDecimals(5)
         self.deviationSpinBox.setMaximum(1000000.000000000000000)
 
         self.gridLayout.addWidget(self.deviationSpinBox, 2, 1, 1, 1)

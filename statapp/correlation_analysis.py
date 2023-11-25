@@ -23,6 +23,7 @@ from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import correlationAnalysis
+from statapp.constants import NUMBERS_PRECISION
 from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.correlation_analysis_model import CorrelationAnalysisModel
 from statapp.ui.ui_correlation_analysis_window import Ui_CorrelationAnalysisWindow
@@ -36,7 +37,7 @@ class CorrelationAnalysisWindow(QDialog):
         self.ui.setupUi(self)
 
         res = correlationAnalysis(data)
-        self.model = CorrelationAnalysisModel(res.round(2))
+        self.model = CorrelationAnalysisModel(res.round(NUMBERS_PRECISION))
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setVerticalHeader(
             MathTexHeaderView(self.ui.tableView)

@@ -23,6 +23,7 @@ from PySide2.QtCore import Slot
 from PySide2.QtWidgets import QMainWindow, QMessageBox
 
 from statapp.calculations import generateXValues, generateYValues
+from statapp.constants import NUMBERS_PRECISION
 from statapp.generate_factor_window import GenerateFactorWindow
 from statapp.linear_polynom_window import LinearPolynomWindow
 from statapp.mathtex_header_view import MathTexHeaderView
@@ -32,7 +33,7 @@ from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
 from statapp.squared_polynom_window import SquaredPolynomWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
-from statapp.utils import buildMessageBox, addIcon
+from statapp.utils import buildMessageBox, addIcon, FloatDelegate
 from statapp.variance_analysis import VarianceAnalysisWindow
 from statapp.correlation_analysis import CorrelationAnalysisWindow
 
@@ -62,6 +63,7 @@ class MainWindow(QMainWindow):
         self.isDataChanged = False
         self.model = InputValuesModel()
         self.fileModel = FileSLCModel()
+        self.ui.tableView.setItemDelegate(FloatDelegate())
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setHorizontalHeader(
             MathTexHeaderView(self.ui.tableView, orientation=QtCore.Qt.Horizontal)
@@ -150,7 +152,7 @@ class MainWindow(QMainWindow):
 
         if gw.exec():
             y = generateYValues(gw.mat, gw.deviation, gw.count)
-            self.model.updateAllData(y.round(2))
+            self.model.updateAllData(y.round(NUMBERS_PRECISION))
             self.isDataChanged = True
 
     @Slot()
@@ -161,7 +163,7 @@ class MainWindow(QMainWindow):
             data = self.model.getData()
             y = self.model.getY()
             xValues = generateXValues(gfw.mat, gfw.deviation, gfw.typeConnection, y)
-            data = np.concatenate((data, xValues.round(2)), axis=1)
+            data = np.concatenate((data, xValues.round(NUMBERS_PRECISION)), axis=1)
             self.model.updateAllData(data)
             self.isDataChanged = True
 

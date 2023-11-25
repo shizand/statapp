@@ -20,10 +20,11 @@
 from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import varianceAnalysis
+from statapp.constants import NUMBERS_PRECISION
 from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.variance_analysis_model import VarianceAnalysisModel
 from statapp.ui.ui_variance_analysis_window import Ui_VarianceAnalysisWindow
-from statapp.utils import addIcon
+from statapp.utils import addIcon, FloatDelegate
 
 
 class VarianceAnalysisWindow(QDialog):
@@ -33,7 +34,8 @@ class VarianceAnalysisWindow(QDialog):
         self.ui.setupUi(self)
 
         res = varianceAnalysis(data)
-        self.model = VarianceAnalysisModel(res.round(2))
+        self.model = VarianceAnalysisModel(res.round(NUMBERS_PRECISION))
+        self.ui.tableView.setItemDelegate(FloatDelegate())
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setVerticalHeader(
             MathTexHeaderView(self.ui.tableView)

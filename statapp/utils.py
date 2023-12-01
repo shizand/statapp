@@ -22,7 +22,9 @@ import sys
 
 from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
-from PySide2.QtWidgets import QMessageBox
+from PySide2.QtWidgets import QMessageBox, QDoubleSpinBox, QStyledItemDelegate
+
+from statapp.constants import NUMBERS_PRECISION
 
 
 def resourcePath(relative):
@@ -58,3 +60,19 @@ def buildMessageBox(title, text, icon, buttons, defaultButton):
     msgBox.setDefaultButton(defaultButton)
 
     return msgBox
+
+
+class FloatDelegate(QStyledItemDelegate):
+    def __init__(self, parent=None):
+        QStyledItemDelegate.__init__(self, parent=parent)
+
+    def createEditor(self, parent, option, index):
+        editor = QDoubleSpinBox(parent)
+        editor.setDecimals(NUMBERS_PRECISION)
+        editor.setMaximum(10**8)
+        editor.setMinimum(-10**8)
+        return editor
+
+    def displayText(self, value, locale):
+        # Грязный хак, скорее всего нужно было использовать locale
+        return f'{value:.{NUMBERS_PRECISION}f}'

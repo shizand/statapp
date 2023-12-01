@@ -17,28 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-from PySide2.QtWidgets import QDialog, QHeaderView
-
 from statapp.calculations import linearPolynom
-from statapp.mathtex_header_view import MathTexHeaderView
-from statapp.models.regression_result_model import RegressionResultModel
-from statapp.ui.ui_linear_polynom_window import Ui_LinearPolynomWindow
-from statapp.utils import addIcon
+from statapp.polynoms.polynom_window import PolynomWindow
 
 
-class LinearPolynomWindow(QDialog):
+class LinearPolynomWindow(PolynomWindow):
     def __init__(self, data):
-        super().__init__()
-        self.ui = Ui_LinearPolynomWindow()
-        self.ui.setupUi(self)
-        addIcon(self)
-
         result = linearPolynom(data)
-
-        self.model = RegressionResultModel(result)
-        self.ui.tableView.setModel(self.model)
-        self.ui.tableView.setVerticalHeader(MathTexHeaderView(self.ui.tableView))
-        header = self.ui.tableView.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-
-        self.ui.residualVarianceValueLabel.setText(str(result.residualVariance))
+        super().__init__(result, "Линейный полином")

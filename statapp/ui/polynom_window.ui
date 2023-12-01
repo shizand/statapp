@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PolynomWindow</class>
+ <widget class="QDialog" name="PolynomWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>630</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Полином</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QTableView" name="tableView">
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>40</number>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>40</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>40</number>
+       </attribute>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="polynomResult">
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <item row="0" column="1">
+        <widget class="QLabel" name="residualVarianceValueLabel">
+         <property name="text">
+          <string>undefined</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="scaledResidualVarianceValueLabel">
+         <property name="text">
+          <string>undefined</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="fStatisticLabel">
+         <property name="text">
+          <string>F1 - отношение Фишера</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="residualVarianceLabel">
+         <property name="text">
+          <string>Остаточная дисперсия:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="scaledResidualVarianceLabel">
+         <property name="text">
+          <string>Остаточная дисперсия (масштабированная):</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="rSquaredLabel">
+         <property name="text">
+          <string>Коэффициент множественной дереминизации</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="fStatisticValueLabel">
+         <property name="text">
+          <string>undefined</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="rSquaredValueLabel">
+         <property name="text">
+          <string>undefined</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

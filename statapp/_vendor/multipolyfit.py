@@ -9,8 +9,7 @@
 # See the GPL-3.0 license for details.
 
 import itertools
-import numpy as np
-from numpy import linalg, zeros, ones, hstack, asarray, diagonal
+from numpy import linalg, zeros, ones, hstack, asarray
 from sympy import symbols, Mul, Add, S
 
 
@@ -90,15 +89,7 @@ def multipolyfit(xs, y, deg, full=False, modelOut=False, powersOut=False):
         return beta, powers
 
     if full:
-        residues = result[1]
-        dof = len(a) - len(beta)
-
-        mse = residues / dof
-        cov = mse * diagonal(linalg.inv(a.T @ a))
-        se = np.sqrt(cov)
-        tStatistics = beta / se
-
-        return result, powers, tStatistics, mse
+        return result, powers, a
 
     return beta
 

@@ -24,13 +24,13 @@ from PySide2.QtWidgets import QMainWindow, QMessageBox
 
 from statapp.calculations import generateXValues, generateYValues
 from statapp.generate_factor_window import GenerateFactorWindow
-from statapp.linear_polynom_window import LinearPolynomWindow
+from statapp.polynoms.linear_polynom_window import LinearPolynomWindow
 from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.input_values_model import InputValuesModel
 from statapp.generate_window import GenerateWindow
 from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
-from statapp.squared_polynom_window import SquaredPolynomWindow
+from statapp.polynoms.squared_polynom_window import SquaredPolynomWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
 from statapp.utils import buildMessageBox, addIcon
 from statapp.variance_analysis import VarianceAnalysisWindow

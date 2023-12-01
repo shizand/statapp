@@ -66,54 +66,72 @@ class RegressionResult:
     Attributes:
         paramsAndImportance (np.ndarray): Параметры модели. Первая колонка -
         residualVariance (np.float64): Остаточная дисперсия
+        scaledResidualVariance (np.float64): Остаточная дисперсия (масштабированная)
         monomials (list): Список одночленов в строковом виде без коэффициентов. Свободный член - c
     """
     paramsAndImportance: np.ndarray
     residualVariance: np.float64
+    scaledResidualVariance: np.float64
+    rSquared: np.float64
+    fStatistic: np.float64
     monomials: list
 
 
-def linearPolynom(inputData) -> RegressionResult:
+def commonPolynom(inputData, deg) -> RegressionResult:
     x = inputData[:, 1:]
     y = inputData[:, 0]
-    data = pd.DataFrame(x)
-    data.insert(0, 'const', 1)
-    # ---
-    result = np.linalg.lstsq(data, y, rcond=None)
-    # Коэффициенты регрессии
-    params = result[0]
-    # Остатки
-    residues = result[1]
-    dof = len(data) - len(params)
+    result, powers, data = multipolyfit(x, y, deg, full=True)
+    (out, mse, scaledResidualVariance,
+     rSquared, fStatistic) = calculateStats(data, result[0], result[1], y)
+
+    return RegressionResult(
+        out.to_numpy(),
+        np.float64(mse),
+        np.float64(scaledResidualVariance),
+        np.float64(rSquared),
+        np.float64(fStatistic),
+        ['c' if str(x) == '1' else str(x) for x in getTerms(powers)]
+    )
+
+
+def linearPolynom(inputData) -> RegressionResult:
+    return commonPolynom(inputData, 1)
+
+
+def squaredPolynom(inputData) -> RegressionResult:
+    return commonPolynom(inputData, 2)
+
+
+def calculateStats(data, params, residues, y):
+    # pylint: disable-msg=too-many-locals
+
+    k = len(params)  # Количество оцениваемых параметров (коэффициентов)
+    n = len(data)  # Количество наблюдений
+
+    # Степень свободы (degrees of freedom) для остатков
+    dof = n - k  # Количество наблюдений минус количество оцениваемых параметров
+    # Остаточная дисперсия (Mean Squared Error, MSE)
     mse = residues / dof
+    # Среднее значение остатков
+    meanResiduals = np.sum(residues) / dof
+    # Масштабированная остаточная дисперсия
+    scaledResidualVariance = residues / meanResiduals ** 2
+    # Ковариационная матрица коэффициентов
     cov = mse * np.diagonal(np.linalg.inv(data.T @ data))
+    # Стандартные ошибки коэффициентов
     se = np.sqrt(cov)
+    # T-статистики для каждого коэффициента регрессии
     tStatistics = params / se
 
-    # возможно стоит сделать через np.reshape + np.concatenate
+    # R-squared (коэффициент множественной детерминации)
+    sst = np.sum((y - np.mean(y)) ** 2)  # Сумма квадратов отклонений
+    rSquared = 1 - (mse[0] / sst)
+
+    # F-statistic (статистика Фишера)
+    fStatistic = (rSquared / (k - 1)) / ((1 - rSquared) / (n - k))
+
     out = pd.DataFrame()
     out[0] = params
     out[1] = tStatistics
 
-    return RegressionResult(
-        out.to_numpy(),
-        np.float64(mse[0]),
-        ['c'] + [f'x{i}' for i in range(1, len(params))]
-    )
-
-
-def squaredPolynom(inputData):
-    x = inputData[:, 1:]
-    y = inputData[:, 0]
-    result, powers, tStatistics, mse = multipolyfit(x, y, 2, full=True)
-    betas = result[0]
-
-    out = pd.DataFrame()
-    out[0] = betas
-    out[1] = tStatistics
-
-    return RegressionResult(
-        out.to_numpy(),
-        np.float64(mse[0]),
-        ['c' if str(x) == '1' else str(x) for x in getTerms(powers)]
-    )
+    return out, mse[0], scaledResidualVariance, rSquared, fStatistic

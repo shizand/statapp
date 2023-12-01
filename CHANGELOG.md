@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/shizand/statapp/compare/v0.6.0...v0.7.0) (2023-12-01)
+
+
+### Новые функции
+
+* добавлена возможность ввода чисел до 5 знаков ([#87](https://github.com/shizand/statapp/issues/87)) ([dc7c487](https://github.com/shizand/statapp/commit/dc7c4875d7e15ad8c9ae5fa16b4b589d156632dd)), closes [#82](https://github.com/shizand/statapp/issues/82)
+* Добавлены новые характеристики ([#89](https://github.com/shizand/statapp/issues/89)) ([b12db5a](https://github.com/shizand/statapp/commit/b12db5a3003802830784e26a14097ee9d68a0e64)), closes [#84](https://github.com/shizand/statapp/issues/84)
+
 ## [0.6.0](https://github.com/shizand/statapp/compare/v0.5.0...v0.6.0) (2023-10-20)
 
 

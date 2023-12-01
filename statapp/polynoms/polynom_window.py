@@ -18,22 +18,19 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 from PySide2.QtWidgets import QDialog, QHeaderView
-
-from statapp.calculations import linearPolynom
 from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.regression_result_model import RegressionResultModel
-from statapp.ui.ui_linear_polynom_window import Ui_LinearPolynomWindow
+from statapp.ui.ui_polynom_window import Ui_PolynomWindow
 from statapp.utils import addIcon, FloatDelegate
 
 
-class LinearPolynomWindow(QDialog):
-    def __init__(self, data):
+class PolynomWindow(QDialog):
+    def __init__(self, result, windowTitle):
         super().__init__()
-        self.ui = Ui_LinearPolynomWindow()
+        self.ui = Ui_PolynomWindow()
         self.ui.setupUi(self)
         addIcon(self)
-
-        result = linearPolynom(data)
+        self.setWindowTitle(windowTitle)
 
         self.model = RegressionResultModel(result)
         self.ui.tableView.setItemDelegate(FloatDelegate())
@@ -43,3 +40,6 @@ class LinearPolynomWindow(QDialog):
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
         self.ui.residualVarianceValueLabel.setText(str(result.residualVariance))
+        self.ui.scaledResidualVarianceValueLabel.setText(str(result.scaledResidualVariance))
+        self.ui.fStatisticValueLabel.setText(str(result.fStatistic))
+        self.ui.rSquaredValueLabel.setText(str(result.scaledResidualVariance))

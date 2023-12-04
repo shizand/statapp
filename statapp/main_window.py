@@ -36,6 +36,7 @@ from statapp.ui.ui_main_window import Ui_MainWindow
 from statapp.utils import buildMessageBox, addIcon, FloatDelegate
 from statapp.variance_analysis import VarianceAnalysisWindow
 from statapp.correlation_analysis import CorrelationAnalysisWindow
+from statapp.polynoms.transform_polynom_window import TransformPolynomWindow
 
 
 class MainWindow(QMainWindow):
@@ -190,6 +191,11 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_squaredPolynomAction_triggered(self):
         dw = SquaredPolynomWindow(self.model.getData())
+        dw.exec()
+
+    @Slot()
+    def on_transformPolynomAction_triggered(self):
+        dw = TransformPolynomWindow(self.model.getData())
         dw.exec()
 
     def closeEvent(self, event):

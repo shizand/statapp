@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>27</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="filemenu">
@@ -71,6 +71,7 @@
     </property>
     <addaction name="linearPolynomAction"/>
     <addaction name="squaredPolynomAction"/>
+    <addaction name="transformPolynomAction"/>
    </widget>
    <widget class="QMenu" name="helpmenu">
     <property name="title">
@@ -133,6 +134,11 @@
   <action name="squaredPolynomAction">
    <property name="text">
     <string>Квадратичный полином</string>
+   </property>
+  </action>
+  <action name="transformPolynomAction">
+   <property name="text">
+    <string>Преобразования</string>
    </property>
   </action>
  </widget>

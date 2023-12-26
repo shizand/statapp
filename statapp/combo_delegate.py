@@ -27,12 +27,12 @@ class ComboDelegate(QItemDelegate):
     A delegate that places a fully functioning QComboBox in every
     cell of the column to which it's applied
     """
-    def __init__(self, parent, objects, object_names):
+    def __init__(self, parent, objects, objectNames):
         """
         Constructoe
         :param parent: QTableView parent object
         :param objects: List of objects to set. i.e. [True, False]
-        :param object_names: List of Object names to display. i.e. ['True', 'False']
+        :param objectNames: List of Object names to display. i.e. ['True', 'False']
         """
         QItemDelegate.__init__(self, parent)
 
@@ -40,7 +40,7 @@ class ComboDelegate(QItemDelegate):
         self.objects = objects
 
         # object description to display in the combobox. i.e. ['True', 'False']
-        self.object_names = object_names
+        self.objectNames = objectNames
 
     @QtCore.Slot()
     def currentIndexChanged(self):
@@ -48,7 +48,7 @@ class ComboDelegate(QItemDelegate):
 
     def createEditor(self, parent, option, index):
         combo = QComboBox(parent)
-        combo.addItems(self.object_names)
+        combo.addItems(self.objectNames)
         combo.currentIndexChanged.connect(self.currentIndexChanged)
         return combo
 

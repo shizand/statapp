@@ -37,6 +37,7 @@ TRANSFORMS = {
 class TransformPolynomModel(RegressionResultModel, EditableTableModel):
 
     def __init__(self, result):
+        self._monomials = None
         super().__init__(result)
         n = result.paramsAndImportance.shape[0]
 

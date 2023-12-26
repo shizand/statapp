@@ -57,6 +57,7 @@ class MainWindow(QMainWindow):
             self.ui.correlationAnalisisAction,
             self.ui.linearPolynomAction,
             self.ui.squaredPolynomAction,
+            self.ui.transformPolynomAction,
         ]
 
         self.aboutWindow = None

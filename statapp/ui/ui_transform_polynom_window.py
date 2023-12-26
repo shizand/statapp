@@ -40,19 +40,6 @@ class Ui_PolynomWindow(object):
         PolynomWindow.resize(537, 444)
         self.gridLayout_2 = QGridLayout(PolynomWindow)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.gridLayout = QGridLayout()
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.tableView = QTableView(PolynomWindow)
-        self.tableView.setObjectName(u"tableView")
-        self.tableView.horizontalHeader().setMinimumSectionSize(40)
-        self.tableView.verticalHeader().setMinimumSectionSize(40)
-        self.tableView.verticalHeader().setDefaultSectionSize(40)
-
-        self.gridLayout.addWidget(self.tableView, 1, 3, 1, 1)
-
-
-        self.gridLayout_2.addLayout(self.gridLayout, 0, 7, 1, 1)
-
         self.polynomResult = QGridLayout()
         self.polynomResult.setObjectName(u"polynomResult")
         self.polynomResult.setContentsMargins(-1, 10, -1, -1)
@@ -97,22 +84,20 @@ class Ui_PolynomWindow(object):
         self.polynomResult.addWidget(self.rSquaredValueLabel, 3, 1, 1, 1)
 
 
-        self.gridLayout_2.addLayout(self.polynomResult, 1, 7, 1, 1)
+        self.gridLayout_2.addLayout(self.polynomResult, 1, 6, 1, 1)
 
-        self.listTransforms = QListWidget(PolynomWindow)
-        QListWidgetItem(self.listTransforms)
-        QListWidgetItem(self.listTransforms)
-        QListWidgetItem(self.listTransforms)
-        QListWidgetItem(self.listTransforms)
-        self.listTransforms.setObjectName(u"listTransforms")
-        self.listTransforms.setMinimumSize(QSize(100, 0))
-        self.listTransforms.setMaximumSize(QSize(100, 16777215))
-        font = QFont()
-        font.setPointSize(12)
-        self.listTransforms.setFont(font)
-        self.listTransforms.setViewMode(QListView.ListMode)
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.tableView = QTableView(PolynomWindow)
+        self.tableView.setObjectName(u"tableView")
+        self.tableView.horizontalHeader().setMinimumSectionSize(40)
+        self.tableView.verticalHeader().setMinimumSectionSize(40)
+        self.tableView.verticalHeader().setDefaultSectionSize(40)
 
-        self.gridLayout_2.addWidget(self.listTransforms, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.tableView, 1, 3, 1, 1)
+
+
+        self.gridLayout_2.addLayout(self.gridLayout, 0, 6, 1, 1)
 
 
         self.retranslateUi(PolynomWindow)
@@ -130,17 +115,4 @@ class Ui_PolynomWindow(object):
         self.rSquaredLabel.setText(QCoreApplication.translate("PolynomWindow", u"\u041a\u043e\u044d\u0444\u0444\u0438\u0446\u0438\u0435\u043d\u0442 \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0439 \u0434\u0435\u0440\u0435\u043c\u0438\u043d\u0438\u0437\u0430\u0446\u0438\u0438", None))
         self.fStatisticValueLabel.setText(QCoreApplication.translate("PolynomWindow", u"undefined", None))
         self.rSquaredValueLabel.setText(QCoreApplication.translate("PolynomWindow", u"undefined", None))
-
-        __sortingEnabled = self.listTransforms.isSortingEnabled()
-        self.listTransforms.setSortingEnabled(False)
-        ___qlistwidgetitem = self.listTransforms.item(0)
-        ___qlistwidgetitem.setText(QCoreApplication.translate("PolynomWindow", u"sin(x)", None));
-        ___qlistwidgetitem1 = self.listTransforms.item(1)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("PolynomWindow", u"cos(x)", None));
-        ___qlistwidgetitem2 = self.listTransforms.item(2)
-        ___qlistwidgetitem2.setText(QCoreApplication.translate("PolynomWindow", u"log(x)", None));
-        ___qlistwidgetitem3 = self.listTransforms.item(3)
-        ___qlistwidgetitem3.setText(QCoreApplication.translate("PolynomWindow", u"exp(x)", None));
-        self.listTransforms.setSortingEnabled(__sortingEnabled)
-
     # retranslateUi

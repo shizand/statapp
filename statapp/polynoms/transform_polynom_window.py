@@ -18,14 +18,15 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 import numpy as np
-from PySide2.QtCore import Slot, QModelIndex
+from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QDialog, QHeaderView
 
 from statapp.calculations import linearPolynom
+from statapp.combo_delegate import ComboDelegate
 from statapp.mathtex_header_view import MathTexHeaderView
-from statapp.models.regression_result_model import RegressionResultModel
+from statapp.models.transform_polynom_model import TransformPolynomModel, TRANSFORMS
 from statapp.ui.ui_transform_polynom_window import Ui_PolynomWindow
-from statapp.utils import addIcon, FloatDelegate
+from statapp.utils import addIcon
 
 
 class TransformPolynomWindow(QDialog):
@@ -39,8 +40,20 @@ class TransformPolynomWindow(QDialog):
         self.data = data
         result = linearPolynom(data)
 
-        self.model = RegressionResultModel(result)
-        self.ui.tableView.setItemDelegate(FloatDelegate())
+        # Создание столбца из нулей
+        zeroCol = np.zeros((result.paramsAndImportance.shape[0], 1))
+        # Добавление столбца к исходному массиву
+        result.paramsAndImportance = np.column_stack((zeroCol, result.paramsAndImportance))
+
+        # self.ui.tableView.setItemDelegate(FloatDelegate())
+        self.ui.tableView.setItemDelegate(
+            ComboDelegate(
+                self.ui.tableView,
+                list(TRANSFORMS.keys()),
+                list(TRANSFORMS.keys()),
+            )
+        )
+        self.model = TransformPolynomModel(result)
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setVerticalHeader(MathTexHeaderView(self.ui.tableView))
         header = self.ui.tableView.horizontalHeader()
@@ -51,43 +64,24 @@ class TransformPolynomWindow(QDialog):
         self.ui.fStatisticValueLabel.setText(str(result.fStatistic))
         self.ui.rSquaredValueLabel.setText(str(result.scaledResidualVariance))
 
-    @Slot(QModelIndex)
-    def on_listTransforms_clicked(self, index):
-        item = self.ui.listTransforms.currentItem().text()
+        self.model.dataChanged.connect(self.on_data_changed)
 
+    def on_data_changed(self):
         data = np.copy(self.data)
+        print(len(data[0:]))
         for i in range(len(data[0:])):
             for j in range(1, len(data[i])):
-                func = defaultX
-
-                if item == 'sin(x)':
-                    func = np.sin
-                elif item == 'cos(x)':
-                    func = np.cos
-                elif item == 'log(x)':
-                    func = np.log
-                elif item == 'exp(x)':
-                    func = np.exp
-
-                data[i][j] = func(data[i][j])
+                tr = self.model.data(self.model.createIndex(j, 0), Qt.DisplayRole)
+                data[i][j] = TRANSFORMS[tr](data[i][j])
 
         self.rebuildData(data)
 
     def rebuildData(self, data):
         result = linearPolynom(data)
-
-        self.model = RegressionResultModel(result)
-        self.ui.tableView.setItemDelegate(FloatDelegate())
-        self.ui.tableView.setModel(self.model)
-        #self.ui.tableView.setVerticalHeader(MathTexHeaderView(self.ui.tableView))
-        header = self.ui.tableView.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-
+        zeroCol = np.zeros((result.paramsAndImportance.shape[0], 1))
+        result.paramsAndImportance = np.column_stack((zeroCol, result.paramsAndImportance))
+        self.model.updateAllData(result)
         self.ui.residualVarianceValueLabel.setText(str(result.residualVariance))
         self.ui.scaledResidualVarianceValueLabel.setText(str(result.scaledResidualVariance))
         self.ui.fStatisticValueLabel.setText(str(result.fStatistic))
         self.ui.rSquaredValueLabel.setText(str(result.scaledResidualVariance))
-
-
-def defaultX(x):
-    return x

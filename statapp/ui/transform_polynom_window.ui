@@ -14,24 +14,7 @@
    <string>Полином</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="7">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="3">
-      <widget class="QTableView" name="tableView">
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>40</number>
-       </attribute>
-       <attribute name="verticalHeaderMinimumSectionSize">
-        <number>40</number>
-       </attribute>
-       <attribute name="verticalHeaderDefaultSectionSize">
-        <number>40</number>
-       </attribute>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="7">
+   <item row="1" column="6">
     <layout class="QGridLayout" name="polynomResult">
      <property name="topMargin">
       <number>10</number>
@@ -94,49 +77,22 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="0">
-    <widget class="QListWidget" name="listTransforms">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="viewMode">
-      <enum>QListView::ListMode</enum>
-     </property>
-     <item>
-      <property name="text">
-       <string>sin(x)</string>
-      </property>
+   <item row="0" column="6">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="3">
+      <widget class="QTableView" name="tableView">
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>40</number>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>40</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>40</number>
+       </attribute>
+      </widget>
      </item>
-     <item>
-      <property name="text">
-       <string>cos(x)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>log(x)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>exp(x)</string>
-      </property>
-     </item>
-    </widget>
+    </layout>
    </item>
   </layout>
  </widget>

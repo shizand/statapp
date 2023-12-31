@@ -38,15 +38,6 @@ def main():
     window = MainWindow()
     window.show()
     return app.exec_()
-    # n = 100
-    # y = generateYValues(100, 5, n)
-    # x1 = generateXValues(20, 2, 0, y)
-    # x2 = generateXValues(10, 1, 0, y)
-    # data = np.concatenate([y, x1, x2], axis=1)
-#
-    # result = linearPolynom(data)
-#
-    # prediction(data, result)
 
 
 if __name__ == "__main__":

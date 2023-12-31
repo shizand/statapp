@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/shizand/statapp/compare/v0.7.0...v0.8.0) (2023-12-31)
+
+
+### Новые функции
+
+* добавлены преобразования ([#90](https://github.com/shizand/statapp/issues/90)) ([f70be43](https://github.com/shizand/statapp/commit/f70be431cfb4ecda5c3e706f4ca95171bbe779b3))
+
 ## [0.7.0](https://github.com/shizand/statapp/compare/v0.6.0...v0.7.0) (2023-12-01)
 
 

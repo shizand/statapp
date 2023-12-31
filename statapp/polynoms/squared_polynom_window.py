@@ -24,4 +24,4 @@ from statapp.polynoms.polynom_window import PolynomWindow
 class SquaredPolynomWindow(PolynomWindow):
     def __init__(self, data):
         result = squaredPolynom(data)
-        super().__init__(result, "Квадратичный полином")
+        super().__init__(data, result, "Квадратичный полином")

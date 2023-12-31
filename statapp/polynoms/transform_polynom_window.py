@@ -21,11 +21,12 @@ import numpy as np
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QDialog, QHeaderView
 
-from statapp.calculations import linearPolynom
+from statapp.calculations import linearPolynom, prediction
 from statapp.combo_delegate import ComboDelegate
 from statapp.mathtex_header_view import MathTexHeaderView
+from statapp.models.prediction_table_model import PreditionTableModel
 from statapp.models.transform_polynom_model import TransformPolynomModel, TRANSFORMS
-from statapp.ui.ui_transform_polynom_window import Ui_PolynomWindow
+from statapp.ui.ui_polynom_window import Ui_PolynomWindow
 from statapp.utils import addIcon
 
 
@@ -39,6 +40,11 @@ class TransformPolynomWindow(QDialog):
 
         self.data = data
         result = linearPolynom(data)
+
+        self.predictionModel = PreditionTableModel(prediction(data, result))
+        self.ui.predictionTableView.setModel(self.predictionModel)
+        header = self.ui.predictionTableView.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
         # Создание столбца из нулей
         zeroCol = np.zeros((result.paramsAndImportance.shape[0], 1))
@@ -78,6 +84,7 @@ class TransformPolynomWindow(QDialog):
 
     def rebuildData(self, data):
         result = linearPolynom(data)
+        self.predictionModel.updateAllData(prediction(data, result))
         zeroCol = np.zeros((result.paramsAndImportance.shape[0], 1))
         result.paramsAndImportance = np.column_stack((zeroCol, result.paramsAndImportance))
         self.model.updateAllData(result)

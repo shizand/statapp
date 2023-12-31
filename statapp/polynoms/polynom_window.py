@@ -18,14 +18,17 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 from PySide2.QtWidgets import QDialog, QHeaderView
+
+from statapp.calculations import prediction
 from statapp.mathtex_header_view import MathTexHeaderView
+from statapp.models.prediction_table_model import PreditionTableModel
 from statapp.models.regression_result_model import RegressionResultModel
 from statapp.ui.ui_polynom_window import Ui_PolynomWindow
 from statapp.utils import addIcon, FloatDelegate
 
 
 class PolynomWindow(QDialog):
-    def __init__(self, result, windowTitle):
+    def __init__(self, data, result, windowTitle):
         super().__init__()
         self.ui = Ui_PolynomWindow()
         self.ui.setupUi(self)
@@ -43,3 +46,8 @@ class PolynomWindow(QDialog):
         self.ui.scaledResidualVarianceValueLabel.setText(str(result.scaledResidualVariance))
         self.ui.fStatisticValueLabel.setText(str(result.fStatistic))
         self.ui.rSquaredValueLabel.setText(str(result.scaledResidualVariance))
+
+        self.predictionModel = PreditionTableModel(prediction(data, result))
+        self.ui.predictionTableView.setModel(self.predictionModel)
+        header = self.ui.predictionTableView.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)

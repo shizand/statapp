@@ -17,11 +17,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-from statapp.calculations import linearPolynom
-from statapp.polynoms.polynom_window import PolynomWindow
+from PySide2.QtCore import Qt
+
+from statapp.models.ro_table_model import ROTableModel
 
 
-class LinearPolynomWindow(PolynomWindow):
-    def __init__(self, data):
-        result = linearPolynom(data)
-        super().__init__(data, result, "Линейный полином")
+class PreditionTableModel(ROTableModel):
+    def getHorizontalHeader(self):
+        return ['Отклик', 'Прогноз', 'Отклонение', '1-3 сигмовые зоны']
+
+    def data(self, index, role):
+        if role == Qt.DisplayRole and index.column() == 3:
+            value = super().data(index, role)
+            return 'x' if value == 1 else ''
+        return super().data(index, role)

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/shizand/statapp/compare/v0.8.0...v0.9.0) (2024-01-02)
+
+
+### Новые функции
+
+* добавлен "Прогноз" ([#92](https://github.com/shizand/statapp/issues/92)) ([8ea3cff](https://github.com/shizand/statapp/commit/8ea3cffa7e0d920141c8eda71952ff02d2c02905)), closes [#85](https://github.com/shizand/statapp/issues/85)
+
 ## [0.8.0](https://github.com/shizand/statapp/compare/v0.7.0...v0.8.0) (2023-12-31)
 
 

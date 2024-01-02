@@ -21,6 +21,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+import sympy as sp
 from statapp._vendor.multipolyfit import multipolyfit, getTerms
 
 DIRECT_LINK = 0
@@ -135,3 +136,39 @@ def calculateStats(data, params, residues, y):
     out[1] = tStatistics
 
     return out, mse[0], scaledResidualVariance, rSquared, fStatistic
+
+
+def prediction(inputData, result: RegressionResult):
+    inputs = inputData[:, 1:]
+    outputs = inputData[:, 0]
+
+    params = result.paramsAndImportance[:, 0]
+
+    expr = sp.sympify(' '.join(
+        [
+            f'{param}' if m == 'c' else f' + ({param}) * {m}'
+            for param, m in zip(params, result.monomials)
+        ]
+    ))
+
+    results = []
+
+    for y, xValues in zip(outputs, inputs):
+        subsDict = dict(zip(expr.free_symbols, xValues))
+        predictedResult = expr.subs(subsDict)
+        difference = predictedResult - y
+
+        results.append([y, predictedResult, difference, 0.0])
+
+    results = np.array(results, dtype=np.float32)
+
+    # Расчет среднего значения и стандартного отклонения разностей
+    meanDifference = np.mean(results[:, 2])
+    stdDifference = np.std(results[:, 2])
+
+    # Установка флага 1.0, если разность выходит за пределы 3 стандартных отклонений
+    for row in results:
+        if abs(row[2] - meanDifference) > 3 * stdDifference:
+            row[3] = 1.0
+
+    return results

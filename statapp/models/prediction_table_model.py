@@ -17,28 +17,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-import sys
+from PySide2.QtCore import Qt
 
-from PySide2 import QtCore
-from PySide2.QtWidgets import QApplication
-
-from statapp.main_window import MainWindow
+from statapp.models.ro_table_model import ROTableModel
 
 
-def main():
-    app = QApplication(sys.argv)
+class PreditionTableModel(ROTableModel):
+    def getHorizontalHeader(self):
+        return ['Отклик', 'Прогноз', 'Отклонение', '1-3 сигмовые зоны']
 
-    translator = QtCore.QTranslator(app)
-    locale = QtCore.QLocale.system().name()
-    path = QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)
-    translator.load(f'qt_{locale}', path)
-    translator.load(f'qtbase_{locale}', path)
-    app.installTranslator(translator)
-
-    window = MainWindow()
-    window.show()
-    return app.exec_()
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    def data(self, index, role):
+        if role == Qt.DisplayRole and index.column() == 3:
+            value = super().data(index, role)
+            return 'x' if value == 1 else ''
+        return super().data(index, role)

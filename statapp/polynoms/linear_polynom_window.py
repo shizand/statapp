@@ -24,4 +24,4 @@ from statapp.polynoms.polynom_window import PolynomWindow
 class LinearPolynomWindow(PolynomWindow):
     def __init__(self, data):
         result = linearPolynom(data)
-        super().__init__(result, "Линейный полином")
+        super().__init__(data, result, "Линейный полином")

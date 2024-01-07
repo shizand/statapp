@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2023 Maxim Slipenko, Eugene Lazurenko.
+# Copyright (c) 2024 Maxim Slipenko, Eugene Lazurenko.
 #
 # This file is part of Statapp
 # (see https://github.com/shizand/statapp).
@@ -117,6 +117,16 @@ class Ui_PolynomWindow(object):
         self.gridLayout_4.addWidget(self.predictionTableView, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.prediction, "")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.gridLayout_5 = QGridLayout(self.tab)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.plotContainer = QGridLayout()
+        self.plotContainer.setObjectName(u"plotContainer")
+
+        self.gridLayout_5.addLayout(self.plotContainer, 0, 0, 1, 1)
+
+        self.tabWidget.addTab(self.tab, "")
 
         self.gridLayout_2.addWidget(self.tabWidget, 0, 6, 1, 1)
 
@@ -141,4 +151,5 @@ class Ui_PolynomWindow(object):
         self.rSquaredValueLabel.setText(QCoreApplication.translate("PolynomWindow", u"undefined", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.model), QCoreApplication.translate("PolynomWindow", u"\u041c\u043e\u0434\u0435\u043b\u044c", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.prediction), QCoreApplication.translate("PolynomWindow", u"\u041f\u0440\u043e\u0433\u043d\u043e\u0437", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("PolynomWindow", u"\u0413\u0440\u0430\u0444\u0438\u043a", None))
     # retranslateUi

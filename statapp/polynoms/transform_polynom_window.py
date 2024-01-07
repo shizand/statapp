@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2023 Maxim Slipenko, Eugene Lazurenko.
+# Copyright (c) 2024 Maxim Slipenko, Eugene Lazurenko.
 #
 # This file is part of Statapp
 # (see https://github.com/shizand/statapp).
@@ -26,6 +26,7 @@ from statapp.combo_delegate import ComboDelegate
 from statapp.mathtex_header_view import MathTexHeaderView
 from statapp.models.prediction_table_model import PreditionTableModel
 from statapp.models.transform_polynom_model import TransformPolynomModel, TRANSFORMS
+from statapp.polynoms.polynom_window import MplCanvas
 from statapp.ui.ui_polynom_window import Ui_PolynomWindow
 from statapp.utils import addIcon
 
@@ -41,10 +42,19 @@ class TransformPolynomWindow(QDialog):
         self.data = data
         result = linearPolynom(data)
 
-        self.predictionModel = PreditionTableModel(prediction(data, result))
+        predictionResult = prediction(data, result)
+        self.predictionModel = PreditionTableModel(predictionResult)
         self.ui.predictionTableView.setModel(self.predictionModel)
         header = self.ui.predictionTableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+        self.sc = MplCanvas(self, width=5, height=4, dpi=100)
+        xAxes = np.array(range(len(data[:, 0])))
+        realY = predictionResult[:, 0]
+        calculatedY = predictionResult[:, 1]
+        self.sc.axes.scatter(xAxes, realY)
+        self.sc.axes.plot(xAxes, calculatedY)
+        self.ui.plotContainer.addWidget(self.sc)
 
         # Создание столбца из нулей
         zeroCol = np.zeros((result.paramsAndImportance.shape[0], 1))
@@ -84,7 +94,17 @@ class TransformPolynomWindow(QDialog):
 
     def rebuildData(self, data):
         result = linearPolynom(data)
-        self.predictionModel.updateAllData(prediction(data, result))
+        predictionResult = prediction(data, result)
+        self.predictionModel.updateAllData(predictionResult)
+        self.ui.plotContainer.removeWidget(self.sc)
+        self.sc = MplCanvas(self, width=5, height=4, dpi=100)
+        xAxes = np.array(range(len(data[:, 0])))
+        realY = predictionResult[:, 0]
+        calculatedY = predictionResult[:, 1]
+        self.sc.axes.scatter(xAxes, realY)
+        self.sc.axes.plot(xAxes, calculatedY)
+        self.ui.plotContainer.addWidget(self.sc)
+
         zeroCol = np.zeros((result.paramsAndImportance.shape[0], 1))
         result.paramsAndImportance = np.column_stack((zeroCol, result.paramsAndImportance))
         self.model.updateAllData(result)

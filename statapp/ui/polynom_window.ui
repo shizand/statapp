@@ -120,6 +120,16 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>График</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="plotContainer"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

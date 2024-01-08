@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/shizand/statapp/compare/v0.9.0...v0.10.0) (2024-01-08)
+
+
+### Новые функции
+
+* добавлен график ([#94](https://github.com/shizand/statapp/issues/94)) ([bb1b2f1](https://github.com/shizand/statapp/commit/bb1b2f1ec5b988bcb8ddd7500b95fe9e35c826f5)), closes [#86](https://github.com/shizand/statapp/issues/86)
+
 ## [0.9.0](https://github.com/shizand/statapp/compare/v0.8.0...v0.9.0) (2024-01-02)
 
 

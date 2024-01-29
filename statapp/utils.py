@@ -59,6 +59,8 @@ def buildMessageBox(title, text, icon, buttons, defaultButton):
     msgBox.setStandardButtons(buttons)
     msgBox.setDefaultButton(defaultButton)
 
+    addIcon(msgBox)
+
     return msgBox
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/shizand/statapp/compare/v0.10.0...v0.10.1) (2024-01-29)
+
+
+### Исправления
+
+* Добавлена обработка ошибок ([#98](https://github.com/shizand/statapp/issues/98)) ([c36e1aa](https://github.com/shizand/statapp/commit/c36e1aa733269720366c4d7dea48d2bdc966a59a))
+
 ## [0.10.0](https://github.com/shizand/statapp/compare/v0.9.0...v0.10.0) (2024-01-08)
 
 

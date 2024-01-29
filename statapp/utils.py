@@ -59,8 +59,19 @@ def buildMessageBox(title, text, icon, buttons, defaultButton):
     msgBox.setStandardButtons(buttons)
     msgBox.setDefaultButton(defaultButton)
 
+    addIcon(msgBox)
+
     return msgBox
 
+def onError(errorName: Exception):
+    msgBox = buildMessageBox \
+        ('Ошибка',
+        "Упс.. Произошла ошибка:\n" + str(errorName),
+        QMessageBox.Critical,
+        QMessageBox.Ok,
+        QMessageBox.Ok)
+
+    msgBox.exec_()
 
 class FloatDelegate(QStyledItemDelegate):
     def __init__(self, parent=None):

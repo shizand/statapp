@@ -33,7 +33,7 @@ from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
 from statapp.polynoms.squared_polynom_window import SquaredPolynomWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
-from statapp.utils import buildMessageBox, addIcon, FloatDelegate
+from statapp.utils import buildMessageBox, addIcon, FloatDelegate, onError
 from statapp.variance_analysis import VarianceAnalysisWindow
 from statapp.correlation_analysis import CorrelationAnalysisWindow
 from statapp.polynoms.transform_polynom_window import TransformPolynomWindow
@@ -103,71 +103,86 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def on_openfileaction_triggered(self):
-        currentData = self.model.getData()
-        data = np.array([])
-        if currentData.size > 1:
-            file = ''
-            if self.fileModel.fileName:
-                file = '\nФайл сохранения: ' + self.fileModel.fileName
+        try:
+            currentData = self.model.getData()
+            data = np.array([])
+            if currentData.size > 1:
+                file = ''
+                if self.fileModel.fileName:
+                    file = '\nФайл сохранения: ' + self.fileModel.fileName
 
-            msgBox = buildMessageBox \
-                ('Сохранение данных',
-                 "Сохранить данные?" + file,
-                 QMessageBox.Question,
-                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
-                 QMessageBox.Cancel)
+                msgBox = buildMessageBox \
+                    ('Сохранение данных',
+                     "Сохранить данные?" + file,
+                     QMessageBox.Question,
+                     QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
+                     QMessageBox.Cancel)
 
-            reply = msgBox.exec_()
-            if reply == QMessageBox.StandardButton.Yes:
-                self.fileModel.saveFile(self.model.getData())
+                reply = msgBox.exec_()
+                if reply == QMessageBox.StandardButton.Yes:
+                    self.fileModel.saveFile(self.model.getData())
 
-                data = self.fileModel.loadFile()
-                if data is not None and data.shape[0] > 0:
-                    self.model.updateAllData(data)
-                    self.isDataChanged = False
-            elif reply == QMessageBox.StandardButton.Cancel:
-                return
+                    data = self.fileModel.loadFile()
+                    if data is not None and data.shape[0] > 0:
+                        self.model.updateAllData(data)
+                        self.isDataChanged = False
+                elif reply == QMessageBox.StandardButton.Cancel:
+                    return
+                else:
+                    data = self.fileModel.loadFile()
+                    if data is not None and data.shape[0] > 0:
+                        self.model.updateAllData(data)
+                        self.isDataChanged = False
             else:
                 data = self.fileModel.loadFile()
                 if data is not None and data.shape[0] > 0:
                     self.model.updateAllData(data)
                     self.isDataChanged = False
-        else:
-            data = self.fileModel.loadFile()
-            if data is not None and data.shape[0] > 0:
-                self.model.updateAllData(data)
-                self.isDataChanged = False
+        except Exception as error:
+            onError(error)
 
 
     @Slot()
     def on_savefileaction_triggered(self):
-        self.isDataChanged = not self.fileModel.saveFile(self.model.getData())
+        try:
+            self.isDataChanged = not self.fileModel.saveFile(self.model.getData())
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_closefileaction_triggered(self):
-        self.fileModel.closeFile()
-        self.isDataChanged = False
+        try:
+            self.fileModel.closeFile()
+            self.isDataChanged = False
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_generateYaction_triggered(self):
-        gw = GenerateWindow()
+        try:
+            gw = GenerateWindow()
 
-        if gw.exec():
-            y = generateYValues(gw.mat, gw.deviation, gw.count)
-            self.model.updateAllData(y.round(NUMBERS_PRECISION))
-            self.isDataChanged = True
+            if gw.exec():
+                y = generateYValues(gw.mat, gw.deviation, gw.count)
+                self.model.updateAllData(y.round(NUMBERS_PRECISION))
+                self.isDataChanged = True
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_generateXaction_triggered(self):
-        gfw = GenerateFactorWindow()
+        try:
+            gfw = GenerateFactorWindow()
 
-        if gfw.exec():
-            data = self.model.getData()
-            y = self.model.getY()
-            xValues = generateXValues(gfw.mat, gfw.deviation, gfw.typeConnection, y)
-            data = np.concatenate((data, xValues.round(NUMBERS_PRECISION)), axis=1)
-            self.model.updateAllData(data)
-            self.isDataChanged = True
+            if gfw.exec():
+                data = self.model.getData()
+                y = self.model.getY()
+                xValues = generateXValues(gfw.mat, gfw.deviation, gfw.typeConnection, y)
+                data = np.concatenate((data, xValues.round(NUMBERS_PRECISION)), axis=1)
+                self.model.updateAllData(data)
+                self.isDataChanged = True
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_aboutmenuaction_triggered(self):
@@ -176,28 +191,43 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def on_varianceAnalysisAction_triggered(self):
-        dw = VarianceAnalysisWindow(self.model.getData())
-        dw.exec()
+        try:
+            dw = VarianceAnalysisWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_correlationAnalisisAction_triggered(self):
-        dw = CorrelationAnalysisWindow(self.model.getData())
-        dw.exec()
+        try:
+            dw = CorrelationAnalysisWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_linearPolynomAction_triggered(self):
-        dw = LinearPolynomWindow(self.model.getData())
-        dw.exec()
+        try:
+            dw = LinearPolynomWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_squaredPolynomAction_triggered(self):
-        dw = SquaredPolynomWindow(self.model.getData())
-        dw.exec()
+        try:
+            dw = SquaredPolynomWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
 
     @Slot()
     def on_transformPolynomAction_triggered(self):
-        dw = TransformPolynomWindow(self.model.getData())
-        dw.exec()
+        try:
+            dw = TransformPolynomWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
 
     def closeEvent(self, event):
         if self.isDataChanged:

@@ -33,7 +33,7 @@ from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
 from statapp.polynoms.squared_polynom_window import SquaredPolynomWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
-from statapp.utils import buildMessageBox, addIcon, FloatDelegate
+from statapp.utils import buildMessageBox, addIcon, FloatDelegate, onError
 from statapp.variance_analysis import VarianceAnalysisWindow
 from statapp.correlation_analysis import CorrelationAnalysisWindow
 from statapp.polynoms.transform_polynom_window import TransformPolynomWindow
@@ -139,7 +139,7 @@ class MainWindow(QMainWindow):
                     self.model.updateAllData(data)
                     self.isDataChanged = False
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
 
     @Slot()
@@ -147,7 +147,7 @@ class MainWindow(QMainWindow):
         try:
             self.isDataChanged = not self.fileModel.saveFile(self.model.getData())
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_closefileaction_triggered(self):
@@ -155,7 +155,7 @@ class MainWindow(QMainWindow):
             self.fileModel.closeFile()
             self.isDataChanged = False
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_generateYaction_triggered(self):
@@ -167,7 +167,7 @@ class MainWindow(QMainWindow):
                 self.model.updateAllData(y.round(NUMBERS_PRECISION))
                 self.isDataChanged = True
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_generateXaction_triggered(self):
@@ -182,7 +182,7 @@ class MainWindow(QMainWindow):
                 self.model.updateAllData(data)
                 self.isDataChanged = True
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_aboutmenuaction_triggered(self):
@@ -195,7 +195,7 @@ class MainWindow(QMainWindow):
             dw = VarianceAnalysisWindow(self.model.getData())
             dw.exec()
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_correlationAnalisisAction_triggered(self):
@@ -203,7 +203,7 @@ class MainWindow(QMainWindow):
             dw = CorrelationAnalysisWindow(self.model.getData())
             dw.exec()
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_linearPolynomAction_triggered(self):
@@ -211,7 +211,7 @@ class MainWindow(QMainWindow):
             dw = LinearPolynomWindow(self.model.getData())
             dw.exec()
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_squaredPolynomAction_triggered(self):
@@ -219,7 +219,7 @@ class MainWindow(QMainWindow):
             dw = SquaredPolynomWindow(self.model.getData())
             dw.exec()
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     @Slot()
     def on_transformPolynomAction_triggered(self):
@@ -227,7 +227,7 @@ class MainWindow(QMainWindow):
             dw = TransformPolynomWindow(self.model.getData())
             dw.exec()
         except Exception as error:
-            self.onError(error)
+            onError(error)
 
     def closeEvent(self, event):
         if self.isDataChanged:
@@ -252,13 +252,3 @@ class MainWindow(QMainWindow):
                 event.ignore()
         else:
             event.accept()
-
-    def onError(self, errorName: Exception):
-        msgBox = buildMessageBox \
-            ('Ошибка',
-             "Упс.. Произошла ошибка:\n" + str(errorName),
-             QMessageBox.Critical,
-             QMessageBox.Ok | QMessageBox.Cancel,
-             QMessageBox.Cancel)
-
-        msgBox.exec_()

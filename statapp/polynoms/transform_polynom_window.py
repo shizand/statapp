@@ -28,7 +28,7 @@ from statapp.models.prediction_table_model import PreditionTableModel
 from statapp.models.transform_polynom_model import TransformPolynomModel, TRANSFORMS
 from statapp.polynoms.polynom_window import MplCanvas
 from statapp.ui.ui_polynom_window import Ui_PolynomWindow
-from statapp.utils import addIcon
+from statapp.utils import addIcon, onError
 
 
 class TransformPolynomWindow(QDialog):
@@ -41,8 +41,11 @@ class TransformPolynomWindow(QDialog):
 
         self.data = data
         result = linearPolynom(data)
+        try:
+            predictionResult = prediction(data, result)
+        except Exception as error:
+            onError(error)
 
-        predictionResult = prediction(data, result)
         self.predictionModel = PreditionTableModel(predictionResult)
         self.ui.predictionTableView.setModel(self.predictionModel)
         header = self.ui.predictionTableView.horizontalHeader()
@@ -90,7 +93,10 @@ class TransformPolynomWindow(QDialog):
                 tr = self.model.data(self.model.createIndex(j, 0), Qt.DisplayRole)
                 data[i][j] = TRANSFORMS[tr](data[i][j])
 
-        self.rebuildData(data)
+        try:
+            self.rebuildData(data)
+        except Exception as error:
+            onError(error)
 
     def rebuildData(self, data):
         result = linearPolynom(data)

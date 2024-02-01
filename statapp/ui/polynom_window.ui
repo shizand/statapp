@@ -82,7 +82,7 @@
            <item row="3" column="0">
             <widget class="QLabel" name="rSquaredLabel">
              <property name="text">
-              <string>Коэффициент множественной дереминизации</string>
+              <string>Коэффициент множественной детерминации</string>
              </property>
             </widget>
            </item>

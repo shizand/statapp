@@ -146,7 +146,7 @@ class Ui_PolynomWindow(object):
         self.fStatisticLabel.setText(QCoreApplication.translate("PolynomWindow", u"F1 - \u043e\u0442\u043d\u043e\u0448\u0435\u043d\u0438\u0435 \u0424\u0438\u0448\u0435\u0440\u0430", None))
         self.residualVarianceLabel.setText(QCoreApplication.translate("PolynomWindow", u"\u041e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u0430\u044f \u0434\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u044f:", None))
         self.scaledResidualVarianceLabel.setText(QCoreApplication.translate("PolynomWindow", u"\u041e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u0430\u044f \u0434\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u044f (\u043c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u0430\u044f):", None))
-        self.rSquaredLabel.setText(QCoreApplication.translate("PolynomWindow", u"\u041a\u043e\u044d\u0444\u0444\u0438\u0446\u0438\u0435\u043d\u0442 \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0439 \u0434\u0435\u0440\u0435\u043c\u0438\u043d\u0438\u0437\u0430\u0446\u0438\u0438", None))
+        self.rSquaredLabel.setText(QCoreApplication.translate("PolynomWindow", u"\u041a\u043e\u044d\u0444\u0444\u0438\u0446\u0438\u0435\u043d\u0442 \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0439 \u0434\u0435\u0442\u0435\u0440\u043c\u0438\u043d\u0430\u0446\u0438\u0438", None))
         self.fStatisticValueLabel.setText(QCoreApplication.translate("PolynomWindow", u"undefined", None))
         self.rSquaredValueLabel.setText(QCoreApplication.translate("PolynomWindow", u"undefined", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.model), QCoreApplication.translate("PolynomWindow", u"\u041c\u043e\u0434\u0435\u043b\u044c", None))

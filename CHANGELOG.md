@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.2](https://github.com/shizand/statapp/compare/v0.10.1...v0.10.2) (2024-02-01)
+
+
+### Исправления
+
+* исправлена опечатка в характеристиках модели ([871d9ad](https://github.com/shizand/statapp/commit/871d9ad746c51351bee9097d9f56903c8e1d1873))
+
 ## [0.10.1](https://github.com/shizand/statapp/compare/v0.10.0...v0.10.1) (2024-01-29)
 
 

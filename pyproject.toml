@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "statapp"
-version = "0.10.1"
+version = "0.10.2"
 description = ""
 authors = [
     "Maxim Slipenko <statapp@maks1ms.addy.io>"

@@ -33,3 +33,12 @@ class InputValuesModel(EditableTableModel):
 
     def getY(self):
         return self._data[:, 0]
+
+    def removeCol(self, index: int):
+        self._data = np.delete(self._data, index, axis=1)
+        self.layoutChanged.emit()
+
+        self.dataChanged.emit(
+            self.index(0, 0),
+            self.index(self.rowCount(QModelIndex()), self.columnCount(QModelIndex()))
+        )

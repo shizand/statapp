@@ -124,9 +124,16 @@
       <attribute name="title">
        <string>График</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_5">
+      <layout class="QGridLayout" name="gridLayout_5" rowstretch="1,0">
        <item row="0" column="0">
         <layout class="QGridLayout" name="plotContainer"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Точки - отклик. Линия - прогноз</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

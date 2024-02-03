@@ -33,3 +33,6 @@ class InputValuesModel(EditableTableModel):
 
     def getY(self):
         return self._data[:, 0]
+
+    def removeCol(self, index: int):
+        self.updateAllData(np.delete(self._data, index, axis=1))

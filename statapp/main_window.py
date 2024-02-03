@@ -19,8 +19,8 @@
 #
 import numpy as np
 from PySide2 import QtCore
-from PySide2.QtCore import Slot
-from PySide2.QtWidgets import QMainWindow, QMessageBox
+from PySide2.QtCore import Slot, Qt, QPoint
+from PySide2.QtWidgets import QMainWindow, QMessageBox, QAction, QMenu
 
 from statapp.calculations import generateXValues, generateYValues
 from statapp.constants import NUMBERS_PRECISION
@@ -79,6 +79,27 @@ class MainWindow(QMainWindow):
         # x1 = generateXValues(20, 2, 0, y)
         # x2 = generateXValues(10, 1, 0, y)
         # self.model.updateAllData(np.concatenate([y, x1, x2], axis=1))
+        self.ui.tableView.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
+        self.ui.tableView.horizontalHeader().customContextMenuRequested.connect(self.removeColumn)
+
+
+    def removeColumn(self, event: QPoint):
+        menu = QMenu(self)
+
+        col = self.ui.tableView.columnAt(event.x())
+
+        if col == 0:
+            return
+
+        def fun():
+            self.model.removeCol(col)
+            self.isDataChanged = True
+
+        selectAction = QAction("Удалить", self)
+        selectAction.triggered.connect(fun)
+        menu.addAction(selectAction)
+        menu.exec_(self.ui.tableView.mapToGlobal(event))
+
 
 
     def updateActionsEnabled(self):

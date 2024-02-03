@@ -20,9 +20,9 @@
 
 ## Установка
 
-Программа распространяется с помощью [PyInstaller](https://pyinstaller.org/en/stable/). 
+Программа распространяется с помощью [PyInstaller](https://pyinstaller.org/en/stable/).
 
-Существует две версиии: **statapp** и **statapp-onefile**. 
+Существует две версиии: **statapp** и **statapp-onefile**.
 
 Различия в том, что onefile версия поставляется одним единственным бинарным файлом. На Windows системах с включенным антивирусом это может вызывать [некоторые проблемы](https://qna.habr.com/q/988553).
 
@@ -39,9 +39,11 @@ poetry install
 pyinstaller statapp.spec # или pyinstaller statapp.spec -- --one-file
 ```
 
+Документация собирается с помощью [grip](https://github.com/joeyespo/grip)
+
 ## Использование
 
-<!-- TODO -->
+Использование описано в [Руководстве пользователя](docs/README.md).
 
 ## Чем я могу помочь проекту?
 

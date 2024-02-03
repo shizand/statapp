@@ -1,0 +1,17 @@
+#preview-page {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#readme {
+    border: none;
+}
+
+#readme > .Box-header {
+    border: none;
+    display: none !important;
+}
+
+#readme > .Box-body {
+    border: none;
+}

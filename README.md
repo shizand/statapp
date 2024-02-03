@@ -41,6 +41,12 @@ pyinstaller statapp.spec # или pyinstaller statapp.spec -- --one-file
 
 Документация собирается с помощью [grip](https://github.com/joeyespo/grip)
 
+```bash
+echo "STYLE_URLS = [\"https://cdn.jsdelivr.net/gh/shizand/statapp@main/docs/grip.css\"]" > ~/.grip/settings.py
+cd docs
+grip .
+```
+
 ## Использование
 
 Использование описано в [Руководстве пользователя](docs/README.md).

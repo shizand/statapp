@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="filemenu">
@@ -77,6 +77,7 @@
     <property name="title">
      <string>Справка</string>
     </property>
+    <addaction name="usageaction"/>
     <addaction name="aboutmenuaction"/>
    </widget>
    <addaction name="filemenu"/>
@@ -139,6 +140,11 @@
   <action name="transformPolynomAction">
    <property name="text">
     <string>Преобразования</string>
+   </property>
+  </action>
+  <action name="usageaction">
+   <property name="text">
+    <string>Использование</string>
    </property>
   </action>
  </widget>

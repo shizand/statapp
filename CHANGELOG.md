@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.11.0](https://github.com/shizand/statapp/compare/v0.10.2...v0.11.0) (2024-02-03)
+
+
+### Новые функции
+
+* добавлен пункт "Использование" ([#108](https://github.com/shizand/statapp/issues/108)) ([aafa5a0](https://github.com/shizand/statapp/commit/aafa5a0ebbb772b6aa55699d8a50587a8fe6c8e0)), closes [#70](https://github.com/shizand/statapp/issues/70)
+* добавлена возможность удалить факторы ([#103](https://github.com/shizand/statapp/issues/103)) ([30447a8](https://github.com/shizand/statapp/commit/30447a801afdac80da948a6f0961ce7b08591f4f)), closes [#102](https://github.com/shizand/statapp/issues/102)
+
+
+### Исправления
+
+* добавлена легенда графика ([#104](https://github.com/shizand/statapp/issues/104)) ([240a517](https://github.com/shizand/statapp/commit/240a517dd6691d45253b5863b54b4b035aaea8f1)), closes [#101](https://github.com/shizand/statapp/issues/101)
+
 ## [0.10.2](https://github.com/shizand/statapp/compare/v0.10.1...v0.10.2) (2024-02-01)
 
 

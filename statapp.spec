@@ -17,7 +17,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--one-file", action="store_true")
 options = parser.parse_args()
 
-datas = [('statapp/ui/images/*', 'ui/images')]
+datas = [
+    ('statapp/ui/images/*', 'ui/images'),
+    ('statapp/docs/files/*', 'docs/files'),
+    ('statapp/docs/README.html', 'docs')
+]
 datas += copy_metadata('statapp')
 
 

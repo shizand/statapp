@@ -33,6 +33,7 @@ from statapp.about_window import AboutWindow
 from statapp.models.fileslc_model import FileSLCModel
 from statapp.polynoms.squared_polynom_window import SquaredPolynomWindow
 from statapp.ui.ui_main_window import Ui_MainWindow
+from statapp.usage_window import UsageWindow
 from statapp.utils import buildMessageBox, addIcon, FloatDelegate, onError
 from statapp.variance_analysis import VarianceAnalysisWindow
 from statapp.correlation_analysis import CorrelationAnalysisWindow
@@ -61,6 +62,7 @@ class MainWindow(QMainWindow):
         ]
 
         self.aboutWindow = None
+        self.usageWindow = None
 
         self.isDataChanged = False
         self.model = InputValuesModel()
@@ -209,6 +211,11 @@ class MainWindow(QMainWindow):
     def on_aboutmenuaction_triggered(self):
         self.aboutWindow = AboutWindow()
         self.aboutWindow.show()
+
+    @Slot()
+    def on_usageaction_triggered(self):
+        self.usageWindow = UsageWindow()
+        self.usageWindow.show()
 
     @Slot()
     def on_varianceAnalysisAction_triggered(self):

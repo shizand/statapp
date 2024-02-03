@@ -17,27 +17,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-import sys
+from PySide2.QtCore import QUrl
+from PySide2.QtWebEngineWidgets import QWebEngineView
+from PySide2.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 
-from PySide2 import QtCore
-from PySide2.QtWidgets import QApplication
+from statapp.utils import addIcon, resourcePath
 
-from statapp.main_window import MainWindow
+class UsageWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Использование")
+        addIcon(self)
 
+        layout = QVBoxLayout()
 
-def main():
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
-    app = QApplication(sys.argv)
-    translator = QtCore.QTranslator(app)
-    locale = QtCore.QLocale.system().name()
-    path = QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)
-    translator.load(f'qt_{locale}', path)
-    translator.load(f'qtbase_{locale}', path)
-    app.installTranslator(translator)
-    window = MainWindow()
-    window.show()
-    return app.exec_()
+        self.browser = QWebEngineView()
+        layout.addWidget(self.browser)
+        self.browser.load(QUrl.fromLocalFile(resourcePath("docs/README.html")))
 
-
-if __name__ == "__main__":
-    sys.exit(main())
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)

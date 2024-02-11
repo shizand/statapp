@@ -54,4 +54,3 @@ class UsageWindow(QMainWindow):
     def onLinkClicked(self, url):
         # Open the URL in the default web browser instead of the QWebEngineView
         QDesktopServices.openUrl(url)
-

@@ -20,7 +20,7 @@ class DistributionWindow(QDialog):
 
         self.comboBox = QComboBox()
         self.comboBox.addItems(self.values)
-        self.comboBox.currentIndexChanged.connect(self.on_change)
+        self.comboBox.currentIndexChanged.connect(self.onChange)
         self.sc = self.getSc(data[:, 0])
         self.layout.addWidget(self.comboBox)
 
@@ -29,7 +29,7 @@ class DistributionWindow(QDialog):
         self.layout.addLayout(self.l)
 
 
-    def on_change(self):
+    def onChange(self):
         while ((child := self.l.takeAt(0)) != None):
             child.widget().deleteLater()
         self.sc = self.getSc(self.data[:, self.comboBox.currentIndex()])
@@ -43,16 +43,19 @@ class UniformDistributionWindow(DistributionWindow):
     def getSc(self, points):
         sc = MplCanvas(self, width=5, height=4, dpi=100)
         points = np.sort(points)
-        unique_points = np.array([points[0]] + [pt for pt, next_pt in zip(points[:-1], points[1:]) if pt != next_pt])
-        differences = np.diff(unique_points)
-        inverse_differences = 1 / differences
-        for i, (start, end) in enumerate(zip(unique_points[:-1], unique_points[1:])):
-            sc.axes.hlines(inverse_differences[i], start, end, colors='r', linestyles='solid')
+        points = np.array(
+            [points[0]] +
+            [pt for pt, next_pt in zip(points[:-1], points[1:]) if pt != next_pt]
+        )
+        differences = np.diff(points)
+        inverseDifferences = 1 / differences
+        for i, (start, end) in enumerate(zip(points[:-1], points[1:])):
+            sc.axes.hlines(inverseDifferences[i], start, end, colors='r', linestyles='solid')
         return sc
 
 
-def normal_density(x, mu, sigma_squared):
-    return 1 / np.sqrt(2 * np.pi * sigma_squared) * np.exp(-(x - mu)**2 / (2 * sigma_squared))
+def normalDensity(x, mu, sigmaSquared):
+    return 1 / np.sqrt(2 * np.pi * sigmaSquared) * np.exp(-(x - mu) ** 2 / (2 * sigmaSquared))
 
 
 class NormalDistributionWindow(DistributionWindow):
@@ -63,8 +66,8 @@ class NormalDistributionWindow(DistributionWindow):
         sc = MplCanvas(self, width=5, height=4, dpi=100)
         points = np.sort(points)
         mu = np.mean(points)
-        sigma_squared = np.var(points)
-        y_values = normal_density(points, mu, sigma_squared)
+        sigmaSquared = np.var(points)
+        y_values = normalDensity(points, mu, sigmaSquared)
 
         sc.axes.plot(points, y_values)
 
@@ -79,7 +82,7 @@ class ExponentialDistributionWindow(DistributionWindow):
         sc = MplCanvas(self, width=5, height=4, dpi=100)
         points = np.sort(points)
         mu = np.mean(points)
-        lambda_param = 1 / mu
-        y_values = lambda_param * np.exp(-lambda_param * points)
+        lambdaParam = 1 / mu
+        y_values = lambdaParam * np.exp(-lambdaParam * points)
         sc.axes.plot(points, y_values)
         return sc

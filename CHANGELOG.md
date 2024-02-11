@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.0](https://github.com/shizand/statapp/compare/v0.11.0...v0.12.0) (2024-02-11)
+
+
+### Новые функции
+
+* Добавлена дополнительная литература ([#117](https://github.com/shizand/statapp/issues/117)) ([ded55cb](https://github.com/shizand/statapp/commit/ded55cb5d73e5b1d118c8f2ceaaf107a563f0e5e)), closes [#114](https://github.com/shizand/statapp/issues/114)
+* добавлены "Распределения" ([#116](https://github.com/shizand/statapp/issues/116)) ([981580f](https://github.com/shizand/statapp/commit/981580f46d55b949af440973660a5b9b946827bd)), closes [#111](https://github.com/shizand/statapp/issues/111) [#112](https://github.com/shizand/statapp/issues/112)
+
+
+### Исправления
+
+* Дополнил README ([9766ecb](https://github.com/shizand/statapp/commit/9766ecb7f5f4bb4b960ad9519bbe28919ecda41d))
+
 ## [0.11.0](https://github.com/shizand/statapp/compare/v0.10.2...v0.11.0) (2024-02-03)
 
 

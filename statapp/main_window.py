@@ -51,10 +51,6 @@ class MainWindow(QMainWindow):
 
         addIcon(self)
 
-        self.ui.generateXaction.setEnabled(False)
-        self.ui.varianceAnalysisAction.setEnabled(False)
-        self.ui.correlationAnalisisAction.setEnabled(False)
-
         self.mainActions = [
             self.ui.varianceAnalysisAction,
             self.ui.correlationAnalisisAction,
@@ -112,13 +108,22 @@ class MainWindow(QMainWindow):
         # есть только отклик
         if data.shape[1] == 1:
             self.ui.generateXaction.setEnabled(True)
+            self.ui.uniformDistributionAction.setEnabled(True)
+            self.ui.normalDistributionAction.setEnabled(True)
+            self.ui.exponentialDistributionAction.setEnabled(True)
             self.setEnabledMainActions(False)
         # есть отклик и фактор(ы)
         elif data.shape[1] > 1:
             self.ui.generateXaction.setEnabled(True)
+            self.ui.uniformDistributionAction.setEnabled(True)
+            self.ui.normalDistributionAction.setEnabled(True)
+            self.ui.exponentialDistributionAction.setEnabled(True)
             self.setEnabledMainActions(True)
         else:
             self.ui.generateXaction.setEnabled(False)
+            self.ui.uniformDistributionAction.setEnabled(False)
+            self.ui.normalDistributionAction.setEnabled(False)
+            self.ui.exponentialDistributionAction.setEnabled(False)
             self.setEnabledMainActions(False)
 
 

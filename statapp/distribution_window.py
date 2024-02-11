@@ -67,10 +67,8 @@ class NormalDistributionWindow(DistributionWindow):
         points = np.sort(points)
         mu = np.mean(points)
         sigmaSquared = np.var(points)
-        y_values = normalDensity(points, mu, sigmaSquared)
-
-        sc.axes.plot(points, y_values)
-
+        yValues = normalDensity(points, mu, sigmaSquared)
+        sc.axes.plot(points, yValues)
         return sc
 
 
@@ -83,6 +81,6 @@ class ExponentialDistributionWindow(DistributionWindow):
         points = np.sort(points)
         mu = np.mean(points)
         lambdaParam = 1 / mu
-        y_values = lambdaParam * np.exp(-lambdaParam * points)
-        sc.axes.plot(points, y_values)
+        yValues = lambdaParam * np.exp(-lambdaParam * points)
+        sc.axes.plot(points, yValues)
         return sc

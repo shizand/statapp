@@ -24,6 +24,8 @@ from PySide2.QtWidgets import QMainWindow, QMessageBox, QAction, QMenu
 
 from statapp.calculations import generateXValues, generateYValues
 from statapp.constants import NUMBERS_PRECISION
+from statapp.distribution_window import NormalDistributionWindow, UniformDistributionWindow, \
+    ExponentialDistributionWindow
 from statapp.generate_factor_window import GenerateFactorWindow
 from statapp.polynoms.linear_polynom_window import LinearPolynomWindow
 from statapp.mathtex_header_view import MathTexHeaderView
@@ -253,6 +255,30 @@ class MainWindow(QMainWindow):
     def on_transformPolynomAction_triggered(self):
         try:
             dw = TransformPolynomWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
+
+    @Slot()
+    def on_uniformDistributionAction_triggered(self):
+        try:
+            dw = UniformDistributionWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
+
+    @Slot()
+    def on_normalDistributionAction_triggered(self):
+        try:
+            dw = NormalDistributionWindow(self.model.getData())
+            dw.exec()
+        except Exception as error:
+            onError(error)
+
+    @Slot()
+    def on_exponentialDistributionAction_triggered(self):
+        try:
+            dw = ExponentialDistributionWindow(self.model.getData())
             dw.exec()
         except Exception as error:
             onError(error)

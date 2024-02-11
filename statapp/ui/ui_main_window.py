@@ -1,107 +1,81 @@
 # -*- coding: utf-8 -*-
-#
-# Copyright (c) 2024 Maxim Slipenko, Eugene Lazurenko.
-#
-# This file is part of Statapp
-# (see https://github.com/shizand/statapp).
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
+# Form implementation generated from reading ui file 'statapp/ui/main_window.ui',
+# licensing of 'statapp/ui/main_window.ui' applies.
+#
+# Created: Sun Feb 11 18:12:22 2024
+#      by: pyside2-uic  running on PySide2 5.13.2
+#
+# WARNING! All changes made in this file will be lost!
 
-################################################################################
-## Form generated from reading UI file 'main_window.ui'
-##
-## Created by: Qt User Interface Compiler version 5.15.2
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide2 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        if not MainWindow.objectName():
-            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
-        self.aboutmenuaction = QAction(MainWindow)
-        self.aboutmenuaction.setObjectName(u"aboutmenuaction")
-        self.generateYaction = QAction(MainWindow)
-        self.generateYaction.setObjectName(u"generateYaction")
-        self.generateXaction = QAction(MainWindow)
-        self.generateXaction.setObjectName(u"generateXaction")
-        self.openfileaction = QAction(MainWindow)
-        self.openfileaction.setObjectName(u"openfileaction")
-        self.savefileaction = QAction(MainWindow)
-        self.savefileaction.setObjectName(u"savefileaction")
-        self.closefileaction = QAction(MainWindow)
-        self.closefileaction.setObjectName(u"closefileaction")
-        self.varianceAnalysisAction = QAction(MainWindow)
-        self.varianceAnalysisAction.setObjectName(u"varianceAnalysisAction")
-        self.correlationAnalisisAction = QAction(MainWindow)
-        self.correlationAnalisisAction.setObjectName(u"correlationAnalisisAction")
-        self.linearPolynomAction = QAction(MainWindow)
-        self.linearPolynomAction.setObjectName(u"linearPolynomAction")
-        self.squaredPolynomAction = QAction(MainWindow)
-        self.squaredPolynomAction.setObjectName(u"squaredPolynomAction")
-        self.transformPolynomAction = QAction(MainWindow)
-        self.transformPolynomAction.setObjectName(u"transformPolynomAction")
-        self.usageaction = QAction(MainWindow)
-        self.usageaction.setObjectName(u"usageaction")
-        self.centralwidget = QWidget(MainWindow)
-        self.centralwidget.setObjectName(u"centralwidget")
-        self.gridLayout = QGridLayout(self.centralwidget)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.label = QLabel(self.centralwidget)
-        self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignCenter)
-
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName("gridLayout")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-
-        self.tableView = QTableView(self.centralwidget)
-        self.tableView.setObjectName(u"tableView")
+        self.tableView = QtWidgets.QTableView(self.centralwidget)
+        self.tableView.setObjectName("tableView")
         self.tableView.verticalHeader().setVisible(False)
-
         self.gridLayout.addWidget(self.tableView, 1, 0, 1, 1)
-
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(MainWindow)
-        self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 22))
-        self.filemenu = QMenu(self.menubar)
-        self.filemenu.setObjectName(u"filemenu")
-        self.generatemenu = QMenu(self.menubar)
-        self.generatemenu.setObjectName(u"generatemenu")
-        self.analyzemenu = QMenu(self.menubar)
-        self.analyzemenu.setObjectName(u"analyzemenu")
-        self.modelmenu = QMenu(self.menubar)
-        self.modelmenu.setObjectName(u"modelmenu")
-        self.helpmenu = QMenu(self.menubar)
-        self.helpmenu.setObjectName(u"helpmenu")
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 29))
+        self.menubar.setObjectName("menubar")
+        self.filemenu = QtWidgets.QMenu(self.menubar)
+        self.filemenu.setObjectName("filemenu")
+        self.generatemenu = QtWidgets.QMenu(self.menubar)
+        self.generatemenu.setObjectName("generatemenu")
+        self.analyzemenu = QtWidgets.QMenu(self.menubar)
+        self.analyzemenu.setObjectName("analyzemenu")
+        self.modelmenu = QtWidgets.QMenu(self.menubar)
+        self.modelmenu.setObjectName("modelmenu")
+        self.helpmenu = QtWidgets.QMenu(self.menubar)
+        self.helpmenu.setObjectName("helpmenu")
+        self.menu = QtWidgets.QMenu(self.menubar)
+        self.menu.setObjectName("menu")
         MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(MainWindow)
-        self.statusbar.setObjectName(u"statusbar")
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
-        self.menubar.addAction(self.filemenu.menuAction())
-        self.menubar.addAction(self.generatemenu.menuAction())
-        self.menubar.addAction(self.analyzemenu.menuAction())
-        self.menubar.addAction(self.modelmenu.menuAction())
-        self.menubar.addAction(self.helpmenu.menuAction())
+        self.aboutmenuaction = QtWidgets.QAction(MainWindow)
+        self.aboutmenuaction.setObjectName("aboutmenuaction")
+        self.generateYaction = QtWidgets.QAction(MainWindow)
+        self.generateYaction.setObjectName("generateYaction")
+        self.generateXaction = QtWidgets.QAction(MainWindow)
+        self.generateXaction.setObjectName("generateXaction")
+        self.openfileaction = QtWidgets.QAction(MainWindow)
+        self.openfileaction.setObjectName("openfileaction")
+        self.savefileaction = QtWidgets.QAction(MainWindow)
+        self.savefileaction.setObjectName("savefileaction")
+        self.closefileaction = QtWidgets.QAction(MainWindow)
+        self.closefileaction.setObjectName("closefileaction")
+        self.varianceAnalysisAction = QtWidgets.QAction(MainWindow)
+        self.varianceAnalysisAction.setObjectName("varianceAnalysisAction")
+        self.correlationAnalisisAction = QtWidgets.QAction(MainWindow)
+        self.correlationAnalisisAction.setObjectName("correlationAnalisisAction")
+        self.linearPolynomAction = QtWidgets.QAction(MainWindow)
+        self.linearPolynomAction.setObjectName("linearPolynomAction")
+        self.squaredPolynomAction = QtWidgets.QAction(MainWindow)
+        self.squaredPolynomAction.setObjectName("squaredPolynomAction")
+        self.transformPolynomAction = QtWidgets.QAction(MainWindow)
+        self.transformPolynomAction.setObjectName("transformPolynomAction")
+        self.usageaction = QtWidgets.QAction(MainWindow)
+        self.usageaction.setObjectName("usageaction")
+        self.uniformDistributionAction = QtWidgets.QAction(MainWindow)
+        self.uniformDistributionAction.setObjectName("uniformDistributionAction")
+        self.normalDistributionAction = QtWidgets.QAction(MainWindow)
+        self.normalDistributionAction.setObjectName("normalDistributionAction")
+        self.exponentialDistributionAction = QtWidgets.QAction(MainWindow)
+        self.exponentialDistributionAction.setObjectName("exponentialDistributionAction")
         self.filemenu.addAction(self.openfileaction)
         self.filemenu.addAction(self.savefileaction)
         self.filemenu.addAction(self.closefileaction)
@@ -114,30 +88,41 @@ class Ui_MainWindow(object):
         self.modelmenu.addAction(self.transformPolynomAction)
         self.helpmenu.addAction(self.usageaction)
         self.helpmenu.addAction(self.aboutmenuaction)
+        self.menu.addAction(self.uniformDistributionAction)
+        self.menu.addAction(self.normalDistributionAction)
+        self.menu.addAction(self.exponentialDistributionAction)
+        self.menubar.addAction(self.filemenu.menuAction())
+        self.menubar.addAction(self.generatemenu.menuAction())
+        self.menubar.addAction(self.analyzemenu.menuAction())
+        self.menubar.addAction(self.modelmenu.menuAction())
+        self.menubar.addAction(self.menu.menuAction())
+        self.menubar.addAction(self.helpmenu.menuAction())
 
         self.retranslateUi(MainWindow)
-
-        QMetaObject.connectSlotsByName(MainWindow)
-    # setupUi
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0435 \u043c\u043e\u0434\u0435\u043b\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))
-        self.aboutmenuaction.setText(QCoreApplication.translate("MainWindow", u"\u041e \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0435", None))
-        self.generateYaction.setText(QCoreApplication.translate("MainWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u043e\u0442\u043a\u043b\u0438\u043a\u0430", None))
-        self.generateXaction.setText(QCoreApplication.translate("MainWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u0444\u0430\u043a\u0442\u043e\u0440\u0430", None))
-        self.openfileaction.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c", None))
-        self.savefileaction.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
-        self.closefileaction.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u043a\u0440\u044b\u0442\u044c", None))
-        self.varianceAnalysisAction.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0441\u043f\u0435\u0440\u0441\u0438\u043e\u043d\u043d\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437", None))
-        self.correlationAnalisisAction.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u0440\u0440\u0435\u043b\u044f\u0446\u0438\u043e\u043d\u043d\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437", None))
-        self.linearPolynomAction.setText(QCoreApplication.translate("MainWindow", u"\u041b\u0438\u043d\u0435\u0439\u043d\u044b\u0439 \u043f\u043e\u043b\u0438\u043d\u043e\u043c", None))
-        self.squaredPolynomAction.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0432\u0430\u0434\u0440\u0430\u0442\u0438\u0447\u043d\u044b\u0439 \u043f\u043e\u043b\u0438\u043d\u043e\u043c", None))
-        self.transformPolynomAction.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0435\u043e\u0431\u0440\u0430\u0437\u043e\u0432\u0430\u043d\u0438\u044f", None))
-        self.usageaction.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0422\u0410\u0422\u0418\u0421\u0422\u0418\u0427\u0415\u0421\u041a\u0418\u0415 \u0414\u0410\u041d\u041d\u042b\u0415", None))
-        self.filemenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b", None))
-        self.generatemenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0435\u0439", None))
-        self.analyzemenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0410\u043d\u0430\u043b\u0438\u0437 \u0434\u0430\u043d\u043d\u044b\u0445", None))
-        self.modelmenu.setTitle(QCoreApplication.translate("MainWindow", u"\u041c\u043e\u0434\u0435\u043b\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))
-        self.helpmenu.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
-    # retranslateUi
+        MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "Статистическое моделирование", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("MainWindow", "СТАТИСТИЧЕСКИЕ ДАННЫЕ", None, -1))
+        self.filemenu.setTitle(QtWidgets.QApplication.translate("MainWindow", "Файл", None, -1))
+        self.generatemenu.setTitle(QtWidgets.QApplication.translate("MainWindow", "Генерация показателей", None, -1))
+        self.analyzemenu.setTitle(QtWidgets.QApplication.translate("MainWindow", "Анализ данных", None, -1))
+        self.modelmenu.setTitle(QtWidgets.QApplication.translate("MainWindow", "Моделирование", None, -1))
+        self.helpmenu.setTitle(QtWidgets.QApplication.translate("MainWindow", "Справка", None, -1))
+        self.menu.setTitle(QtWidgets.QApplication.translate("MainWindow", "Распределения", None, -1))
+        self.aboutmenuaction.setText(QtWidgets.QApplication.translate("MainWindow", "О программе", None, -1))
+        self.generateYaction.setText(QtWidgets.QApplication.translate("MainWindow", "Генерация отклика", None, -1))
+        self.generateXaction.setText(QtWidgets.QApplication.translate("MainWindow", "Генерация фактора", None, -1))
+        self.openfileaction.setText(QtWidgets.QApplication.translate("MainWindow", "Открыть", None, -1))
+        self.savefileaction.setText(QtWidgets.QApplication.translate("MainWindow", "Сохранить", None, -1))
+        self.closefileaction.setText(QtWidgets.QApplication.translate("MainWindow", "Закрыть", None, -1))
+        self.varianceAnalysisAction.setText(QtWidgets.QApplication.translate("MainWindow", "Дисперсионный анализ", None, -1))
+        self.correlationAnalisisAction.setText(QtWidgets.QApplication.translate("MainWindow", "Корреляционный анализ", None, -1))
+        self.linearPolynomAction.setText(QtWidgets.QApplication.translate("MainWindow", "Линейный полином", None, -1))
+        self.squaredPolynomAction.setText(QtWidgets.QApplication.translate("MainWindow", "Квадратичный полином", None, -1))
+        self.transformPolynomAction.setText(QtWidgets.QApplication.translate("MainWindow", "Преобразования", None, -1))
+        self.usageaction.setText(QtWidgets.QApplication.translate("MainWindow", "Использование", None, -1))
+        self.uniformDistributionAction.setText(QtWidgets.QApplication.translate("MainWindow", "Равномерное", None, -1))
+        self.normalDistributionAction.setText(QtWidgets.QApplication.translate("MainWindow", "Нормальное", None, -1))
+        self.exponentialDistributionAction.setText(QtWidgets.QApplication.translate("MainWindow", "Экспоненциальное", None, -1))
+

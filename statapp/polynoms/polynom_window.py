@@ -74,10 +74,6 @@ class PolynomWindow(QDialog):
         realY = predictionResult[:, 0]
         calculatedY = predictionResult[:, 1]
 
-        print(xAxes)
-        print(realY)
-        print(calculatedY)
-
         sc.axes.scatter(xAxes, realY)
 
         # xnew = np.linspace(xAxes.min(), xAxes.max(), 300)

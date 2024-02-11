@@ -3,7 +3,7 @@ ignored-modules=PySide2
 extension-pkg-whitelist=PySide2
 
 [MASTER]
-init-hook="import sys; sys.path.append('./statapp')"
+init-hook="import sys; sys.path.append('.')"
 ignore-patterns=ui_.+\.py
 
 [BASIC]

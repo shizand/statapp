@@ -87,7 +87,6 @@ class TransformPolynomWindow(QDialog):
 
     def on_data_changed(self):
         data = np.copy(self.data)
-        print(len(data[0:]))
         for i in range(len(data[0:])):
             for j in range(1, len(data[i])):
                 tr = self.model.data(self.model.createIndex(j, 0), Qt.DisplayRole)

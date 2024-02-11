@@ -1,12 +1,24 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'statapp/ui/generate_factor_window.ui',
-# licensing of 'statapp/ui/generate_factor_window.ui' applies.
 #
-# Created: Sun Feb 11 18:12:25 2024
-#      by: pyside2-uic  running on PySide2 5.13.2
+# Copyright (c) 2024 Maxim Slipenko, Eugene Lazurenko.
 #
-# WARNING! All changes made in this file will be lost!
+# This file is part of Statapp
+# (see https://github.com/shizand/statapp).
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
 
 from PySide2 import QtCore, QtGui, QtWidgets
 
@@ -75,4 +87,3 @@ class Ui_GenerateFactorWindow(object):
         self.label_3.setText(QtWidgets.QApplication.translate("GenerateFactorWindow", "Среднеквадратичное отклонение", None, -1))
         self.generatePushButton.setText(QtWidgets.QApplication.translate("GenerateFactorWindow", "Сгенерировать", None, -1))
         self.label_2.setText(QtWidgets.QApplication.translate("GenerateFactorWindow", "Математическое ожидание", None, -1))
-

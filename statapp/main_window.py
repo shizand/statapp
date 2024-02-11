@@ -24,7 +24,7 @@ from PySide2.QtWidgets import QMainWindow, QMessageBox, QAction, QMenu
 
 from statapp.calculations import generateXValues, generateYValues
 from statapp.constants import NUMBERS_PRECISION
-from statapp.distribution_window import DistributionWindow, NormalDistributionWindow, UniformDistributionWindow, \
+from statapp.distribution_window import NormalDistributionWindow, UniformDistributionWindow, \
     ExponentialDistributionWindow
 from statapp.generate_factor_window import GenerateFactorWindow
 from statapp.polynoms.linear_polynom_window import LinearPolynomWindow

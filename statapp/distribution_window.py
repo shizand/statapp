@@ -1,5 +1,5 @@
 import numpy as np
-from PySide2.QtWidgets import QDialog, QVBoxLayout, QScrollArea, QWidget, QComboBox
+from PySide2.QtWidgets import QDialog, QVBoxLayout, QComboBox
 
 from statapp.polynoms.polynom_window import MplCanvas
 from statapp.utils import addIcon

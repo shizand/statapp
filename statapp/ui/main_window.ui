@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="filemenu">
@@ -80,10 +80,19 @@
     <addaction name="usageaction"/>
     <addaction name="aboutmenuaction"/>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Распределения</string>
+    </property>
+    <addaction name="uniformDistributionAction"/>
+    <addaction name="normalDistributionAction"/>
+    <addaction name="exponentialDistributionAction"/>
+   </widget>
    <addaction name="filemenu"/>
    <addaction name="generatemenu"/>
    <addaction name="analyzemenu"/>
    <addaction name="modelmenu"/>
+   <addaction name="menu"/>
    <addaction name="helpmenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -145,6 +154,21 @@
   <action name="usageaction">
    <property name="text">
     <string>Использование</string>
+   </property>
+  </action>
+  <action name="uniformDistributionAction">
+   <property name="text">
+    <string>Равномерное</string>
+   </property>
+  </action>
+  <action name="normalDistributionAction">
+   <property name="text">
+    <string>Нормальное</string>
+   </property>
+  </action>
+  <action name="exponentialDistributionAction">
+   <property name="text">
+    <string>Экспоненциальное</string>
    </property>
   </action>
  </widget>

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.2](https://github.com/shizand/statapp/compare/v0.12.1...v0.12.2) (2024-02-12)
+
+
+### Исправления
+
+* Добавлены краткие теоретические сведения README ([34bcee2](https://github.com/shizand/statapp/commit/34bcee2acf3a7cee806d2da49ca0e546df8d1e3f))
+
 ## [0.12.1](https://github.com/shizand/statapp/compare/v0.12.0...v0.12.1) (2024-02-11)
 
 

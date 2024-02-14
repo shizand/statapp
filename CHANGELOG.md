@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.12.2](https://github.com/shizand/statapp/compare/v0.12.1...v0.12.2) (2024-02-12)
+
+
+### Исправления
+
+* Добавлены краткие теоретические сведения README ([34bcee2](https://github.com/shizand/statapp/commit/34bcee2acf3a7cee806d2da49ca0e546df8d1e3f))
+
+## [0.12.1](https://github.com/shizand/statapp/compare/v0.12.0...v0.12.1) (2024-02-11)
+
+
+### Исправления
+
+* добавлено отключение "Распределения" при отсутствии отклика ([8ca535c](https://github.com/shizand/statapp/commit/8ca535cc8fb3c97d049afaef30ade033781a6e8e))
+* исправлены ссылки на некоторую дополнительную литературу ([c23e1f8](https://github.com/shizand/statapp/commit/c23e1f81a9243d81a3e8f00f9f2b2ede941f5691))
+
 ## [0.12.0](https://github.com/shizand/statapp/compare/v0.11.0...v0.12.0) (2024-02-11)
 
 

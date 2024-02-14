@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+import logging
 import os
 import sys
 
@@ -71,7 +72,10 @@ def onError(errorName: Exception):
         QMessageBox.Ok,
         QMessageBox.Ok)
 
+    logging.exception(errorName)
+
     msgBox.exec_()
+
 
 class FloatDelegate(QStyledItemDelegate):
     def __init__(self, parent=None):

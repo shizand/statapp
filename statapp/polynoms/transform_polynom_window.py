@@ -81,7 +81,7 @@ class TransformPolynomWindow(QDialog):
         self.ui.residualVarianceValueLabel.setText(str(result.residualVariance))
         self.ui.scaledResidualVarianceValueLabel.setText(str(result.scaledResidualVariance))
         self.ui.fStatisticValueLabel.setText(str(result.fStatistic))
-        self.ui.rSquaredValueLabel.setText(str(result.scaledResidualVariance))
+        self.ui.rSquaredValueLabel.setText(str(result.rSquared))
 
         self.model.dataChanged.connect(self.on_data_changed)
 

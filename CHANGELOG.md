@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.3](https://github.com/shizand/statapp/compare/v0.12.2...v0.12.3) (2024-02-14)
+
+
+### Исправления
+
+* добавлен более подробный вывод ошибок в консоль ([780d5b3](https://github.com/shizand/statapp/commit/780d5b30fdc271f670c09369c1a0a692f89e7fc2))
+* исправлен вывод коэффициента множественной детерминации ([260cc99](https://github.com/shizand/statapp/commit/260cc99afa3e5bc0aaf0fbad8870eebd909e558c))
+
 ## [0.12.2](https://github.com/shizand/statapp/compare/v0.12.1...v0.12.2) (2024-02-12)
 
 

@@ -22,7 +22,10 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 import sympy as sp
-from statapp._vendor.multipolyfit import multipolyfit, getTerms
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
 
 DIRECT_LINK = 0
 INDIRECT_LINK = 1
@@ -78,64 +81,102 @@ class RegressionResult:
     monomials: list
 
 
-def commonPolynom(inputData, deg) -> RegressionResult:
-    x = inputData[:, 1:]
-    y = inputData[:, 0]
-    result, powers, data = multipolyfit(x, y, deg, full=True)
-    (out, mse, scaledResidualVariance,
-     rSquared, fStatistic) = calculateStats(data, result[0], result[1], y)
+def linearPolynom(data):
+    y = data[:, 0]
+    x = data[:, 1:]
+
+    polyFeatures = PolynomialFeatures(degree=1, include_bias=False)
+    xPoly = polyFeatures.fit_transform(x)
+
+    model = LinearRegression(fit_intercept=True)
+    model.fit(xPoly, y)
+
+    params = np.hstack([model.intercept_, model.coef_])
+
+    predictions = model.predict(xPoly)
+    residuals = y - predictions
+    mse = mean_squared_error(y, predictions)
+
+    rSquared = model.score(xPoly, y)
+
+    n = xPoly.shape[0]
+    k = xPoly.shape[1] + 1
+
+    fStatistic = (rSquared / (k - 1)) / ((1 - rSquared) / (n - k))
+
+    xWithIntercept = np.hstack([np.ones((n, 1)), xPoly])
+    varB = mse * np.linalg.inv(xWithIntercept.T @ xWithIntercept).diagonal()
+    seB = np.sqrt(varB)
+
+    tStats = params / seB
+
+    monomials = ['c'] + ['x' + str(i) for i in range(1, x.shape[1] + 1)]
+
+    residualVariance = np.var(residuals, ddof=k)
+    scaledResidualVariance = (residualVariance /
+                              np.mean(residuals) ** 2) if np.mean(residuals) != 0 else np.nan
+
+    paramsAndTStats = np.vstack((params, tStats)).T
 
     return RegressionResult(
-        out.to_numpy(),
-        np.float64(mse),
-        np.float64(scaledResidualVariance),
-        np.float64(rSquared),
-        np.float64(fStatistic),
-        ['c' if str(x) == '1' else str(x) for x in getTerms(powers)]
+        paramsAndTStats,
+        residualVariance,
+        scaledResidualVariance,
+        rSquared,
+        fStatistic,
+        monomials
     )
 
 
-def linearPolynom(inputData) -> RegressionResult:
-    return commonPolynom(inputData, 1)
+def squaredPolynom(data):
+    y = data[:, 0]
+    x = data[:, 1:]
 
+    polyFeatures = PolynomialFeatures(degree=2, include_bias=False)
+    xPoly = polyFeatures.fit_transform(x)
 
-def squaredPolynom(inputData) -> RegressionResult:
-    return commonPolynom(inputData, 2)
+    model = LinearRegression(fit_intercept=True)
+    model.fit(xPoly, y)
 
+    params = np.hstack([model.intercept_, model.coef_])
 
-def calculateStats(data, params, residues, y):
-    # pylint: disable-msg=too-many-locals
+    predictions = model.predict(xPoly)
+    residuals = y - predictions
+    mse = mean_squared_error(y, predictions)
 
-    k = len(params)  # Количество оцениваемых параметров (коэффициентов)
-    n = len(data)  # Количество наблюдений
+    rSquared = model.score(xPoly, y)
 
-    # Степень свободы (degrees of freedom) для остатков
-    dof = n - k  # Количество наблюдений минус количество оцениваемых параметров
-    # Остаточная дисперсия (Mean Squared Error, MSE)
-    mse = residues / dof
-    # Среднее значение остатков
-    meanResiduals = np.sum(residues) / dof
-    # Масштабированная остаточная дисперсия
-    scaledResidualVariance = residues / meanResiduals ** 2
-    # Ковариационная матрица коэффициентов
-    cov = mse * np.diagonal(np.linalg.inv(data.T @ data))
-    # Стандартные ошибки коэффициентов
-    se = np.sqrt(cov)
-    # T-статистики для каждого коэффициента регрессии
-    tStatistics = params / se
+    n = xPoly.shape[0]
+    k = xPoly.shape[1] + 1
 
-    # R-squared (коэффициент множественной детерминации)
-    sst = np.sum((y - np.mean(y)) ** 2)  # Сумма квадратов отклонений
-    rSquared = 1 - (mse[0] / sst)
-
-    # F-statistic (статистика Фишера)
     fStatistic = (rSquared / (k - 1)) / ((1 - rSquared) / (n - k))
 
-    out = pd.DataFrame()
-    out[0] = params
-    out[1] = tStatistics
+    xWithIntercept = np.hstack([np.ones((n, 1)), xPoly])
+    varB = mse * np.linalg.pinv(xWithIntercept.T @ xWithIntercept).diagonal()
+    seB = np.sqrt(np.maximum(varB, 0))
 
-    return out, mse[0], scaledResidualVariance, rSquared, fStatistic
+    tStats = params / seB
+
+    monomials = ['c'] + list(
+        polyFeatures.get_feature_names_out(['x' + str(i) for i in range(1, x.shape[1] + 1)])
+    )
+    monomials = [monomial.replace(' ', '*') for monomial in monomials]
+
+    residualVariance = np.var(residuals, ddof=k)
+    scaledResidualVariance = (
+            residualVariance / np.mean(residuals) ** 2
+    ) if np.mean(residuals) != 0 else np.nan
+
+    paramsAndTStats = np.vstack((params, tStats)).T
+
+    return RegressionResult(
+        paramsAndTStats,
+        residualVariance,
+        scaledResidualVariance,
+        rSquared,
+        fStatistic,
+        monomials
+    )
 
 
 def prediction(inputData, result: RegressionResult):

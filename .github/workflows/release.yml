@@ -44,11 +44,15 @@ jobs:
         with:
           path: ./.venv
           key: venv-${{ runner.os }}-${{ runner.arch }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Setup MSVC (32-bit)
+      - name: Setup MSYS2 (32-bit)
         if: ${{ matrix.arch == 'x86' && matrix.os == 'windows-latest' }}
-        uses: bus1/cabuild/action/msdevshell@e22aba57d6e74891d059d66501b6b5aed8123c4d  # v1
+        uses: msys2/setup-msys2@v2
         with:
-          architecture: 'x86'
+          msystem: mingw32
+          path-type: inherit
+          install: >-
+            mingw-w64-i686-gcc-fortran
+
       - name: Установка зависимостей
         run: poetry install
       - name: Сборка

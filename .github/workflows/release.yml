@@ -15,7 +15,7 @@ jobs:
       matrix:
         os: [ubuntu-20.04, windows-latest]
         spec: [statapp-onefile, statapp]
-        arch: [x86, x64]
+        arch: [x64] # [x86, x64]
         include:
           - os: ubuntu-20.04
             target: linux
@@ -44,15 +44,6 @@ jobs:
         with:
           path: ./.venv
           key: venv-${{ runner.os }}-${{ runner.arch }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Setup MSYS2 (32-bit)
-        if: ${{ matrix.arch == 'x86' && matrix.os == 'windows-latest' }}
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: mingw32
-          path-type: inherit
-          install: >-
-            mingw-w64-i686-gcc-fortran
-
       - name: Установка зависимостей
         run: poetry install
       - name: Сборка

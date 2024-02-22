@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.5](https://github.com/shizand/statapp/compare/v0.12.4...v0.12.5) (2024-02-22)
+
+
+### Исправления
+
+* заменён алгоритм моделирования полиномов и исправлен прогноз ([#122](https://github.com/shizand/statapp/issues/122)) ([f17644d](https://github.com/shizand/statapp/commit/f17644dd15bd8999196c994c1634fe27d621fabc))
+
 ## [0.12.4](https://github.com/shizand/statapp/compare/v0.12.3...v0.12.4) (2024-02-15)
 
 

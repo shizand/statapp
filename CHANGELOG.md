@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.4](https://github.com/shizand/statapp/compare/v0.12.3...v0.12.4) (2024-02-15)
+
+
+### Исправления
+
+* исправлен вывод коэффициента множественной детерминации в "Преобразования" ([da68523](https://github.com/shizand/statapp/commit/da685239136c7047ecaa5f63b7d52d25930ce895))
+
 ## [0.12.3](https://github.com/shizand/statapp/compare/v0.12.2...v0.12.3) (2024-02-14)
 
 

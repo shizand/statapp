@@ -113,8 +113,7 @@ def linearPolynom(data):
     monomials = ['c'] + ['x' + str(i) for i in range(1, x.shape[1] + 1)]
 
     residualVariance = np.var(residuals, ddof=k)
-    scaledResidualVariance = (residualVariance /
-                              np.mean(residuals) ** 2) if np.mean(residuals) != 0 else np.nan
+    scaledResidualVariance = residualVariance / (n - k)
 
     paramsAndTStats = np.vstack((params, tStats)).T
 
@@ -163,9 +162,7 @@ def squaredPolynom(data):
     monomials = [monomial.replace(' ', '*') for monomial in monomials]
 
     residualVariance = np.var(residuals, ddof=k)
-    scaledResidualVariance = (
-            residualVariance / np.mean(residuals) ** 2
-    ) if np.mean(residuals) != 0 else np.nan
+    scaledResidualVariance = residualVariance / (n - k)
 
     paramsAndTStats = np.vstack((params, tStats)).T
 
@@ -194,8 +191,12 @@ def prediction(inputData, result: RegressionResult):
 
     results = []
 
+    numVars = inputs.shape[1]
+    symbolsStr = ' '.join([f'x{i}' for i in range(1, numVars + 1)])
+    symbols = sp.symbols(symbolsStr)
+
     for y, xValues in zip(outputs, inputs):
-        subsDict = dict(zip(expr.free_symbols, xValues))
+        subsDict = dict(zip(symbols, xValues))
         predictedResult = expr.subs(subsDict)
         difference = predictedResult - y
 

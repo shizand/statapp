@@ -25,6 +25,7 @@ import sympy as sp
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
 
 
 DIRECT_LINK = 0
@@ -97,24 +98,43 @@ def _trainModelAndPredict(y, xPoly):
 
 
 def _calculateStatistics(y, x, xPoly, predictions, model, polyFeatures):
+    # Рассчитываем Среднеквадратическую ошибку (MSE) между фактическими и прогнозируемыми значениями
     mse = mean_squared_error(y, predictions)
-    rSquared = model.score(xPoly, y)
+    # Рассчитываем коэффициент детерминации R^2, который
+    # показывает долю вариации зависимой переменной, объясненную моделью
+    rSquared = r2_score(y, predictions)
+    # Определяем количество наблюдений
     n = xPoly.shape[0]
+    # Определяем количество предикторов (признаков) плюс один для свободного члена
     k = xPoly.shape[1] + 1
+    # Рассчитываем F-статистику для оценки значимости всей регрессионной модели
     fStatistic = (rSquared / (k - 1)) / ((1 - rSquared) / (n - k))
+    # Собираем параметры модели, включая свободный член и коэффициенты перед переменными
     params = np.hstack([model.intercept_, model.coef_])
+    # Вычисляем остатки модели как разницу между фактическими и прогнозируемыми значениями
     residuals = y - predictions
+    # Добавляем столбец единиц к матрице признаков для учета свободного члена в регрессионной модели
     xWithIntercept = np.hstack([np.ones((n, 1)), xPoly])
+    # Рассчитываем дисперсии коэффициентов модели
     varB = mse * np.linalg.pinv(xWithIntercept.T @ xWithIntercept).diagonal()
+    # Вычисляем стандартные ошибки коэффициентов, берем корень из дисперсий
     seB = np.sqrt(np.maximum(varB, 0))
+    # Рассчитываем t-статистики для каждого коэффициента
     tStats = params / seB
+    # Рассчитываем дисперсию остатков с поправкой на количество параметров
     residualVariance = np.var(residuals, ddof=k)
-    scaledResidualVariance = residualVariance / (n - k)
+    # Рассчитываем скорректированную дисперсию остатков
+    scaledResidualVariance = 1 - rSquared
+    # Генерируем список мономов (названий признаков после
+    # полиномиализации), добавляя константу для свободного члена
     monomials = ['c'] + list(
         polyFeatures.get_feature_names_out(['x' + str(i) for i in range(1, x.shape[1] + 1)])
     )
+    # Заменяем пробелы на звездочки для представления умножения в названиях мономов
     monomials = [monomial.replace(' ', '*') for monomial in monomials]
+    # Возвращаем рассчитанные статистики и названия мономов
     return params, tStats, residualVariance, scaledResidualVariance, rSquared, fStatistic, monomials
+
 
 
 def _regressionAnalysis(data, degree):

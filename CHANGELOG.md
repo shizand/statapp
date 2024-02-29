@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.0](https://github.com/shizand/statapp/compare/v0.12.5...v0.13.0) (2024-02-29)
+
+
+### Новые функции
+
+* добавлены весовые коэффициенты ([#126](https://github.com/shizand/statapp/issues/126)) ([1900785](https://github.com/shizand/statapp/commit/1900785502d9066b31ed5311fab334f21eb9454e))
+
+
+### Исправления
+
+* исправлена "Остаточная дисперсия (масштабированная)" ([#124](https://github.com/shizand/statapp/issues/124)) ([babfd48](https://github.com/shizand/statapp/commit/babfd48ee15504342b01d9a1a98fcc1aafc890dc))
+
 ## [0.12.5](https://github.com/shizand/statapp/compare/v0.12.4...v0.12.5) (2024-02-22)
 
 

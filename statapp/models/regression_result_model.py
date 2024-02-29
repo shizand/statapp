@@ -28,7 +28,7 @@ class RegressionResultModel(ROTableModel):
         self._monomials = result.monomials
 
     def getHorizontalHeader(self):
-        return ['Коэффициент регрессии', 'Коэффициент значимости']
+        return ['Коэффициент регрессии', 'Коэффициент значимости', 'Весовые коэффициенты']
 
     def getVerticalHeader(self):
         return self._monomials

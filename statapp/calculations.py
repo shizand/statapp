@@ -81,99 +81,73 @@ class RegressionResult:
     monomials: list
 
 
-def linearPolynom(data):
+def _prepareDataAndFeatures(data, degree):
     y = data[:, 0]
     x = data[:, 1:]
-
-    polyFeatures = PolynomialFeatures(degree=1, include_bias=False)
+    polyFeatures = PolynomialFeatures(degree=degree, include_bias=False)
     xPoly = polyFeatures.fit_transform(x)
+    return y, x, xPoly, polyFeatures
 
+
+def _trainModelAndPredict(y, xPoly):
     model = LinearRegression(fit_intercept=True)
     model.fit(xPoly, y)
-
-    params = np.hstack([model.intercept_, model.coef_])
-
     predictions = model.predict(xPoly)
-    residuals = y - predictions
+    return model, predictions
+
+
+def _calculateStatistics(y, x, xPoly, predictions, model, polyFeatures):
     mse = mean_squared_error(y, predictions)
-
     rSquared = model.score(xPoly, y)
-
     n = xPoly.shape[0]
     k = xPoly.shape[1] + 1
-
     fStatistic = (rSquared / (k - 1)) / ((1 - rSquared) / (n - k))
-
-    xWithIntercept = np.hstack([np.ones((n, 1)), xPoly])
-    varB = mse * np.linalg.inv(xWithIntercept.T @ xWithIntercept).diagonal()
-    seB = np.sqrt(varB)
-
-    tStats = params / seB
-
-    monomials = ['c'] + ['x' + str(i) for i in range(1, x.shape[1] + 1)]
-
-    residualVariance = np.var(residuals, ddof=k)
-    scaledResidualVariance = residualVariance / (n - k)
-
-    paramsAndTStats = np.vstack((params, tStats)).T
-
-    return RegressionResult(
-        paramsAndTStats,
-        residualVariance,
-        scaledResidualVariance,
-        rSquared,
-        fStatistic,
-        monomials
-    )
-
-
-def squaredPolynom(data):
-    y = data[:, 0]
-    x = data[:, 1:]
-
-    polyFeatures = PolynomialFeatures(degree=2, include_bias=False)
-    xPoly = polyFeatures.fit_transform(x)
-
-    model = LinearRegression(fit_intercept=True)
-    model.fit(xPoly, y)
-
     params = np.hstack([model.intercept_, model.coef_])
-
-    predictions = model.predict(xPoly)
     residuals = y - predictions
-    mse = mean_squared_error(y, predictions)
-
-    rSquared = model.score(xPoly, y)
-
-    n = xPoly.shape[0]
-    k = xPoly.shape[1] + 1
-
-    fStatistic = (rSquared / (k - 1)) / ((1 - rSquared) / (n - k))
-
     xWithIntercept = np.hstack([np.ones((n, 1)), xPoly])
     varB = mse * np.linalg.pinv(xWithIntercept.T @ xWithIntercept).diagonal()
     seB = np.sqrt(np.maximum(varB, 0))
-
     tStats = params / seB
-
+    residualVariance = np.var(residuals, ddof=k)
+    scaledResidualVariance = residualVariance / (n - k)
     monomials = ['c'] + list(
         polyFeatures.get_feature_names_out(['x' + str(i) for i in range(1, x.shape[1] + 1)])
     )
     monomials = [monomial.replace(' ', '*') for monomial in monomials]
+    return params, tStats, residualVariance, scaledResidualVariance, rSquared, fStatistic, monomials
 
-    residualVariance = np.var(residuals, ddof=k)
-    scaledResidualVariance = residualVariance / (n - k)
 
-    paramsAndTStats = np.vstack((params, tStats)).T
+def _regressionAnalysis(data, degree):
+    y, x, xPoly, polyFeatures = _prepareDataAndFeatures(
+        data, degree
+    )
+    model, predictions = _trainModelAndPredict(y, xPoly)
+    (params, tStats, residualVariance,
+     scaledResidualVariance, rSquared, fStatistic, monomials) = (
+        _calculateStatistics(
+        y,
+        x,
+        xPoly,
+        predictions,
+        model,
+        polyFeatures
+    ))
 
     return RegressionResult(
-        paramsAndTStats,
+        np.vstack((params, tStats)).T,
         residualVariance,
         scaledResidualVariance,
         rSquared,
         fStatistic,
         monomials
     )
+
+def linearPolynom(data):
+    return _regressionAnalysis(data, 1)
+
+
+def squaredPolynom(data):
+    return _regressionAnalysis(data, 2)
 
 
 def prediction(inputData, result: RegressionResult):

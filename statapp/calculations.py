@@ -132,8 +132,11 @@ def _calculateStatistics(y, x, xPoly, predictions, model, polyFeatures):
     )
     # Заменяем пробелы на звездочки для представления умножения в названиях мономов
     monomials = [monomial.replace(' ', '*') for monomial in monomials]
+    weightsCoef = np.concatenate((np.array([0]), tStats[1:] / np.sum(tStats[1:])))
     # Возвращаем рассчитанные статистики и названия мономов
-    return params, tStats, residualVariance, scaledResidualVariance, rSquared, fStatistic, monomials
+    return (params, tStats, weightsCoef,
+            residualVariance, scaledResidualVariance,
+            rSquared, fStatistic, monomials)
 
 
 
@@ -142,7 +145,7 @@ def _regressionAnalysis(data, degree):
         data, degree
     )
     model, predictions = _trainModelAndPredict(y, xPoly)
-    (params, tStats, residualVariance,
+    (params, tStats, weightsCoef, residualVariance,
      scaledResidualVariance, rSquared, fStatistic, monomials) = (
         _calculateStatistics(
         y,
@@ -154,7 +157,7 @@ def _regressionAnalysis(data, degree):
     ))
 
     return RegressionResult(
-        np.vstack((params, tStats)).T,
+        np.vstack((params, tStats, weightsCoef)).T,
         residualVariance,
         scaledResidualVariance,
         rSquared,
